@@ -9,6 +9,8 @@ Epistola is een **open platform voor digitale documentgeneratie** dat gemeenten 
 
 Het belangrijkste onderscheid: Epistola is **eigendom van een onafhankelijke stichting**, niet van één commerciële leverancier. Hierdoor ontstaat geen vendor lock-in en kunnen meerdere bedrijven diensten leveren op basis van hetzelfde platform.
 
+> **Benieuwd naar het WAAROM?** Dit model oplossingen voor pijnpunten waar andere modellen tekortschieten. Lees [Waarom Dit Model](/introductie/waarom-dit-model) voor een uitgebreide toelichting.
+
 ---
 
 ## Kernprincipes
@@ -95,6 +97,8 @@ flowchart LR
 - ✅ Open source
 - ✅ Duurzaam en schaalbaar
 - ✅ Geen kapitaalverstrengeling
+
+**Wil je begrijpen waarom dít model noodzakelijk is?** Lees [Waarom Dit Model](/introductie/waarom-dit-model) voor een uitgebreide toelichting op de ontwerpkeuzes, trade-offs, en waarom eenvoudiger alternatieven tekortschieten.
 
 ---
 

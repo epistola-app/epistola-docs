@@ -93,6 +93,8 @@ Je betaalt **niet** rechtstreeks aan stichting. Supplier draagt licentiekosten a
 
 **Resultaat:** Je supplier kan je niet gijzelen.
 
+**Lees meer:** [Waarom Dit Model](/introductie/waarom-dit-model) legt uit waarom vendor lock-in zo schadelijk is en hoe Epistola dit structureel oplost.
+
 ---
 
 ## 5. En de licentie – open bron of open source?

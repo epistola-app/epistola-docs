@@ -43,8 +43,14 @@ export default defineConfig({
           sidebar: [
               {
                   label: 'Introductie',
-                  autogenerate: { directory: 'introductie' },
                   collapsed: false,
+                  items: [
+                      { label: 'Wat is Epistola', link: '/introductie/wat-is-epistola' },
+                      { label: 'Missie & Visie', link: '/introductie/missie' },
+                      { label: 'Waarom Dit Model', link: '/introductie/waarom-dit-model' },
+                      { label: 'Steward Ownership', link: '/introductie/steward-ownership' },
+                      { label: 'Snelstart', link: '/introductie/snelstart' },
+                  ],
               },
               {
                   label: 'Het Model',
