@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import mermaid from 'astro-mermaid';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -8,6 +9,20 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://docs.epistola.app',
   integrations: [
+      mermaid({
+          strategy: 'client',
+          theme: {
+              light: 'default',
+              dark: 'dark'
+          },
+          mermaidConfig: {
+              startOnLoad: true,
+              theme: 'base',
+              themeVariables: {
+                  darkMode: true
+              }
+          }
+      }),
       starlight({
           title: 'Epistola Documentatie',
           description: 'Open platform voor digitale documentgeneratie zonder vendor lock-in',
