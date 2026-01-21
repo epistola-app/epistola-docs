@@ -1,0 +1,116 @@
+---
+title: SLA Niveaus
+description: Overzicht van Service Level Agreement niveaus en wat je per niveau krijgt
+---
+
+import SlaLevel from '../../../components/SlaLevel.astro';
+import SlaComparisonTable from '../../../components/SlaComparisonTable.astro';
+import slaData from '../../../data/sla-levels.json';
+
+Dit document beschrijft de verschillende SLA / Lifecycle Management niveaus die leveranciers kunnen aanbieden. De exacte voorwaarden en prijzen worden bepaald door de leverancier, maar dit geeft een indicatie van wat je kunt verwachten per niveau.
+
+:::caution[Belangrijk: Hosting en SLA]
+**De uptime garanties gelden alleen als de hosting ook door de leverancier wordt verzorgd.**
+
+Als jouw gemeente zelf host, kan de leverancier geen infrastructuur-uptime garanderen. In dat geval gelden de SLA-niveaus alleen voor:
+- Applicatie-beschikbaarheid (software patches, updates)
+- Support response tijden
+- Functionaliteit en bugs
+
+Maar **niet** voor:
+- Server uptime
+- Netwerk beschikbaarheid
+- Infrastructuur performance
+
+Bespreek met jouw leverancier welke SLA-voorwaarden gelden bij eigen hosting.
+:::
+
+## Overzicht SLA Niveaus
+
+De SLA-kosten worden uitgedrukt als een multiplier van de licentiekosten. Bijvoorbeeld: bij licentiekosten van €8.000 en SLA niveau 2.0× betaal je €16.000 voor SLA/Lifecycle Management.
+
+**Let op:** De onderstaande uptime garanties zijn alleen van toepassing als hosting bij de leverancier wordt afgenomen.
+
+---
+
+{slaData.levels.map(level => <SlaLevel level={level} />)}
+
+<SlaComparisonTable />
+
+---
+
+## Downtime per jaar
+
+Voor perspectief, hier is de maximale toegestane downtime per uptime percentage:
+
+| Uptime % | Downtime per jaar | Downtime per maand | Downtime per week |
+|----------|-------------------|-------------------|-------------------|
+| 99% | 3,65 dagen | 7,2 uur | 1,68 uur |
+| 99.5% | 1,83 dagen | 3,6 uur | 50,4 minuten |
+| 99.7% | 1,10 dagen | 2,16 uur | 30,24 minuten |
+| 99.9% | 8,76 uur | 43,2 minuten | 10,08 minuten |
+| 99.95% | 4,38 uur | 21,6 minuten | 5,04 minuten |
+
+---
+
+## Keuze maken
+
+### Voor kleine gemeenten (< 20.000 inwoners)
+- **Basis (1.0×)** of **Basis+ (1.5×)** is vaak voldoende
+- Beperkte kritische processen
+- Lagere kosten prioriteit
+
+### Voor middelgrote gemeenten (20.000 - 100.000 inwoners)
+- **Standaard (2.0×)** is aanbevolen
+- Goede balans tussen beschikbaarheid en kosten
+- Professionele support tijdens werkuren
+
+### Voor grote gemeenten (> 100.000 inwoners)
+- **Plus (2.5×)** of **Premium (3.0×)**
+- Veel kritische processen
+- Hogere beschikbaarheidseisen
+- Grotere impact bij uitval
+
+---
+
+## Belangrijke notities
+
+:::note[Leverancier specifiek]
+Dit zijn indicatieve niveaus. Exacte voorwaarden, response tijden en prijzen worden bepaald door jouw gekozen preferred supplier. Vraag altijd meerdere offertes aan en vergelijk de concrete SLA-voorwaarden.
+:::
+
+:::tip[Hosting afzonderlijk]
+Hosting wordt apart gefactureerd en is optioneel. Veel gemeenten kiezen voor eigen hosting om kosten te besparen.
+
+**Eigen hosting betekent:**
+- Jij beheert de infrastructuur (servers, netwerk, beveiliging)
+- Leverancier kan geen uptime garanties geven op infra-niveau
+- SLA geldt alleen voor applicatie-niveau (software, support, updates)
+- Vaak lagere SLA-kosten omdat leverancier minder risico draagt
+
+**Hosting bij leverancier betekent:**
+- Volledige uptime garanties (applicatie + infrastructuur)
+- Leverancier is verantwoordelijk voor alles
+- Hogere totale kosten, maar ook meer zekerheid
+- Eén aanspreekpunt voor alle issues
+:::
+
+
+
+:::caution[Contractuele afspraken]
+Zorg dat de SLA-voorwaarden contractueel vastgelegd worden met:
+- Duidelijke definities van uptime
+- Meetmethoden voor response tijden
+- Escalatieprocedures
+- Consequenties bij niet-nakoming (credits, boetes)
+- Geplande onderhoud vs. downtime
+:::
+
+---
+
+## Zie ook
+
+- [Kostencalculator voor Gemeenten](/meedoen/gemeenten/one-pager) - Bereken totale kosten inclusief SLA
+- [Commerciële Partijen](/het-model/structuur-rollen/commerciele-partijen) - Vereisten voor preferred suppliers
+- [Licentie & Kostenbeleid](/het-model/financieel/licentie-en-kostenbeleid) - Volledige prijsinformatie
+- [Veelgestelde Vragen](/meedoen/gemeenten/faq) - Antwoorden op alle vragen

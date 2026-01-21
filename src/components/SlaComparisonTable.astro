@@ -1,0 +1,90 @@
+---
+import slaData from '../data/sla-levels.json';
+---
+
+<div class="sla-comparison">
+  <h2>Vergelijkingstabel</h2>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          {slaData.levels.map(level => (
+            <th>{level.name} ({level.multiplier}×)</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Uptime</strong></td>
+          {slaData.levels.map(level => (
+            <td>{level.uptime}</td>
+          ))}
+        </tr>
+        <tr>
+          <td><strong>Support uren</strong></td>
+          {slaData.levels.map(level => (
+            <td>{level.supportHours}</td>
+          ))}
+        </tr>
+        <tr>
+          <td><strong>Response tijd</strong></td>
+          {slaData.levels.map(level => (
+            <td>{level.responseTime}</td>
+          ))}
+        </tr>
+        <tr>
+          <td><strong>Updates</strong></td>
+          {slaData.levels.map(level => (
+            <td>{level.updates}</td>
+          ))}
+        </tr>
+        <tr>
+          <td><strong>Contact kanalen</strong></td>
+          {slaData.levels.map(level => (
+            <td>{level.contactChannels}</td>
+          ))}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .sla-comparison {
+    margin: 2rem 0;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid var(--sl-color-gray-5);
+  }
+
+  th {
+    background: var(--sl-color-bg-nav);
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+  }
+
+  tbody tr:nth-child(even) {
+    background: var(--sl-color-gray-7);
+  }
+
+  tbody tr:hover {
+    background: var(--sl-color-gray-6);
+  }
+</style>

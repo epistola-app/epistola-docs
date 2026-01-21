@@ -1,0 +1,61 @@
+---
+import slaData from '../data/sla-levels.json';
+
+interface Props {
+  level: typeof slaData.levels[0];
+}
+
+const { level } = Astro.props;
+---
+
+<section class="sla-level">
+  <h2>{level.name} ({level.multiplier}×)</h2>
+
+  <p><strong>Geschikt voor:</strong> {level.suitableFor}</p>
+
+  <h3>Wat krijg je:</h3>
+  <ul>
+    {level.features.map(feature => (
+      <li>✓ <strong>{feature}</strong></li>
+    ))}
+  </ul>
+
+  <h3>Kenmerken:</h3>
+  <ul>
+    {level.characteristics.map(char => (
+      <li>{char}</li>
+    ))}
+  </ul>
+
+  <hr />
+</section>
+
+<style>
+  .sla-level {
+    margin: 2rem 0;
+  }
+
+  .sla-level h2 {
+    margin-top: 2rem;
+  }
+
+  .sla-level h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .sla-level ul {
+    margin-left: 1.5rem;
+  }
+
+  .sla-level li {
+    margin: 0.5rem 0;
+  }
+
+  .sla-level hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: none;
+    border-top: 1px solid var(--sl-color-gray-5);
+  }
+</style>

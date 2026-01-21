@@ -1,0 +1,478 @@
+---
+// Cost Calculator for Gemeenten
+import slaData from '../data/sla-levels.json';
+---
+
+<div class="cost-calculator">
+  <h3>💰 Kostencalculator voor Gemeenten</h3>
+  <p>Bereken de geschatte kosten voor jouw gemeente</p>
+
+  <div class="calculator-input">
+    <label for="inhabitants">
+      <strong>Aantal inwoners:</strong>
+    </label>
+    <input
+      type="number"
+      id="inhabitants"
+      placeholder="Bijv. 50000"
+      min="0"
+      max="1000000"
+    />
+  </div>
+
+  <div class="calculator-input">
+    <label for="sla-level">
+      <strong>SLA / Lifecycle Management niveau:</strong>
+    </label>
+    <div class="slider-container">
+      <input
+        type="range"
+        id="sla-level"
+        min="1.0"
+        max="3.0"
+        step="0.5"
+        value="2.0"
+      />
+      <div class="slider-labels">
+        <span>{slaData.levels[0].name} ({slaData.levels[0].multiplier}×)</span>
+        <span id="sla-value">{slaData.levels[2].name} ({slaData.levels[2].multiplier}×)</span>
+        <span>{slaData.levels[4].name} ({slaData.levels[4].multiplier}×)</span>
+      </div>
+    </div>
+    <small>Hoger niveau = meer support, snellere response times, meer uptime garantie</small>
+  </div>
+
+  <div class="sla-info" id="sla-info">
+    <h4>ℹ️ Wat krijg je per SLA niveau?</h4>
+    <div id="sla-description">
+      <!-- Will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <div class="calculator-options">
+    <label for="include-hosting">
+      <input type="checkbox" id="include-hosting" checked />
+      <span>Hosting via leverancier (uitvinken als je zelf host)</span>
+    </label>
+  </div>
+
+  <div class="results" id="results" style="display: none;">
+    <div class="result-row">
+      <span class="label">Gemeentegrootte:</span>
+      <span class="value" id="size">-</span>
+    </div>
+    <div class="result-row highlight">
+      <span class="label">Licentiekosten per jaar:</span>
+      <span class="value" id="license">-</span>
+    </div>
+    <div class="result-row">
+      <span class="label">SLA / Lifecycle Management:</span>
+      <span class="value" id="sla">-</span>
+    </div>
+    <div class="result-note" id="sla-note" style="display: none;">
+      <small>💡 Bij zelf-hosting: 40% korting op SLA (geen infra-verantwoordelijkheid)</small>
+    </div>
+    <div class="result-row" id="hosting-row">
+      <span class="label">Hosting (optioneel via leverancier):</span>
+      <span class="value" id="hosting">-</span>
+    </div>
+    <div class="result-row">
+      <span class="label">Support & Training:</span>
+      <span class="value" id="support">-</span>
+    </div>
+    <div class="result-row total">
+      <span class="label">Totale geschatte kosten per jaar:</span>
+      <span class="value" id="total">-</span>
+    </div>
+    <div class="result-row">
+      <span class="label">Kosten per inwoner per jaar:</span>
+      <span class="value" id="per-capita">-</span>
+    </div>
+  </div>
+
+  <p class="note">
+    <em>* SLA en Hosting kosten zijn schattingen en variëren per leverancier. Veel gemeenten kiezen voor eigen hosting. Vraag offertes aan voor exacte prijzen.</em>
+  </p>
+</div>
+
+<style>
+  .cost-calculator {
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .cost-calculator h3 {
+    margin-top: 0;
+    color: var(--sl-color-white);
+  }
+
+  .calculator-input {
+    margin: 1.5rem 0;
+  }
+
+  .calculator-input label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--sl-color-white);
+  }
+
+  .calculator-input input[type="number"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 4px;
+    background: var(--sl-color-black);
+    color: var(--sl-color-white);
+  }
+
+  .calculator-input small {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--sl-color-gray-3);
+    font-size: 0.875rem;
+  }
+
+  .slider-container {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 0.5rem;
+  }
+
+  .slider-container input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--sl-color-gray-5);
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--sl-color-blue);
+    cursor: pointer;
+  }
+
+  .slider-container input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--sl-color-blue);
+    cursor: pointer;
+    border: none;
+  }
+
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-3);
+  }
+
+  .slider-labels span:nth-child(2) {
+    font-weight: 600;
+    color: var(--sl-color-blue);
+  }
+
+  .calculator-options {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: var(--sl-color-blue-low);
+    border-radius: 6px;
+    border: 2px solid var(--sl-color-blue);
+  }
+
+  .calculator-options label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--sl-color-white);
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .calculator-options input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    accent-color: var(--sl-color-blue);
+  }
+
+  .calculator-options label:hover {
+    opacity: 0.9;
+  }
+
+  .calculator-options span {
+    user-select: none;
+  }
+
+  .results {
+    background: var(--sl-color-black);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--sl-color-gray-6);
+  }
+
+  .result-row:last-child {
+    border-bottom: none;
+  }
+
+  .result-row.highlight {
+    background: var(--sl-color-blue-low);
+    font-weight: 600;
+    border-radius: 4px;
+  }
+
+  .result-row.total {
+    background: var(--sl-color-green-low);
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+  }
+
+  .result-row .label {
+    color: var(--sl-color-gray-2);
+  }
+
+  .result-row .value {
+    color: var(--sl-color-white);
+    font-weight: 600;
+  }
+
+  .result-note {
+    padding: 0.5rem 0.75rem;
+    background: var(--sl-color-blue-low);
+    border-radius: 4px;
+    margin: 0.25rem 0 0.5rem 0;
+  }
+
+  .result-note small {
+    color: var(--sl-color-gray-2);
+    font-size: 0.8rem;
+  }
+
+  .note {
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-3);
+    margin-top: 1rem;
+  }
+
+  .sla-info {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--sl-color-gray-6);
+    border-radius: 6px;
+    border-left: 4px solid var(--sl-color-blue);
+  }
+
+  .sla-info h4 {
+    margin-top: 0;
+    color: var(--sl-color-white);
+  }
+
+  .sla-info #sla-description {
+    color: var(--sl-color-gray-2);
+  }
+
+  .sla-info #sla-description strong {
+    color: var(--sl-color-blue);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .sla-info ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .sla-info li {
+    margin: 0.25rem 0;
+  }
+</style>
+
+<!-- Embed SLA data for client-side access -->
+<script id="sla-data" type="application/json" set:html={JSON.stringify(slaData.levels)} />
+
+<script>
+  const slaLevels = JSON.parse(document.getElementById('sla-data')!.textContent!);
+
+  function calculateCosts(inhabitants: number, includeHosting: boolean, slaMultiplier: number) {
+    let license = 0;
+    let size = '';
+
+    // License pricing based on municipality size
+    if (inhabitants < 5000) {
+      license = 2000;
+      size = 'Micro';
+    } else if (inhabitants < 10000) {
+      license = 3000;
+      size = 'Zeer klein';
+    } else if (inhabitants < 20000) {
+      license = 4500;
+      size = 'Klein';
+    } else if (inhabitants < 35000) {
+      license = 6000;
+      size = 'Klein–mid';
+    } else if (inhabitants < 60000) {
+      license = 8000;
+      size = 'Mid';
+    } else if (inhabitants < 100000) {
+      license = 11000;
+      size = 'Mid–groot';
+    } else if (inhabitants < 150000) {
+      license = 15000;
+      size = 'Groot';
+    } else if (inhabitants < 250000) {
+      license = 22000;
+      size = 'Zeer groot';
+    } else {
+      license = 30000;
+      size = 'XL';
+    }
+
+    // SLA based on selected multiplier
+    // If municipality hosts themselves, SLA is cheaper (no infrastructure responsibility)
+    // Apply 60% of normal rate when self-hosting (40% discount)
+    const slaReduction = includeHosting ? 1.0 : 0.6;
+    const sla = Math.round(license * slaMultiplier * slaReduction);
+
+    // Estimate Hosting (typically 1.5-2x license cost)
+    const hosting = Math.round(license * 1.5);
+
+    // Estimate Support (typically 0.5-1x license cost)
+    const support = Math.round(license * 0.75);
+
+    const total = license + sla + (includeHosting ? hosting : 0) + support;
+    const perCapita = (total / inhabitants).toFixed(2);
+
+    return { license, size, sla, hosting, support, total, perCapita };
+  }
+
+  function formatCurrency(amount: number): string {
+    return new Intl.NumberFormat('nl-NL', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  }
+
+  function updateSlaLabel() {
+    const slaSlider = document.getElementById('sla-level') as HTMLInputElement;
+    const slaValue = parseFloat(slaSlider.value);
+    const slaLabel = document.getElementById('sla-value')!;
+
+    // Find matching SLA level
+    const level = slaLevels.find(l => l.multiplier === slaValue);
+    if (level) {
+      slaLabel.textContent = `${level.name} (${level.multiplier}×)`;
+    }
+  }
+
+  function updateSlaDescription() {
+    const slaSlider = document.getElementById('sla-level') as HTMLInputElement;
+    const slaValue = parseFloat(slaSlider.value);
+    const descriptionDiv = document.getElementById('sla-description')!;
+
+    // Find matching SLA level
+    const level = slaLevels.find(l => l.multiplier === slaValue);
+
+    if (level) {
+      const featuresList = level.features.map(f => `<li>✓ ${f}</li>`).join('');
+      const description = `
+        <strong>${level.name} (${level.multiplier}×)</strong>
+        <ul>
+          ${featuresList}
+        </ul>
+      `;
+      descriptionDiv.innerHTML = description;
+    }
+  }
+
+  function updateResults() {
+    const input = document.getElementById('inhabitants') as HTMLInputElement;
+    const hostingCheckbox = document.getElementById('include-hosting') as HTMLInputElement;
+    const slaSlider = document.getElementById('sla-level') as HTMLInputElement;
+    const inhabitants = parseInt(input.value);
+
+    if (!inhabitants || inhabitants <= 0) {
+      document.getElementById('results')!.style.display = 'none';
+      return;
+    }
+
+    const includeHosting = hostingCheckbox.checked;
+    const slaMultiplier = parseFloat(slaSlider.value);
+    const costs = calculateCosts(inhabitants, includeHosting, slaMultiplier);
+
+    document.getElementById('size')!.textContent = costs.size;
+    document.getElementById('license')!.textContent = formatCurrency(costs.license);
+    document.getElementById('sla')!.textContent = formatCurrency(costs.sla);
+    document.getElementById('hosting')!.textContent = formatCurrency(costs.hosting);
+    document.getElementById('support')!.textContent = formatCurrency(costs.support);
+    document.getElementById('total')!.textContent = formatCurrency(costs.total);
+    document.getElementById('per-capita')!.textContent = formatCurrency(parseFloat(costs.perCapita));
+
+    // Show SLA discount note when self-hosting
+    const slaNote = document.getElementById('sla-note')!;
+    if (!includeHosting) {
+      slaNote.style.display = 'block';
+    } else {
+      slaNote.style.display = 'none';
+    }
+
+    // Show/hide hosting row with visual indicator
+    const hostingRow = document.getElementById('hosting-row')!;
+    if (includeHosting) {
+      hostingRow.style.display = 'flex';
+      hostingRow.style.opacity = '1';
+    } else {
+      hostingRow.style.opacity = '0.5';
+      hostingRow.querySelector('.value')!.textContent = formatCurrency(costs.hosting) + ' (niet meegeteld)';
+    }
+
+    document.getElementById('results')!.style.display = 'block';
+  }
+
+  // Add event listeners
+  const input = document.getElementById('inhabitants');
+  const hostingCheckbox = document.getElementById('include-hosting');
+  const slaSlider = document.getElementById('sla-level');
+
+  if (input) {
+    input.addEventListener('input', updateResults);
+  }
+
+  if (hostingCheckbox) {
+    hostingCheckbox.addEventListener('change', updateResults);
+  }
+
+  if (slaSlider) {
+    slaSlider.addEventListener('input', () => {
+      updateSlaLabel();
+      updateSlaDescription();
+      updateResults();
+    });
+    // Initialize label and description
+    updateSlaLabel();
+    updateSlaDescription();
+  }
+</script>

@@ -1,0 +1,161 @@
+{
+  "levels": [
+    {
+      "id": "basis",
+      "name": "Basis",
+      "multiplier": 1.0,
+      "uptime": "99%",
+      "supportHours": "9-17u",
+      "supportHoursDescription": "Support tijdens kantooruren (9-17u)",
+      "responseTime": "8 uur",
+      "updates": "Maandelijks",
+      "updatesDescription": "Maandelijkse updates",
+      "contactChannels": "Email",
+      "contactChannelsDescription": "Email support",
+      "features": [
+        "99% uptime garantie",
+        "Support tijdens kantooruren (9-17u)",
+        "Response tijd: 8 uur",
+        "Maandelijkse updates",
+        "Email support"
+      ],
+      "suitableFor": "Kleine gemeenten met beperkte kritische processen, waarbij incidentele downtime acceptabel is.",
+      "characteristics": [
+        "Basic ondersteuning voor stabiele omgevingen",
+        "Geschikt voor niet-kritische workloads",
+        "Beperkte beschikbaarheid buiten kantooruren",
+        "Laagste kostenoptie"
+      ]
+    },
+    {
+      "id": "basis-plus",
+      "name": "Basis+",
+      "multiplier": 1.5,
+      "uptime": "99.5%",
+      "supportHours": "9-17u + avond",
+      "supportHoursDescription": "Support tijdens kantooruren + eerste lijn avond",
+      "responseTime": "4 uur",
+      "updates": "Tweewekelijks",
+      "updatesDescription": "Tweewekelijkse updates",
+      "contactChannels": "Email + Tel",
+      "contactChannelsDescription": "Email + telefoon support",
+      "features": [
+        "99.5% uptime garantie",
+        "Support tijdens kantooruren + eerste lijn avond",
+        "Response tijd: 4 uur",
+        "Tweewekelijkse updates",
+        "Email + telefoon support"
+      ],
+      "suitableFor": "Kleine tot middelgrote gemeenten met regelmatig gebruik, waar snellere response gewenst is.",
+      "characteristics": [
+        "Uitgebreide support met avonddekking",
+        "Snellere response tijden",
+        "Frequentere updates voor stabiliteit",
+        "Goede balans tussen kosten en service"
+      ]
+    },
+    {
+      "id": "standaard",
+      "name": "Standaard",
+      "multiplier": 2.0,
+      "uptime": "99.7%",
+      "supportHours": "7x14 (8-22u)",
+      "supportHoursDescription": "Support 7x14 (weekdagen 8-22u)",
+      "responseTime": "2 uur",
+      "updates": "Wekelijks",
+      "updatesDescription": "Wekelijkse updates",
+      "contactChannels": "Email + Tel + Portal",
+      "contactChannelsDescription": "Email, telefoon + portal support",
+      "additionalFeatures": ["Kwartaalrapportages"],
+      "features": [
+        "99.7% uptime garantie",
+        "Support 7x14 (weekdagen 8-22u)",
+        "Response tijd: 2 uur",
+        "Wekelijkse updates",
+        "Email, telefoon + portal support",
+        "Kwartaalrapportages"
+      ],
+      "suitableFor": "Middelgrote gemeenten met dagelijks gebruik en behoefte aan betrouwbare beschikbaarheid.",
+      "characteristics": [
+        "Professionele support met uitgebreide bereikbaarheid",
+        "Snelle response voor incidenten",
+        "Regelmatige updates en monitoring",
+        "Rapportage voor management oversight",
+        "Aanbevolen niveau voor meeste gemeenten"
+      ],
+      "recommended": true
+    },
+    {
+      "id": "plus",
+      "name": "Plus",
+      "multiplier": 2.5,
+      "uptime": "99.9%",
+      "supportHours": "7x18 (6-24u)",
+      "supportHoursDescription": "Support 7x18 (alle dagen 6-24u)",
+      "responseTime": "1 uur",
+      "updates": "Continu",
+      "updatesDescription": "Continue deployment mogelijkheid",
+      "contactChannels": "+ Dedicated",
+      "contactChannelsDescription": "Dedicated support contact",
+      "additionalFeatures": [
+        "Maandelijkse review calls",
+        "Security monitoring"
+      ],
+      "features": [
+        "99.9% uptime garantie",
+        "Support 7x18 (alle dagen 6-24u)",
+        "Response tijd: 1 uur",
+        "Continue deployment mogelijkheid",
+        "Dedicated support contact",
+        "Maandelijkse review calls",
+        "Security monitoring"
+      ],
+      "suitableFor": "Grotere gemeenten met hoge beschikbaarheidseisen en kritische processen.",
+      "characteristics": [
+        "Bijna 24/7 beschikbaarheid",
+        "Zeer snelle response",
+        "Proactieve monitoring en security",
+        "Vaste contactpersoon voor continuïteit",
+        "Regelmatige strategische reviews"
+      ]
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "multiplier": 3.0,
+      "uptime": "99.95%",
+      "supportHours": "24/7",
+      "supportHoursDescription": "24/7 support beschikbaar",
+      "responseTime": "30 min",
+      "updates": "Continu",
+      "updatesDescription": "Continue deployment",
+      "contactChannels": "+ Team",
+      "contactChannelsDescription": "Dedicated team",
+      "additionalFeatures": [
+        "Real-time monitoring dashboard",
+        "Custom development SLA",
+        "Prioriteit bij nieuwe features",
+        "Kwartaal strategiesessies"
+      ],
+      "features": [
+        "99.95% uptime garantie",
+        "24/7 support beschikbaar",
+        "Response tijd: 30 minuten",
+        "Dedicated team",
+        "Real-time monitoring dashboard",
+        "Custom development SLA",
+        "Prioriteit bij nieuwe features",
+        "Kwartaal strategiesessies"
+      ],
+      "suitableFor": "Zeer grote gemeenten of gemeenten met kritische 24/7 operaties.",
+      "characteristics": [
+        "Maximale beschikbaarheid en betrouwbaarheid",
+        "Direct beschikbaar team",
+        "Proactieve monitoring met dashboards",
+        "Strategisch partnerschap met leverancier",
+        "Invloed op roadmap en ontwikkeling",
+        "Hoogste service niveau"
+      ]
+    }
+  ]
+}

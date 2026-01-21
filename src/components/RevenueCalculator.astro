@@ -1,0 +1,373 @@
+---
+// Revenue Calculator for Leveranciers
+import slaData from '../data/sla-levels.json';
+---
+
+<div class="revenue-calculator">
+  <h3>💼 Omzet Calculator voor Leveranciers</h3>
+  <p>Bereken je potentiële inkomsten als preferred supplier</p>
+
+  <div class="calculator-inputs">
+    <div class="input-group">
+      <label for="clients">
+        <strong>Aantal gemeenten (klanten):</strong>
+      </label>
+      <input
+        type="number"
+        id="clients"
+        placeholder="Bijv. 10"
+        min="1"
+        max="100"
+        value="10"
+      />
+    </div>
+
+    <div class="input-group">
+      <label for="avg-inhabitants">
+        <strong>Gemiddeld aantal inwoners per gemeente:</strong>
+      </label>
+      <select id="avg-inhabitants">
+        <option value="5000">~5.000 (Zeer klein)</option>
+        <option value="15000">~15.000 (Klein)</option>
+        <option value="50000" selected>~50.000 (Mid)</option>
+        <option value="100000">~100.000 (Groot)</option>
+        <option value="200000">~200.000 (Zeer groot)</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="license-margin">
+        <strong>Licentie marge (%):</strong>
+      </label>
+      <input
+        type="number"
+        id="license-margin"
+        min="0"
+        max="15"
+        value="12"
+        step="0.5"
+      />
+      <small>Max 10-15% toegestaan</small>
+    </div>
+
+    <div class="input-group">
+      <label for="sla-multiplier">
+        <strong>SLA factor (× licentie):</strong>
+      </label>
+      <input
+        type="number"
+        id="sla-multiplier"
+        min="1"
+        max="4"
+        value="2.5"
+        step="0.5"
+      />
+      <small>Typisch 2-3× licentiekosten</small>
+    </div>
+
+    <div class="input-group">
+      <label for="hosting-multiplier">
+        <strong>Hosting factor (× licentie):</strong>
+      </label>
+      <input
+        type="number"
+        id="hosting-multiplier"
+        min="0"
+        max="3"
+        value="1.5"
+        step="0.5"
+      />
+      <small>Typisch 1-2× licentie (0 als gemeente zelf host)</small>
+    </div>
+  </div>
+
+  <div class="results" id="revenue-results">
+    <div class="result-section">
+      <h4>📊 Per Gemeente (gemiddeld)</h4>
+      <div class="result-row">
+        <span class="label">Licentiekosten:</span>
+        <span class="value" id="avg-license">€8.000</span>
+      </div>
+      <div class="result-row highlight">
+        <span class="label">Jouw licentie-marge:</span>
+        <span class="value" id="avg-license-margin">€960</span>
+      </div>
+      <div class="result-row">
+        <span class="label">SLA / Lifecycle Mgmt:</span>
+        <span class="value" id="avg-sla">€20.000</span>
+      </div>
+      <div class="result-row">
+        <span class="label">Hosting (optioneel):</span>
+        <span class="value" id="avg-hosting">€12.000</span>
+      </div>
+      <div class="result-row">
+        <span class="label">Support/Training:</span>
+        <span class="value" id="avg-support">€6.000</span>
+      </div>
+      <div class="result-row total">
+        <span class="label">Totale omzet per gemeente:</span>
+        <span class="value" id="avg-total">€45.960</span>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <h4>🎯 Totaal Portfolio</h4>
+      <div class="result-row">
+        <span class="label">Totale licentie doorbelasting:</span>
+        <span class="value" id="total-license">€80.000</span>
+      </div>
+      <div class="result-row highlight">
+        <span class="label">Totale licentie-marge (jouw deel):</span>
+        <span class="value" id="total-margin">€9.600</span>
+      </div>
+      <div class="result-row">
+        <span class="label">Totale SLA inkomsten:</span>
+        <span class="value" id="total-sla">€200.000</span>
+      </div>
+      <div class="result-row">
+        <span class="label">Totale Hosting inkomsten:</span>
+        <span class="value" id="total-hosting">€120.000</span>
+      </div>
+      <div class="result-row">
+        <span class="label">Totale Support/Training:</span>
+        <span class="value" id="total-support">€60.000</span>
+      </div>
+      <div class="result-row total-big">
+        <span class="label">💰 Totale jaarlijkse omzet:</span>
+        <span class="value" id="grand-total">€459.600</span>
+      </div>
+      <div class="result-row">
+        <span class="label">Aan stichting (licentiekosten):</span>
+        <span class="value" id="to-foundation">€70.400</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h4>ℹ️ Belangrijk</h4>
+    <ul>
+      <li><strong>Licentie-marge:</strong> Max 10-15% marge op doorbelasting toegestaan</li>
+      <li><strong>SLA:</strong> Vrije marktprijzen - jij bepaalt (lifecycle management, updates, support)</li>
+      <li><strong>Hosting:</strong> Vrije marktprijzen - optioneel (veel gemeenten hosten zelf)</li>
+      <li><strong>Concurrentie:</strong> Meerdere suppliers mogelijk - kwaliteit telt</li>
+      <li><strong>Upstream verplichting:</strong> Alle code moet terug naar hoofdbron</li>
+    </ul>
+  </div>
+
+  <p class="note">
+    <em>* Dit zijn schattingen. Werkelijke prijzen variëren per gemeente en dienstverlening.</em>
+  </p>
+</div>
+
+<style>
+  .revenue-calculator {
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .revenue-calculator h3 {
+    margin-top: 0;
+    color: var(--sl-color-white);
+  }
+
+  .calculator-inputs {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .input-group label {
+    color: var(--sl-color-white);
+  }
+
+  .input-group small {
+    color: var(--sl-color-gray-3);
+    font-size: 0.875rem;
+  }
+
+  .input-group input,
+  .input-group select {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 4px;
+    background: var(--sl-color-black);
+    color: var(--sl-color-white);
+  }
+
+  .results {
+    margin: 1.5rem 0;
+  }
+
+  .result-section {
+    background: var(--sl-color-black);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .result-section h4 {
+    margin: 0 0 1rem 0;
+    color: var(--sl-color-white);
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--sl-color-gray-6);
+  }
+
+  .result-row:last-child {
+    border-bottom: none;
+  }
+
+  .result-row.highlight {
+    background: var(--sl-color-blue-low);
+    font-weight: 600;
+    border-radius: 4px;
+  }
+
+  .result-row.total {
+    background: var(--sl-color-green-low);
+    font-weight: 700;
+    font-size: 1.05rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+  }
+
+  .result-row.total-big {
+    background: var(--sl-color-green-high);
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+  }
+
+  .result-row .label {
+    color: var(--sl-color-gray-2);
+  }
+
+  .result-row .value {
+    color: var(--sl-color-white);
+    font-weight: 600;
+  }
+
+  .info-box {
+    background: var(--sl-color-orange-low);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .info-box h4 {
+    margin-top: 0;
+    color: var(--sl-color-white);
+  }
+
+  .info-box ul {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.5rem;
+  }
+
+  .info-box li {
+    color: var(--sl-color-gray-1);
+    margin: 0.5rem 0;
+  }
+
+  .note {
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-3);
+    margin-top: 1rem;
+  }
+</style>
+
+<script>
+  function getLicenseCost(inhabitants: number): number {
+    if (inhabitants < 5000) return 2000;
+    if (inhabitants < 10000) return 3000;
+    if (inhabitants < 20000) return 4500;
+    if (inhabitants < 35000) return 6000;
+    if (inhabitants < 60000) return 8000;
+    if (inhabitants < 100000) return 11000;
+    if (inhabitants < 150000) return 15000;
+    if (inhabitants < 250000) return 22000;
+    return 30000;
+  }
+
+  function calculateRevenue() {
+    const clientsInput = document.getElementById('clients') as HTMLInputElement;
+    const inhabitantsSelect = document.getElementById('avg-inhabitants') as HTMLSelectElement;
+    const marginInput = document.getElementById('license-margin') as HTMLInputElement;
+    const slaMultiplierInput = document.getElementById('sla-multiplier') as HTMLInputElement;
+    const hostingMultiplierInput = document.getElementById('hosting-multiplier') as HTMLInputElement;
+
+    const clients = parseInt(clientsInput.value) || 10;
+    const avgInhabitants = parseInt(inhabitantsSelect.value);
+    const marginPercent = parseFloat(marginInput.value) || 12;
+    const slaMultiplier = parseFloat(slaMultiplierInput.value) || 2.5;
+    const hostingMultiplier = parseFloat(hostingMultiplierInput.value) || 1.5;
+
+    // Per gemeente calculations
+    const avgLicense = getLicenseCost(avgInhabitants);
+    const avgLicenseMargin = avgLicense * (marginPercent / 100);
+    const avgSLA = Math.round(avgLicense * slaMultiplier);
+    const avgHosting = Math.round(avgLicense * hostingMultiplier);
+    const avgSupport = Math.round(avgLicense * 0.75); // ~0.75x license
+    const avgTotal = avgLicense + avgSLA + avgHosting + avgSupport;
+
+    // Total portfolio
+    const totalLicense = avgLicense * clients;
+    const totalMargin = avgLicenseMargin * clients;
+    const totalSLA = avgSLA * clients;
+    const totalHosting = avgHosting * clients;
+    const totalSupport = avgSupport * clients;
+    const grandTotal = totalLicense + totalSLA + totalHosting + totalSupport;
+    const toFoundation = totalLicense - totalMargin;
+
+    // Update per gemeente
+    document.getElementById('avg-license')!.textContent = formatCurrency(avgLicense);
+    document.getElementById('avg-license-margin')!.textContent = formatCurrency(avgLicenseMargin);
+    document.getElementById('avg-sla')!.textContent = formatCurrency(avgSLA);
+    document.getElementById('avg-hosting')!.textContent = formatCurrency(avgHosting);
+    document.getElementById('avg-support')!.textContent = formatCurrency(avgSupport);
+    document.getElementById('avg-total')!.textContent = formatCurrency(avgTotal);
+
+    // Update totals
+    document.getElementById('total-license')!.textContent = formatCurrency(totalLicense);
+    document.getElementById('total-margin')!.textContent = formatCurrency(totalMargin);
+    document.getElementById('total-sla')!.textContent = formatCurrency(totalSLA);
+    document.getElementById('total-hosting')!.textContent = formatCurrency(totalHosting);
+    document.getElementById('total-support')!.textContent = formatCurrency(totalSupport);
+    document.getElementById('grand-total')!.textContent = formatCurrency(grandTotal);
+    document.getElementById('to-foundation')!.textContent = formatCurrency(toFoundation);
+  }
+
+  function formatCurrency(amount: number): string {
+    return new Intl.NumberFormat('nl-NL', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  }
+
+  // Add event listeners
+  document.getElementById('clients')?.addEventListener('input', calculateRevenue);
+  document.getElementById('avg-inhabitants')?.addEventListener('change', calculateRevenue);
+  document.getElementById('license-margin')?.addEventListener('input', calculateRevenue);
+  document.getElementById('sla-multiplier')?.addEventListener('input', calculateRevenue);
+  document.getElementById('hosting-multiplier')?.addEventListener('input', calculateRevenue);
+
+  // Initial calculation
+  calculateRevenue();
+</script>

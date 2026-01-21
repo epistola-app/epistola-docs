@@ -1,0 +1,287 @@
+---
+// ROI Calculator for Investeerders
+---
+
+<div class="roi-calculator">
+  <h3>📈 ROI Calculator voor Investeerders</h3>
+  <p>Bereken je potentiële rendement met ROI-cap model</p>
+
+  <div class="calculator-inputs">
+    <div class="input-group">
+      <label for="investment">
+        <strong>Investeringsbedrag (€):</strong>
+      </label>
+      <input
+        type="number"
+        id="investment"
+        placeholder="Bijv. 100000"
+        min="0"
+        value="100000"
+      />
+    </div>
+
+    <div class="input-group">
+      <label for="roicap">
+        <strong>ROI-cap (multiplier):</strong>
+      </label>
+      <select id="roicap">
+        <option value="1.5">1.5x (Early Backer)</option>
+        <option value="1.25">1.25x (Growth)</option>
+        <option value="1.0">1.0x (Strategic Partner)</option>
+        <option value="2.0">2.0x (Custom)</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="years">
+        <strong>Verwachte terugbetaaltijd (jaren):</strong>
+      </label>
+      <select id="years">
+        <option value="2">2 jaar</option>
+        <option value="3" selected>3 jaar</option>
+        <option value="4">4 jaar</option>
+        <option value="5">5 jaar</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="results" id="roi-results">
+    <div class="result-row highlight">
+      <span class="label">Maximaal rendement (ROI-cap):</span>
+      <span class="value" id="max-return">€150.000</span>
+    </div>
+    <div class="result-row">
+      <span class="label">Totale winst:</span>
+      <span class="value" id="profit">€50.000</span>
+    </div>
+    <div class="result-row">
+      <span class="label">Gemiddeld per jaar:</span>
+      <span class="value" id="yearly">€16.667</span>
+    </div>
+    <div class="result-row">
+      <span class="label">ROI percentage:</span>
+      <span class="value" id="roi-percent">50%</span>
+    </div>
+    <div class="result-row total">
+      <span class="label">Jaarlijks rendement (IRR ~):</span>
+      <span class="value" id="irr">~14.5%</span>
+    </div>
+  </div>
+
+  <div class="scenario-info">
+    <h4>💡 Scenario Details</h4>
+    <div id="scenario-description">
+      <p><strong>Early Backer (1.5x ROI-cap)</strong></p>
+      <ul>
+        <li>Risico: Hoog (concept onbewezen)</li>
+        <li>Timing: 3-4 jaar terugbetaling</li>
+        <li>Bonus: Advisory role, netwerk toegang</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="note">
+    <em>* Dit zijn schattingen gebaseerd op conservatieve groeiprojecties. Werkelijke rendementen kunnen variëren.</em>
+  </p>
+</div>
+
+<style>
+  .roi-calculator {
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .roi-calculator h3 {
+    margin-top: 0;
+    color: var(--sl-color-white);
+  }
+
+  .calculator-inputs {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .input-group label {
+    color: var(--sl-color-white);
+  }
+
+  .input-group input,
+  .input-group select {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 4px;
+    background: var(--sl-color-black);
+    color: var(--sl-color-white);
+  }
+
+  .results {
+    background: var(--sl-color-black);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--sl-color-gray-6);
+  }
+
+  .result-row:last-child {
+    border-bottom: none;
+  }
+
+  .result-row.highlight {
+    background: var(--sl-color-blue-low);
+    font-weight: 600;
+    border-radius: 4px;
+  }
+
+  .result-row.total {
+    background: var(--sl-color-green-low);
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+  }
+
+  .result-row .label {
+    color: var(--sl-color-gray-2);
+  }
+
+  .result-row .value {
+    color: var(--sl-color-white);
+    font-weight: 600;
+  }
+
+  .scenario-info {
+    background: var(--sl-color-blue-low);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .scenario-info h4 {
+    margin-top: 0;
+    color: var(--sl-color-white);
+  }
+
+  .scenario-info ul {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.5rem;
+  }
+
+  .scenario-info li {
+    color: var(--sl-color-gray-2);
+    margin: 0.25rem 0;
+  }
+
+  .note {
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-3);
+    margin-top: 1rem;
+  }
+</style>
+
+<script>
+  function calculateROI() {
+    const investmentInput = document.getElementById('investment') as HTMLInputElement;
+    const roicapSelect = document.getElementById('roicap') as HTMLSelectElement;
+    const yearsSelect = document.getElementById('years') as HTMLSelectElement;
+
+    const investment = parseFloat(investmentInput.value) || 100000;
+    const roicap = parseFloat(roicapSelect.value);
+    const years = parseInt(yearsSelect.value);
+
+    const maxReturn = investment * roicap;
+    const profit = maxReturn - investment;
+    const yearly = profit / years;
+    const roiPercent = ((roicap - 1) * 100).toFixed(1);
+
+    // Simple IRR approximation (not exact, but close enough for illustration)
+    const irr = (Math.pow(roicap, 1/years) - 1) * 100;
+
+    // Update results
+    document.getElementById('max-return')!.textContent = formatCurrency(maxReturn);
+    document.getElementById('profit')!.textContent = formatCurrency(profit);
+    document.getElementById('yearly')!.textContent = formatCurrency(yearly);
+    document.getElementById('roi-percent')!.textContent = roiPercent + '%';
+    document.getElementById('irr')!.textContent = '~' + irr.toFixed(1) + '%';
+
+    // Update scenario description
+    updateScenarioDescription(roicap);
+  }
+
+  function updateScenarioDescription(roicap: number) {
+    const scenarioDiv = document.getElementById('scenario-description')!;
+
+    let html = '';
+    if (roicap === 1.5) {
+      html = `
+        <p><strong>Early Backer (1.5x ROI-cap)</strong></p>
+        <ul>
+          <li>Risico: Hoog (concept onbewezen)</li>
+          <li>Timing: 2-4 jaar terugbetaling</li>
+          <li>Bonus: Advisory role, netwerk toegang</li>
+        </ul>
+      `;
+    } else if (roicap === 1.25) {
+      html = `
+        <p><strong>Growth (1.25x ROI-cap)</strong></p>
+        <ul>
+          <li>Risico: Gemiddeld (validatie na jaar 1-2)</li>
+          <li>Timing: 4-5 jaar terugbetaling</li>
+          <li>Bonus: Board observation, strategiesessie</li>
+        </ul>
+      `;
+    } else if (roicap === 1.0) {
+      html = `
+        <p><strong>Strategic Partner (1.0x ROI-cap)</strong></p>
+        <ul>
+          <li>Risico: Laag (capital preservation)</li>
+          <li>Timing: 5-10 jaar terugbetaling</li>
+          <li>Bonus: Co-creation van publieke structuur</li>
+        </ul>
+      `;
+    } else {
+      html = `
+        <p><strong>Custom ROI-cap (${roicap}x)</strong></p>
+        <ul>
+          <li>Aangepaste voorwaarden</li>
+          <li>Neem contact op voor details</li>
+        </ul>
+      `;
+    }
+
+    scenarioDiv.innerHTML = html;
+  }
+
+  function formatCurrency(amount: number): string {
+    return new Intl.NumberFormat('nl-NL', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  }
+
+  // Add event listeners
+  document.getElementById('investment')?.addEventListener('input', calculateROI);
+  document.getElementById('roicap')?.addEventListener('change', calculateROI);
+  document.getElementById('years')?.addEventListener('change', calculateROI);
+
+  // Initial calculation
+  calculateROI();
+</script>
