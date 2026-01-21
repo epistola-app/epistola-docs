@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://docs.epistola.app',
   integrations: [
       starlight({
           title: 'Epistola Documentatie',
