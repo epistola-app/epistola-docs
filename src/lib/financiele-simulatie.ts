@@ -109,6 +109,11 @@ export interface BVInputs {
 
 export interface BVYearRow {
   jaar: number;
+  /** All-in kosten per FTE inclusief overhead (€) — referentie voor de afleiding */
+  kostenPerFte: number;
+  /** Theoretische FTE-capaciteit bij het beschikbare budget (float, niet afgerond) */
+  beoogdeFte: number;
+  /** Daadwerkelijk gekozen FTE — conservatief: floor(beoogdeFte), max MAX_BV_FTE */
   fte: number;
   vanStichtingOnderhoud: number;
   vanStichtingFeatures: number;
@@ -116,6 +121,7 @@ export interface BVYearRow {
   vanGemeenten: number;
   bvInkomsten: number;
   bvKosten: number;
+  /** Buffer = inkomsten − kosten; onder cost-plus altijd ≥ 0 en < kostenPerFte (tenzij FTE gecapt is) */
   bvResultaat: number;
 }
 
@@ -246,6 +252,8 @@ export function berekenBVJaar(
 
   return {
     jaar: stichtingJaar.jaar,
+    kostenPerFte,
+    beoogdeFte,
     fte,
     vanStichtingOnderhoud,
     vanStichtingFeatures,

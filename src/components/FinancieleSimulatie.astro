@@ -220,14 +220,18 @@
     </div>
 
     <h4>📉 BV uitgaven en resultaat</h4>
+    <p class="sim-explainer">FTE-capaciteit volgt uit beschikbaar budget ÷ kosten per FTE. De BV staft conservatief — de gekozen FTE is naar beneden afgerond, zodat het verschil (de buffer) altijd positief blijft en als overwinst terugvloeit naar de gemeenschap.</p>
     <div class="sim-table-wrap">
       <table>
         <thead>
           <tr>
             <th>Jaar</th>
-            <th>FTE-kosten</th>
             <th>Inkomsten</th>
-            <th>Resultaat</th>
+            <th>Kosten/FTE</th>
+            <th>Beoogd FTE</th>
+            <th>Gekozen FTE</th>
+            <th>FTE-kosten</th>
+            <th>Buffer (resultaat)</th>
           </tr>
         </thead>
         <tbody id="b-uitgaven-tbody"></tbody>
@@ -466,13 +470,17 @@
 
     function renderBVUitgaven(bv: BVResult) {
       const tbody = document.getElementById('b-uitgaven-tbody')!;
+      const decFmt = new Intl.NumberFormat('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       tbody.innerHTML = bv.rows
         .map(
           (r) => `
         <tr>
           <td>${r.jaar}</td>
-          <td>${fmt.format(r.bvKosten)}</td>
           <td>${fmt.format(r.bvInkomsten)}</td>
+          <td>${fmt.format(r.kostenPerFte)}</td>
+          <td>${decFmt.format(r.beoogdeFte)}</td>
+          <td>${r.fte}</td>
+          <td>${fmt.format(r.bvKosten)}</td>
           <td class="${r.bvResultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.bvResultaat)}</td>
         </tr>`
         )
