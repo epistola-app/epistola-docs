@@ -1,49 +1,40 @@
-# Starlight Starter Kit: Basics
+# Visie op Open Source in de Publieke Sector
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Documentatiesite met een onderbouwde visie op hoe open source platformsoftware in de Nederlandse publieke sector duurzaam gefinancierd en bestuurd kan worden. **Epistola** — een open platform voor digitale documentgeneratie voor gemeenten — fungeert als concreet uitgewerkt voorbeeld.
 
+🌐 **Live:** <https://epistola-app.github.io/visie-op-opensource/>
+
+## Inhoud
+
+De site is opgebouwd uit drie hoofdstukken:
+
+1. **Open Source** — Waarom open source platformsoftware structureel onderhoudsfinanciering nodig heeft, welke financieringsmodellen bestaan en hoe afnemers betrouwbaarheid beoordelen.
+2. **Organisatiestructuur** — For-profit, missiegedreven en steward-owned organisaties vergeleken, plus het cost-recovery model.
+3. **Epistola** — Drie modellen doorgerekend (open source + diensten, BSL + ecosysteem, centraal aanbesteed) inclusief aanbeveling aan de VNG om de GIBIT aan te passen.
+
+Aanvullende secties: praktische informatie voor gemeenten, leveranciers en investeerders, plus referentiedocumenten (BSL-licentie, begrippen, bronnen).
+
+Alle content is in het Nederlands.
+
+## Lokaal draaien
+
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # productiebuild in ./dist/
+npm run preview  # productiebuild lokaal previewen
 ```
-npm create astro@latest -- --template starlight
-```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Vereist Node.js 20+ (zie `.tool-versions`).
 
-## 🚀 Project Structure
+## Publicatie
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+Elke push naar `main` triggert automatisch een GitHub Actions-deploy naar GitHub Pages — zie `.github/workflows/`.
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
-```
+## Techniek
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
-
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
-
-Static assets, like favicons, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+- **Astro 5** met **Starlight** als documentatie-thema
+- **Tailwind CSS 4** via de Vite-plugin
+- **Mermaid** voor diagrammen (client-side)
+- Content in `src/content/docs/`, sidebar handmatig geconfigureerd in `astro.config.mjs`
+- Interactieve componenten (`CostCalculator`, `RevenueCalculator`, `SlaLevel`, `SlaComparisonTable`) in `src/components/`
