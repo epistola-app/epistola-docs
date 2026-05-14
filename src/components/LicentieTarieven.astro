@@ -1,0 +1,38 @@
+---
+import tarieven from '../data/licentie-tarieven.json';
+
+export interface Props {
+  schalen?: string[];
+}
+
+const { schalen } = Astro.props;
+
+const rijen = schalen
+  ? tarieven.schalen.filter((s) => schalen.includes(s.id))
+  : tarieven.schalen;
+
+const formatter = new Intl.NumberFormat('nl-NL', {
+  style: 'currency',
+  currency: tarieven.valuta,
+  maximumFractionDigits: 0,
+});
+---
+
+<table>
+  <thead>
+    <tr>
+      <th>Gemeentegrootte</th>
+      <th>Inwoners</th>
+      <th>Licentie/{tarieven.periode}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {rijen.map((rij) => (
+      <tr>
+        <td>{rij.label}</td>
+        <td>{rij.inwoners}</td>
+        <td>{formatter.format(rij.tarief)}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

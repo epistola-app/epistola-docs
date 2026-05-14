@@ -1,0 +1,20 @@
+{
+  "valuta": "EUR",
+  "periode": "jaar",
+  "schalen": [
+    { "id": "micro",       "label": "Micro",       "inwoners": "< 5k",     "tarief": 800 },
+    { "id": "zeer-klein",  "label": "Zeer klein",  "inwoners": "5–10k",    "tarief": 1200 },
+    { "id": "klein",       "label": "Klein",       "inwoners": "10–20k",   "tarief": 1800 },
+    { "id": "klein-mid",   "label": "Klein–mid",   "inwoners": "20–35k",   "tarief": 2800 },
+    { "id": "mid",         "label": "Mid",         "inwoners": "35–60k",   "tarief": 4500 },
+    { "id": "mid-groot",   "label": "Mid–groot",   "inwoners": "60–100k",  "tarief": 7000 },
+    { "id": "groot",       "label": "Groot",       "inwoners": "100–150k", "tarief": 10000 },
+    { "id": "zeer-groot",  "label": "Zeer groot",  "inwoners": "150–250k", "tarief": 15000 },
+    { "id": "xl",          "label": "XL",          "inwoners": "250k+",    "tarief": 20000 }
+  ],
+  "schaalvoordeel": [
+    { "vanaf": 10, "korting": 0.05 },
+    { "vanaf": 20, "korting": 0.10 },
+    { "vanaf": 35, "korting": 0.15 }
+  ]
+}
