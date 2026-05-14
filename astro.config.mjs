@@ -5,12 +5,6 @@ import mermaid from 'astro-mermaid';
 
 import tailwindcss from '@tailwindcss/vite';
 
-// Lokaal zichtbaar, maar (nog) niet op de publieke site
-const isProd = process.env.NODE_ENV === 'production';
-const localOnlyEpistolaItems = isProd
-  ? []
-  : [{ label: 'Financiële Prognose', link: '/epistola/financiele-prognose' }];
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://docs.epistola.app',
@@ -82,7 +76,7 @@ export default defineConfig({
                       { label: 'Model 2: BSL + Ecosysteem', link: '/epistola/model-2-bsl-licentie' },
                       { label: 'Model 3: Centraal Aanbesteed', link: '/epistola/model-3-centraal-aanbesteed' },
                       { label: 'Modelkeuze & Transitie', link: '/epistola/modelkeuze' },
-                      ...localOnlyEpistolaItems,
+                      { label: 'Financiële Prognose', link: '/epistola/financiele-prognose' },
                       {
                           label: 'Governance',
                           collapsed: true,
