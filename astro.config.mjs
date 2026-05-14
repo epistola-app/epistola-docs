@@ -100,6 +100,7 @@ export default defineConfig({
                           items: [
                               { label: 'Overzicht', link: '/meedoen/gemeenten/overzicht' },
                               { label: 'Aanbestedingen', link: '/meedoen/gemeenten/aanbestedingen' },
+                              { label: 'GIBIT-compatibiliteit', link: '/meedoen/gemeenten/gibit-compatibiliteit' },
                               { label: 'Veelgestelde Vragen', link: '/meedoen/gemeenten/faq' },
                           ],
                       },
