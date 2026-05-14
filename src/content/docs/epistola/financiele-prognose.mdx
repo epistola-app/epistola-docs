@@ -1,0 +1,63 @@
+---
+title: Financiële Prognose
+description: Een interactieve simulatie van hoe een Epistola-achtige stichting+BV zich financieel zou ontwikkelen
+---
+
+import FinancieleSimulatie from '../../../components/FinancieleSimulatie.astro';
+
+Hoe ontwikkelt een stichting+BV-combinatie zoals Epistola zich financieel over de eerste vijf jaar? Veel hangt af van adoptietempo, gemiddelde gemeentegrootte en personeelsgroei. Onderstaande simulatie laat je aan de aannames schuiven.
+
+---
+
+## Uitgangspunten
+
+De berekening gebruikt:
+
+- De [licentietabel uit Model 2](/epistola/model-2-bsl-licentie) als inkomstenbasis
+- Schaalvoordeel-staffel (10+ gemeenten: −5%, 20+: −10%, 35+: −15%)
+- Personeelskosten als grootste kostenpost; vaste kosten voor infrastructuur, audits, overhead daarbovenop
+- Initiële investering om het tekort in jaar 1–2 op te vangen
+
+De cijfers zijn projecties, geen voorspellingen. Ze laten zien hoe gevoelig de uitkomst is voor de aannames — niet wat er gebeurt.
+
+---
+
+<FinancieleSimulatie />
+
+---
+
+## Wat de simulatie wel en niet zegt
+
+**Wel:**
+
+- Bij welk adoptie-tempo het platform structureel zelfvoorzienend wordt
+- Hoe groot de initiële investering moet zijn om jaar 1–2 te overbruggen
+- Wanneer overwinst beschikbaar komt om terug te laten vloeien naar klanten, stichting en open source-bijdragen
+
+**Niet:**
+
+- Inkomsten uit SaaS-aanbieders (per-document afdracht is niet meegerekend; dat is een aanvullende inkomstenstroom voor de stichting)
+- Eenmalige kosten zoals juridische oprichting, certificering of audits in het eerste jaar
+- Operationele risico's (uitval van een grote klant, security-incident, regulatoire wijzigingen)
+- Het effect van de [aanbeveling aan de VNG](/epistola/modelkeuze#aanbeveling-aan-de-vng-pas-de-gibit-aan) — een GIBIT-onderhoudsbijdrage zou de inkomstenbasis aanzienlijk verbreden
+
+---
+
+## Realistische scenario's
+
+Een paar combinaties van aannames die het verkennen waard zijn:
+
+- **Conservatief**: 3 gemeenten in jaar 1, +5 per jaar, Klein-bracket (≈€2.800), 2 FTE start + 2 per jaar
+- **Baseline**: 5 gemeenten, +8 per jaar, Mid-bracket (€4.500), 2 FTE + 3 per jaar
+- **Optimistisch**: 10 gemeenten in jaar 1, +15 per jaar, Mid-bracket, 3 FTE + 4 per jaar
+
+In elk scenario verschuift het break-even-moment, de benodigde investering en het moment waarop overwinst beschikbaar komt.
+
+---
+
+## Zie ook
+
+- [Investeringen (referentie)](/referentie/investeringen) — De ROI-cap-structuur en investeringscategorieën
+- [Voor Investeerders](/meedoen/investeerders/overzicht) — Hoe gemeenten zelf kunnen investeren
+- [Model 2: BSL + Ecosysteem](/epistola/model-2-bsl-licentie) — De licentiebasis waar deze prognose op leunt
+- [Epistola Organisatiestructuur](/epistola/organisatiestructuur) — De vijf constraints die de kostenstructuur bepalen

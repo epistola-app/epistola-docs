@@ -49,11 +49,13 @@ Het concrete voorbeeld: stichting + BV, vijf statutaire constraints (max salaris
 
 ## Onze positie
 
-We prefereren **Model 2** (BSL + ecosysteem van preferred suppliers) omdat het als enige het ecosysteem-incentive-conflict oplost: elke nieuwe leverancier vergroot de markt in plaats van de omzet aan te tasten.
+Epistola opereert nu binnen **Model 1** (volledig open source, verdienen op diensten) — niet omdat we Model 1 als duurzaam eindpunt zien, maar omdat Model 2 (BSL + ecosysteem) in de huidige markt vaak wordt geïnterpreteerd als "niet écht open source". Die perceptie is de praktische blokkade, niet de inhoud.
 
-We **beginnen met Model 1** omdat de markt nog niet rijp is voor een licentiegesprek met gemeenten die "open source = gratis" verwachten.
+We zijn in goed gezelschap: **Maykin Media**, **Ritense** en andere Nederlandse open source-leveranciers in de publieke sector hanteren feitelijk hetzelfde model. En zij lopen tegen dezelfde uitdagingen aan — uitdagingen die met de opkomst van AI alleen maar groter zullen worden, omdat de toetredingsdrempel voor concurrerende dienstverleners verder daalt en het free-rider-probleem urgenter wordt. [Zie hier](/referentie/ai-impact) waarom AI de licentie-vs-diensten-afweging in scherpe vorm zet.
 
-We **adviseren de VNG** om de GIBIT aan te passen zodat afnemers van open source verplicht een onderhoudsbijdrage betalen. Dat lost het free-rider-probleem structureel op en is de brug van Model 1 naar Model 2.
+Met dit document willen we niet één model promoten, maar **alle drie de modellen helder uitleggen en de consequenties van elk zichtbaar maken** — zodat gemeenten, leveranciers en stewards een geïnformeerde keuze kunnen maken in plaats van een impliciete.
+
+We **adviseren de VNG** om de GIBIT aan te passen zodat afnemers van open source verplicht een onderhoudsbijdrage betalen. Dat lost het free-rider-probleem structureel op en geeft elk van de drie modellen een steviger financiële basis.
 
 [→ Volledige modelkeuze en transitiestrategie](/epistola/modelkeuze)
 
