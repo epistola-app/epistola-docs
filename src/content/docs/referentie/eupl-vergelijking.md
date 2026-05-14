@@ -3,7 +3,7 @@ title: EUPL — alleen relevant binnen Model 1
 description: Waarom de EUPL-vraag pas opkomt als je Model 1 kiest, en hoe EUPL zich dan verhoudt tot AGPL als copyleft-keuze
 ---
 
-In gesprekken over Epistola komt regelmatig de vraag: "waarom niet gewoon EUPL?" Op het eerste gezicht een logische vraag — EUPL is expliciet ontworpen voor publieke-sector software in EU-context. Maar de vraag is alleen zinvol binnen een specifiek scenario: **Model 1** (volledig open source, verdienen op diensten). Onder Model 2 (de keuze van Epistola: BSL + ecosysteem) is EUPL geen alternatief voor BSL — ze lossen verschillende problemen op.
+In gesprekken over Epistola komt regelmatig de vraag: "waarom niet gewoon EUPL?" Op het eerste gezicht een logische vraag — EUPL is expliciet ontworpen voor publieke-sector software in EU-context. Maar de vraag is alleen zinvol binnen een specifiek scenario: **Model 1** (volledig open source, verdienen op diensten). Onder Model 2 (het voorkeursmodel: BSL + ecosysteem) is EUPL geen alternatief voor BSL — ze lossen verschillende problemen op.
 
 Deze pagina behandelt eerst waarom EUPL niet vergelijkbaar is met BSL, en daarna de eigenlijke vergelijking die wél interessant is: **EUPL versus AGPL** als copyleft-keuze binnen Model 1.
 
@@ -78,13 +78,13 @@ In Model 1-territorium zou de keuze tussen EUPL en AGPL er als volgt uitzien:
 - **AGPL** bij sterke nadruk op SaaS-bescherming en internationale adoptie
 - **EUPL** bij sterke nadruk op EU-publieke-sector-legitimiteit en multilingual juridische basis
 
-Voor een Nederlands gemeente-platform met EU-context en weinig SaaS-naar-derden zou EUPL de iets logischere keuze zijn. Maar onder Model 2 — de keuze van Epistola — is geen van beide aan de orde.
+Voor een Nederlands gemeente-platform met EU-context en weinig SaaS-naar-derden zou EUPL de iets logischere keuze zijn. Maar onder Model 2 — het voorkeursmodel waar Epistola naartoe wil — is geen van beide aan de orde.
 
 ---
 
 ## Conclusie
 
-EUPL is een uitstekende licentie voor een specifiek soort project: publieke-sector open source software die op een dienstenmodel draait (Model 1). Voor Epistola is dat niet het gekozen pad.
+EUPL is een uitstekende licentie voor een specifiek soort project: publieke-sector open source software die op een dienstenmodel draait (Model 1). Voor Epistola is dat niet het beoogde eindpunt — al ligt de praktijk daar momenteel wel het dichtst bij.
 
 De vraag "waarom geen EUPL?" is dus eigenlijk de vraag "waarom geen Model 1?" — en het antwoord daarop staat op [Modelkeuze & Transitiestrategie](/epistola/modelkeuze): het ecosysteem-incentive-conflict en het ontbreken van een platformfinancieringsmechanisme.
 

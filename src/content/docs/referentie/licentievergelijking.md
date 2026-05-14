@@ -99,16 +99,17 @@ Buiten scope van deze pagina, maar relevant als nulpunt: alles wat naar links va
 
 ---
 
-## Voor Epistola: BSL → Apache 2.0
+## Wat dit voor Epistola betekent
 
-Epistola kiest voor **BSL met een change date van één jaar naar Apache 2.0**. Die keuze combineert:
+Epistola hanteert drie mogelijke modellen die elk een eigen licentiekeuze impliceren. De definitieve keuze is nog niet gemaakt — de site beargumenteert wel een voorkeur en een transitiepad.
 
-- Code-transparantie vanaf dag 1 (auditeerbaar, inspectable)
-- Tijdelijke commerciële regulering om platformfinanciering mogelijk te maken
-- Automatische overgang naar maximale vrijheid (Apache 2.0) na één jaar
-- Geen permanente lock-in zoals propriëtair of SSPL
+| Model | Licentie | Status |
+|---|---|---|
+| **Model 1** — Open source + diensten | Permissive (Apache 2.0) of copyleft (AGPL/EUPL) | Huidig startpunt — pragmatische adoptie |
+| **Model 2** — BSL + ecosysteem | BSL met change date naar Apache 2.0 | Voorkeursmodel, voorzien als eindbestemming |
+| **Model 3** — Centraal aanbesteed | Afhankelijk van VNG-eisen | Wordt mogelijk gemaakt, niet actief nagestreefd |
 
-Voor de volledige onderbouwing, zie [De BSL-licentie](/referentie/bsl-licentie). Voor de specifieke vraag waarom geen EUPL, zie [Waarom geen EUPL?](/referentie/eupl-vergelijking).
+Het BSL-model combineert code-transparantie vanaf dag 1, tijdelijke commerciële regulering voor platformfinanciering, en automatische overgang naar maximale vrijheid na één jaar. Voor de volledige onderbouwing en de redenering achter de modelkeuze, zie [Modelkeuze & Transitiestrategie](/epistola/modelkeuze). Voor de werking van de BSL specifiek, zie [De BSL-licentie](/referentie/bsl-licentie). Voor de EUPL-afweging zie [Waarom geen EUPL?](/referentie/eupl-vergelijking).
 
 ---
 
