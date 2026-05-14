@@ -45,12 +45,17 @@ De aanbieder is vrij om zijn eigen prijsmodel te kiezen (per gemeente, per gebru
 
 ### Multi-tenancy en data-isolatie
 
-Elke gemeente moet logisch én juridisch gescheiden zijn binnen de SaaS-omgeving:
+Het platform is van de grond af **multi-tenant gebouwd**. Epistola levert de primitieven; de aanbieder is verantwoordelijk voor het correct configureren, monitoren en aantonen van de werking daarvan.
 
-- **Logisch**: data van gemeente A is onder geen omstandigheid zichtbaar voor gemeente B
-- **Audit-baar**: toegangslogs aantonen dat er geen cross-tenant leakage is
-- **Encryptie**: bij voorkeur per-tenant encryptiesleutels voor data at rest
-- **Backup-isolatie**: backups zijn per gemeente apart restoreerbaar
+| Wat het platform biedt | Wat de aanbieder moet doen |
+|---|---|
+| Tenant-scheiding op data- en queryniveau | Tenants juist provisioneren bij onboarding |
+| Per-tenant encryptiesleutels (data at rest) | Sleutelbeheer operationeel inrichten en roteren |
+| Audit-logs van cross-tenant accesspogingen | Logs monitoren en periodiek auditen |
+| Backup-primitieven per tenant | Backup-strategie ontwerpen, restores periodiek testen |
+| Tenant-specifieke configuratie en branding | Gemeenten configureren binnen de geboden ruimte |
+
+Met andere woorden: data van gemeente A kán logisch en juridisch niet zichtbaar zijn voor gemeente B mits de aanbieder de platform-features correct inzet. De stichting kan in audits steekproefsgewijs de inzet daarvan controleren.
 
 ### Data-residentie
 
@@ -66,7 +71,16 @@ Documentgeneratie kent pieken (begin van het jaar, vakantieperiodes, verzendmome
 
 ### Configureerbaarheid
 
-Gemeenten hebben eigen huisstijl, eigen workflows, eigen integraties met zaakgericht werken-systemen. De SaaS-aanbieder moet per-gemeente configureerbaarheid bieden zonder forks van de platform-code.
+Gemeenten hebben eigen huisstijl, eigen templates, eigen integraties met zaakgericht werken-systemen. Net als bij multi-tenancy levert het platform de configuratie-primitieven; de aanbieder schakelt ze in en beheert ze per gemeente.
+
+| Wat het platform biedt | Wat de aanbieder doet |
+|---|---|
+| Per-tenant huisstijl, templates en afzendergegevens | Configureren bij onboarding, beheren in beheerportaal |
+| Configureerbare gebruikers- en rollenmodellen | Aansluiten op de identity-provider van de gemeente |
+| Geconfigureerde integratiekoppelvlakken (zaakgericht werken, e-mail, archivering) | Aansluiten op de specifieke systemen van de gemeente |
+| Beperkt aanpasbare instellingen per gemeente | Documenteren en uitleggen aan de gemeente |
+
+Forks van de platform-code zijn niet toegestaan — alle gemeente-specifieke aanpassingen lopen via configuratie, niet via codewijzigingen.
 
 ---
 
@@ -102,8 +116,8 @@ Voor de eindafnemer is de keuze niet triviaal. Een korte vergelijking:
 |---|---|---|
 | **Drempel** | Laag — geen eigen infra | Hoog — vereist hostingbeslissingen |
 | **Kosten** | Abonnement (per-document afdracht doorbelast) | Vaste licentie op inwonertal + hostingkosten |
-| **Configureerbaarheid** | Beperkt tot wat de aanbieder ondersteunt | Volledige controle |
-| **Integraties** | Beperkt tot wat de aanbieder ontsluit | Maatwerk mogelijk |
+| **Configureerbaarheid** | Volledig — via platform-configuratie per tenant | Volledig — plus controle over de deployment-omgeving |
+| **Integraties** | Via de koppelvlakken die het platform biedt | Idem, plus ruimte voor externe scripts of nabewerkingen op eigen infrastructuur |
 | **Data-locatie** | Bij de aanbieder | Bij de gemeente of haar gekozen hosting partner |
 | **Wisselen van aanbieder** | Data-export, dan migratie | Naar andere supplier of in-house |
 | **Geschikt voor** | Kleinere gemeenten, snelle start | Grotere gemeenten of gemeenten met specifieke integratie-eisen |
