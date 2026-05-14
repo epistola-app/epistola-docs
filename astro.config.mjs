@@ -102,6 +102,7 @@ export default defineConfig({
                           items: [
                               { label: 'Overzicht', link: '/meedoen/leveranciers/overzicht' },
                               { label: 'Certificering', link: '/meedoen/leveranciers/certificering' },
+                              { label: 'SaaS Aanbieden', link: '/meedoen/leveranciers/saas-aanbieden' },
                               { label: 'Doorontwikkeling & Roadmap', link: '/meedoen/leveranciers/roadmap-en-doorontwikkeling' },
                           ],
                       },
