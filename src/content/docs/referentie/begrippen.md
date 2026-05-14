@@ -96,3 +96,22 @@ Principe waarbij alle commerciële partijen onder dezelfde voorwaarden kunnen op
 
 ### Network effects
 Fenomeen waarbij de waarde van Epistola toeneemt naarmate meer partijen (gemeenten en leveranciers) deelnemen aan het ecosysteem.
+
+---
+
+## Verdienmodel & Participatie
+
+### Escalatieladder
+De geordende reeks van bijdragevormen: van maximale commerciële betrokkenheid (licentie) via SLA en diensten naar de minimale bijdrage (continuïteitsbijdrage). Iedereen die het platform gebruikt wordt geacht op een van deze niveaus bij te dragen.
+
+### Continuïteitsbijdrage
+De minimale bijdrage die verwacht wordt van organisaties die het platform gebruiken zonder licentie, SLA of diensten af te nemen. Kan bestaan uit upstream code, documentatie, een financiële donatie of mede-financiering van een roadmap-feature.
+
+### Template kwaliteitscheck
+Een betaalde dienst waarbij een preferred supplier de documenttemplates van een gemeente auditeert op toegankelijkheid, technische correctheid en huisstijlconsistentie.
+
+### Versie-compatibiliteitsvalidatie
+Een betaalde dienst waarbij een preferred supplier controleert of bestaande templates van een gemeente blijven werken na een nieuwe platformversie, en eventuele problemen verhelpt.
+
+### Free-rider
+Organisatie of gebruiker die profiteert van een gemeenschappelijk goed (het platform) zonder bij te dragen aan de instandhouding ervan. De escalatieladder is ontworpen om free-riding te beperken.

@@ -45,36 +45,32 @@ export default defineConfig({
                   label: 'Introductie',
                   collapsed: false,
                   items: [
-                      { label: 'Wat is Epistola', link: '/introductie/wat-is-epistola' },
-                      { label: 'Missie & Visie', link: '/introductie/missie' },
-                      { label: 'Waarom Dit Model', link: '/introductie/waarom-dit-model' },
-                      { label: 'Steward Ownership', link: '/introductie/steward-ownership' },
-                      { label: 'Snelstart', link: '/introductie/snelstart' },
+                      { label: 'Het Probleem', link: '/introductie/het-probleem' },
+                      { label: 'Het Model in Één Oogopslag', link: '/introductie/het-model-in-een-oogopslag' },
+                      { label: 'Snelstart per Doelgroep', link: '/introductie/snelstart' },
                   ],
               },
               {
-                  label: 'Het Model',
+                  label: 'Het Verdienmodel',
                   collapsed: false,
                   items: [
+                      { label: 'Overzicht & Escalatieladder', link: '/het-verdienmodel/overzicht' },
+                      { label: '1. Licenties', link: '/het-verdienmodel/licenties' },
+                      { label: '2. SLA & Support', link: '/het-verdienmodel/sla-en-support' },
+                      { label: '3. Diensten', link: '/het-verdienmodel/diensten' },
+                      { label: '4. Continuïteitsbijdrage', link: '/het-verdienmodel/continuiteits-bijdrage' },
+                  ],
+              },
+              {
+                  label: 'Verantwoord Beheer',
+                  collapsed: false,
+                  items: [
+                      { label: 'Steward Ownership', link: '/verantwoord-beheer/steward-ownership' },
+                      { label: 'Structuur & Rollen', link: '/verantwoord-beheer/structuur' },
                       {
-                          label: 'Structuur & Rollen',
-                          autogenerate: { directory: 'het-model/structuur-rollen' },
+                          label: 'Governance',
                           collapsed: true,
-                      },
-                      {
-                          label: 'Governance & Besluitvorming',
-                          autogenerate: { directory: 'het-model/governance' },
-                          collapsed: true,
-                      },
-                      {
-                          label: 'Financieel Model',
-                          autogenerate: { directory: 'het-model/financieel' },
-                          collapsed: true,
-                      },
-                      {
-                          label: 'IP & Licenties',
-                          autogenerate: { directory: 'het-model/ip-licenties' },
-                          collapsed: true,
+                          autogenerate: { directory: 'verantwoord-beheer/governance' },
                       },
                   ],
               },
@@ -84,25 +80,27 @@ export default defineConfig({
                   items: [
                       {
                           label: 'Voor Gemeenten',
-                          autogenerate: { directory: 'meedoen/gemeenten' },
                           collapsed: true,
+                          items: [
+                              { label: 'Overzicht', link: '/meedoen/gemeenten/overzicht' },
+                              { label: 'Aanbestedingen', link: '/meedoen/gemeenten/aanbestedingen' },
+                              { label: 'Veelgestelde Vragen', link: '/meedoen/gemeenten/faq' },
+                          ],
                       },
                       {
                           label: 'Voor Leveranciers',
-                          autogenerate: { directory: 'meedoen/leveranciers' },
                           collapsed: true,
-                      },
-                      {
-                          label: 'Voor Investeerders',
-                          autogenerate: { directory: 'meedoen/investeerders' },
-                          collapsed: true,
+                          items: [
+                              { label: 'Overzicht', link: '/meedoen/leveranciers/overzicht' },
+                              { label: 'Doorontwikkeling & Roadmap', link: '/meedoen/leveranciers/doorontwikkeling' },
+                          ],
                       },
                   ],
               },
               {
                   label: 'Referentie',
-                  autogenerate: { directory: 'referentie' },
                   collapsed: true,
+                  autogenerate: { directory: 'referentie' },
               },
           ],
       }),

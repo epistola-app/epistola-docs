@@ -1,138 +1,96 @@
 ---
-title: Epistola Documentatie
-description: Open platform voor digitale documentgeneratie zonder vendor lock-in
+title: Open Platformsoftware voor de Publieke Sector
+description: Hoe een open platform voor digitale documentgeneratie een duurzaam verdienmodel heeft zonder vendor lock-in
 template: splash
 hero:
   title: |
-    Epistola
+    Een duurzaam verdienmodel
     <span style="font-size: 0.7em; display: block; margin-top: 0.5em; font-weight: normal;">
-      Open platform voor digitale documentgeneratie
+      voor open platformsoftware in de publieke sector
     </span>
-  tagline: Gemeenten genereren documenten zonder vendor lock-in. Eigendom van een onafhankelijke stichting, dienstverlening via meerdere gecertificeerde leveranciers.
+  tagline: Epistola laat zien hoe een open platform voor gemeenten zichzelf kan financieren — transparant, zonder vendor lock-in, en met een escalatieladder van bijdragen.
   actions:
-    - text: Start hier
-      link: /introductie/snelstart/
+    - text: Het probleem
+      link: /introductie/het-probleem/
       icon: right-arrow
       variant: primary
-    - text: Over Epistola
-      link: /introductie/wat-is-epistola/
+    - text: Het verdienmodel
+      link: /het-verdienmodel/overzicht/
       icon: information
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Voor wie ben je hier?
+## Wat je hier leert
 
 <CardGrid stagger>
-  <Card title="Voor Gemeenten" icon="rocket">
-    **Ontdek hoe Epistola uw gemeente helpt zonder vendor lock-in**
+  <Card title="Het Probleem" icon="warning">
+    Waarom open source software voor de publieke sector een bijzonder verdienmodel nodig heeft — en waarom de bekende alternatieven elk op hun eigen manier falen.
 
-    - Betaalbaar: €2-30k/jaar (op basis van inwonertal)
-    - Keuzevrijheid tussen meerdere leveranciers
-    - Open source na 1 jaar
-    - Continuïteit gegarandeerd
+    [Lees het probleem →](/introductie/het-probleem/)
+  </Card>
 
-    [Quick Start →](/meedoen/gemeenten/one-pager/)
+  <Card title="Het Verdienmodel" icon="approve-check-circle">
+    De vier inkomstenbronnen die samen een escalatieladder vormen: licenties, SLA & support, diensten, en continuïteitsbijdrage.
+
+    [Bekijk het verdienmodel →](/het-verdienmodel/overzicht/)
+  </Card>
+
+  <Card title="Verantwoord Beheer" icon="puzzle">
+    Hoe steward ownership en governance garanderen dat het platform betrouwbaar blijft — onafhankelijk van commerciële druk.
+
+    [Lees over governance →](/verantwoord-beheer/steward-ownership/)
+  </Card>
+
+  <Card title="Meedoen" icon="rocket">
+    Praktische informatie voor gemeenten, leveranciers en andere partijen die willen deelnemen aan het ecosysteem.
+
+    [Start per doelgroep →](/introductie/snelstart/)
+  </Card>
+</CardGrid>
+
+## De escalatieladder
+
+Wie het platform gebruikt wordt geacht bij te dragen. De vorm hangt af van de mate van betrokkenheid:
+
+| # | Bijdragevorm | Voor wie? |
+|---|---|---|
+| 1 | **Licentie** | Commerciële afnemers (gemeenten via supplier) |
+| 2 | **SLA & Support** | Afnemers met operationele eisen |
+| 3 | **Diensten** | Afnemers die expertise nodig hebben |
+| 4 | **Continuïteitsbijdrage** | Iedereen die het platform gebruikt zonder 1–3 |
+
+**Kernprincipe:** Als licenties geen optie zijn, moet je op een andere manier bijdragen. Gebruik zonder enige bijdrage is niet houdbaar.
+
+[→ Meer over de escalatieladder](/het-verdienmodel/overzicht/)
+
+## Epistola als voorbeeld
+
+Epistola is een open platform voor digitale documentgeneratie voor Nederlandse gemeenten — eigendom van een onafhankelijke stichting, met dienstverlening via meerdere gecertificeerde leveranciers. Het is het concrete voorbeeld van hoe dit model in de praktijk werkt.
+
+<CardGrid>
+  <Card title="Voor Gemeenten" icon="document">
+    Kosten, SLA-keuze, aanbestedingen en waarborgen.
+
+    [Overzicht voor gemeenten →](/meedoen/gemeenten/overzicht/)
   </Card>
 
   <Card title="Voor Leveranciers" icon="seti:config">
-    **Leer hoe u kunt meedoen als preferred supplier**
+    Verdienmodel, certificering en roadmap.
 
-    - Duurzaam verdienmodel via dienstverlening
-    - Gelijk speelveld, geen exclusiviteit
-    - Investeer in innovatie binnen kaders
-    - Groeiende markt (300+ gemeenten)
-
-    [Quick Start →](/meedoen/leveranciers/one-pager/)
-  </Card>
-
-  <Card title="Voor Investeerders" icon="approve-check-circle">
-    **Bekijk het investeringsperspectief en ROI-model**
-
-    - Impact investment met duidelijk rendement
-    - ROI-cap 1.5x, payback 2-3 jaar
-    - €80-100k seed investment nodig
-    - Publieke missie geborgd
-
-    [Quick Start →](/meedoen/investeerders/one-pager/)
-  </Card>
-
-  <Card title="Governance & Juridisch" icon="puzzle">
-    **Steward ownership model en statutaire borging**
-
-    - Onafhankelijke stichting als eigenaar
-    - Transparante governance met stewards
-    - Geen winstmaximalisatie
-    - Juridisch geborgd
-
-    [Meer over governance →](/het-model/governance/governance/)
-  </Card>
-</CardGrid>
-
-## Waarom Epistola?
-
-<CardGrid stagger>
-  <Card title="Geen vendor lock-in" icon="approve-check">
-    Software is eigendom van onafhankelijke stichting. Na 1 jaar volledig open source. Data altijd van jou. Overstappen zonder risico.
-  </Card>
-
-  <Card title="Open source (BSL → Apache 2.0)" icon="open-book">
-    Jaar 1: Business Source License (inzichtelijk, kwaliteitsregie)
-    Jaar 2+: Apache 2.0 (volledig vrij te gebruiken)
-  </Card>
-
-  <Card title="Transparant & betaalbaar" icon="star">
-    Licentiekosten op basis van gemeentegrootte (€2-30k/jaar). Schaalvoordelen worden gedeeld. Volledige transparantie over kosten en governance.
-  </Card>
-</CardGrid>
-
-## Hoe werkt het?
-
-Epistola heeft een unieke drielaagse structuur:
-
-1. **Stichting Epistola** (steward)
-   - Beheert intellectueel eigendom
-   - Bewaakt missie en kwaliteit
-   - Certificeert leveranciers
-   - Levert zelf GEEN diensten
-
-2. **Preferred Suppliers** (dienstverlening)
-   - Meerdere gecertificeerde bedrijven
-   - SLA, hosting, support, implementatie
-   - Concurreren op kwaliteit
-
-3. **Gemeenten** (gebruikers)
-   - Contracteren met leverancier naar keuze
-   - Kunnen altijd overstappen
-   - Behouden eigendom van data
-
-[Lees meer over de structuur →](/het-model/structuur-rollen/structuur/)
-
-## Volgende stappen
-
-<CardGrid>
-  <Card title="Snelstart" icon="rocket">
-    Directe links naar relevante info per doelgroep
-
-    [Snelstart per doelgroep →](/introductie/snelstart/)
-  </Card>
-
-  <Card title="Volledige Samenvatting" icon="document">
-    Alles in één document: structuur, governance, financiën
-
-    [Samenvatting →](/referentie/samenvatting/)
-  </Card>
-
-  <Card title="Veelgestelde Vragen" icon="information">
-    Antwoorden op alle praktische vragen
-
-    [FAQ voor gemeenten →](/meedoen/gemeenten/faq/)
+    [Overzicht voor leveranciers →](/meedoen/leveranciers/overzicht/)
   </Card>
 
   <Card title="Begrippen" icon="open-book">
-    Verklaring van kernbegrippen en terminologie
+    Verklaring van kernbegrippen en terminologie.
 
     [Begrippen & Terminologie →](/referentie/begrippen/)
+  </Card>
+
+  <Card title="Samenvatting" icon="list-format">
+    Alles in één document.
+
+    [Volledige samenvatting →](/referentie/samenvatting/)
   </Card>
 </CardGrid>
