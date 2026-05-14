@@ -1,0 +1,119 @@
+---
+title: Model 3 — Centraal Aanbesteed
+description: Wat er gebeurt als de VNG namens alle gemeenten centraal aanbesteedt — de voordelen, en het monopsonie-risico
+---
+
+Er is een derde model dat steeds vaker opduikt in gesprekken over digitale infrastructuur voor gemeenten: **centrale aanbesteding door de VNG**. In plaats van dat elke gemeente individueel een aanbesteding uitschrijft, doet de VNG dat namens alle gemeenten gezamenlijk. Gemeenten nemen vervolgens af van het centraal aanbestede contract.
+
+Dit model heeft aantrekkelijke eigenschappen — maar ook een structureel risico dat weinig aandacht krijgt.
+
+---
+
+## Hoe het werkt
+
+De VNG (Vereniging van Nederlandse Gemeenten) sluit namens haar leden een raamcontract af met een of meerdere leveranciers. Individuele gemeenten kunnen op dit contract afnemen zonder zelf een aanbestedingsprocedure te hoeven doorlopen.
+
+**Varianten:**
+- **Exclusief raamcontract** — één leverancier, alle gemeenten
+- **Meervoudig raamcontract** — meerdere leveranciers, gemeenten kiezen
+- **Collectieve inkoop met open standaard** — VNG stelt eisen en open standaarden vast, markt levert
+
+---
+
+## Waarom dit aantrekkelijk is
+
+**Lagere aanbestedingslast voor gemeenten.** Een individuele aanbesteding voor documentgeneratie kost een gemeente tienduizenden euro's aan ambtelijke uren. Als de VNG dat eenmalig doet voor alle gemeenten, is de efficiency-winst enorm.
+
+**Schaalvoordelen.** Met 342 gemeenten als gecombineerde afnemer heeft de VNG aanzienlijk meer onderhandelingsmacht dan een individuele gemeente. Dat kan leiden tot lagere prijzen.
+
+**Standaardisatie.** Gemeenten gebruiken hetzelfde systeem, dezelfde standaarden, dezelfde koppelvlakken. Dat maakt samenwerking, data-uitwisseling en kennisdeling eenvoudiger.
+
+**Lagere drempel voor kleinere gemeenten.** Kleine gemeenten missen vaak de kennis en capaciteit om een goede IT-aanbesteding te doen. Een centraal aanbesteed contract met goede voorwaarden verlaagt de drempel.
+
+---
+
+## Het monopsonie-risico
+
+Een **monopsonie** is een markt met één koper — het spiegelbeeld van een monopolie. Wanneer de VNG optreedt als de enige of dominante koper van een bepaalde software-categorie, ontstaat er een monopsonie.
+
+Dat heeft gevolgen voor de leverancier:
+
+### Extreme klantconcentratie
+
+Als de VNG je enige klant is — of verreweg je grootste — ben je volledig afhankelijk van één beslissende partij. Niet verlengd? Je verliest al je omzet tegelijk. Nieuwe contracteisen? Je hebt geen keuze dan accepteren.
+
+Voor startende leveranciers is dit bijzonder riskant: het wekt de illusie van zekerheid (een groot contract!) terwijl het structureel één van de gevaarlijkste klantconcentraties is die je kunt hebben.
+
+### Geen andere klanten
+
+Een product dat specifiek is gebouwd voor de VNG-aanbesteding, is moeilijk te verkopen buiten gemeenteland. De investering in het product is volledig afhankelijk van de voortgang van één contract. Zodra dat contract afloopt of niet verlengd wordt, is er geen alternatieve markt om op terug te vallen.
+
+### Innovatie wordt politiek
+
+Nieuwe features, aanpassingen aan de roadmap, integraties — alles moet worden goedgekeurd door of afgestemd op de VNG en haar leden. De VNG wordt de innovatie-bottleneck. Besluitvorming in een ledenorganisatie van 342 gemeenten is per definitie langzaam en consensusgericht.
+
+Leveranciers die snel willen innoveren, zullen botsen op de governance-structuur van de VNG. Degenen die overleven zijn degenen die leren werken binnen die structuur — wat ten koste kan gaan van hun innovatievermogen.
+
+### Prijsdruk zonder kwaliteitsprikkel
+
+De VNG heeft als inkoper belang bij lage prijzen. Met 342 gemeenten als achterban heeft ze de onderhandelingsmacht om die te bedingen. Maar lage prijzen gecombineerd met hoge compliance-eisen betekent dunne marges voor leveranciers. Dunne marges leiden tot minder investering in kwaliteit, minder innovatie, en — op de lange termijn — minder goede leveranciers die bereid zijn mee te doen.
+
+### Politieke kwetsbaarheid
+
+De VNG is een ledenorganisatie. Haar prioriteiten veranderen met bestuurswisselingen, politieke wind en lobbydruk van leveranciers. Een aanbestedingsbesluit dat vandaag gunstig is, kan over vier jaar worden teruggedraaid — niet op basis van kwaliteit, maar op basis van politieke overwegingen.
+
+---
+
+## Wat er gebeurt aan het einde van het contract
+
+Een centraal aanbesteed contract heeft een looptijd. Wat er daarna gebeurt, is een onderschat risico:
+
+- **Gemeenten hebben geen interne expertise opgebouwd.** Ze hebben altijd gebruik gemaakt van het centraal contract.
+- **De leverancier weet dit.** De heronderhandeling of heraanbesteding is zwaar in het voordeel van de incumbent — de switching costs zijn enorm.
+- **Of er vindt een volledige heraanbesteding plaats.** Met alle kosten, onzekerheid en discontinuïteit van dien.
+
+In beide gevallen is de gemeente slechter af dan bij een model waarbij concurrentie doorlopend mogelijk is.
+
+---
+
+## Hoe dit zich verhoudt tot open source
+
+Centrale aanbesteding en open source sluiten elkaar niet uit — maar de combinatie vraagt zorgvuldigheid.
+
+**Zonder open source:** de code is eigendom van de geselecteerde leverancier. Bij contractwisseling begint een nieuwe leverancier vanaf nul. Data-overdracht is complex. Lock-in is totaal.
+
+**Met open source (of BSL):** de code is beschikbaar. Een nieuwe leverancier kan bij contractwisseling voortbouwen op wat er al is. Het overstaprisico is structureel lager. De VNG kan als aanbesteder ook eisen dat de code open source is of na afloop open source wordt — precies zoals de BSL-change-date werkt.
+
+Een centraal aanbesteed contract op basis van open source-software vermindert het lock-in risico aanzienlijk — maar lost het monopsonie-risico niet op.
+
+---
+
+## De combinatie met Epistola's modellen
+
+Als de VNG centraal aanbesteedt, zijn er twee scenario's voor Epistola:
+
+**Epistola wint de aanbesteding.** Dan heeft Epistola één grote klant — de VNG. Het monopsonie-risico is volledig aanwezig. De stichting blijft relevant als IP-beheerder, maar de BV is volledig afhankelijk van het VNG-contract. Dit is geen gezonde positie, ook niet als het financieel aantrekkelijk lijkt.
+
+**De aanbesteding is open voor meerdere preferred suppliers.** Als de VNG een raamcontract sluit waarbij meerdere gecertificeerde suppliers mogen aanbieden, behoudt de markt haar concurrentiefunctie. In dat geval kan het VNG-model samengaan met Model 2: de stichting certificeert suppliers, de VNG selecteert uit het gecertificeerde aanbod.
+
+Dit laatste is het enige scenario waarbij centrale aanbesteding en een gezond ecosysteem samengaan.
+
+---
+
+## Onze aanbeveling aan de VNG
+
+Als de VNG centraal wil aanbesteden, adviseren we:
+
+1. **Eis open source of BSL** — zodat de code na afloop van het contract beschikbaar blijft en leverancierswisseling mogelijk is
+2. **Werk met een raamcontract van meerdere suppliers** — zodat concurrentie behouden blijft en geen monopsonie ontstaat voor één leverancier
+3. **Koppel aanbesteding aan onderhoudsbijdrage** — zie de [GIBIT-aanbeveling](/epistola/modelkeuze#aanbeveling-aan-de-vng-pas-de-gibit-aan): wie diensten afneemt, draagt bij aan platformonderhoud
+4. **Voorkom dat de VNG de innovatie-bottleneck wordt** — laat de stichting de roadmap bewaken, niet de aanbestedende partij
+
+---
+
+## Zie ook
+
+- [Model 1: Open Source + Diensten](/epistola/model-1-open-source)
+- [Model 2: BSL + Ecosysteem](/epistola/model-2-bsl-licentie)
+- [Modelkeuze & Transitiestrategie](/epistola/modelkeuze) — De vergelijking van alle drie de modellen
+- [Afnemersperspectief](/open-source/afnemersperspectief) — Hoe gemeenten lock-in en betrouwbaarheid beoordelen

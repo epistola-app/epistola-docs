@@ -3,21 +3,24 @@ title: Modelkeuze & Transitiestrategie
 description: Waarom Epistola de voorkeur geeft aan Model 2, waarom we beginnen met Model 1, en wat we de VNG adviseren om dit structureel op te lossen
 ---
 
-De vorige pagina's beschreven twee modellen elk op hun eigen merites. Deze pagina legt uit waarom we een voorkeur hebben, waarom de werkelijkheid van 2025 ons dwingt anders te beginnen, en hoe we hopen dat dat verandert.
+De vorige pagina's beschreven drie modellen elk op hun eigen merites. Deze pagina legt uit waarom we een voorkeur hebben, waarom de werkelijkheid van 2025 ons dwingt anders te beginnen, en hoe we hopen dat dat verandert.
 
 ---
 
 ## De vergelijking in één tabel
 
-| | Model 1: Open Source + Diensten | Model 2: BSL + Ecosysteem |
-|---|---|---|
-| **Adoptiedrempel** | Geen — iedereen kan starten | Licentieverplichting vraagt uitleg |
-| **Inkomstenstabiliteit** | Afhankelijk van dienstenvraag | Voorspelbaar via licenties |
-| **Ecosysteem-incentive** | Negatief — elke concurrent schaadt omzet | Positief — elke supplier vergroot de markt |
-| **Concurrentie op diensten** | Structureel nadeel (anderen liften mee) | Eerlijk speelveld via licentieplicht |
-| **Schalbaarheid** | Begrensd door BV-capaciteit | Onbegrensd via ecosysteem |
-| **Vertrouwen bij overheden** | Hoog ("echt open source") | Vraagt uitleg |
-| **Financiering platform** | Kwetsbaar bij dienstenconcurrentie | Geborgd via stichting |
+| | Model 1: Open Source + Diensten | Model 2: BSL + Ecosysteem | Model 3: Centraal Aanbesteed |
+|---|---|---|---|
+| **Adoptiedrempel** | Geen — iedereen kan starten | Licentieverplichting vraagt uitleg | Geen (gemeente volgt VNG-contract) |
+| **Inkomstenstabiliteit** | Afhankelijk van dienstenvraag | Voorspelbaar via licenties | Hoog — maar alles bij één klant |
+| **Ecosysteem-incentive** | Negatief — elke concurrent schaadt omzet | Positief — elke supplier vergroot de markt | Afhankelijk van contractvorm |
+| **Concurrentie op diensten** | Structureel nadeel (anderen liften mee) | Eerlijk speelveld via licentieplicht | Beperkt — VNG is bottleneck |
+| **Schaalbaarheid** | Begrensd door BV-capaciteit | Onbegrensd via ecosysteem | Direct groot, maar monopsonie-afhankelijk |
+| **Klantconcentratie** | Verspreid over gemeenten | Verspreid over gemeenten | Extreem hoog (één klant: VNG) |
+| **Innovatiesnelheid** | Hoog | Hoog | Laag (VNG-besluitvorming) |
+| **Vertrouwen bij overheden** | Hoog ("echt open source") | Vraagt uitleg | Hoog (VNG-keurmerk) |
+| **Financiering platform** | Kwetsbaar bij dienstenconcurrentie | Geborgd via stichting | Volledig afhankelijk van contractverlenging |
+| **Lock-in risico** | Laag (open code) | Laag (BSL + Apache 2.0) | Hoog bij contractwisseling (tenzij open source) |
 
 ---
 
@@ -100,6 +103,18 @@ Voor gemeenten die al gewend zijn aan de GIBIT, is een onderhoudsbijdrage voor o
 
 ---
 
+## Model 3: de VNG-richting
+
+Er is een derde model dat niet van Epistola komt, maar op ons afkomt: centrale aanbesteding door de VNG. Als de VNG namens alle gemeenten aanbesteedt, heeft dat aantrekkelijke eigenschappen — lagere aanbestedingslast, schaalvoordelen — maar ook een structureel risico dat weinig aandacht krijgt: **monopsonie**.
+
+Als de VNG je enige klant is, ben je volledig afhankelijk van één beslissende partij. Niet verlengd? Je verliest al je omzet tegelijk. Innovatie wordt politiek — alles moet door VNG-besluitvorming. En de prijs van je product wordt bepaald door de onderhandelingsmacht van één koper, niet door een markt.
+
+Voor Epistola is het scenario waarbij we het VNG-contract winnen en daarna niets anders meer hebben, structureel gevaarlijker dan kleinschalig maar gediversifieerd beginnen. We willen Model 3 mogelijk maken — maar dan in een variant waarbij de VNG een raamcontract sluit voor meerdere gecertificeerde suppliers, zodat concurrentie behouden blijft.
+
+[→ Lees de volledige analyse van Model 3](/epistola/model-3-centraal-aanbesteed)
+
+---
+
 ## De transitie
 
 We verwachten dat de situatie evolueert:
@@ -110,13 +125,16 @@ We verwachten dat de situatie evolueert:
 
 **Later (Model 2):** BSL + ecosysteem. Stichting ontvangt licenties, preferred suppliers concurreren op diensten, ecosysteem groeit zonder incentive-conflict.
 
+**Parallel (Model 3 — mits goed ingericht):** Als de VNG centraal aanbesteedt via een meervoudig raamcontract op basis van open source, kan dat samengaan met Model 2. De stichting certificeert suppliers, de VNG selecteert uit het gecertificeerde aanbod. In dat scenario versterken de modellen elkaar.
+
 De organisatiestructuur (stichting + BV, de afspraken over salaris en focus) is al ingericht voor Model 2. Het licentiemodel kan worden geactiveerd zodra de markt er klaar voor is.
 
 ---
 
 ## Zie ook
 
-- [Model 1: Open Source + Diensten](/epistola/model-1-open-source) — De volledige uitwerking van het diensten-model
-- [Model 2: BSL + Ecosysteem](/epistola/model-2-bsl-licentie) — De volledige uitwerking van het licentie-ecosysteemmodel
-- [Organisatiestructuur](/epistola/organisatiestructuur) — De BV en stichting die beide modellen onderbouwen
+- [Model 1: Open Source + Diensten](/epistola/model-1-open-source)
+- [Model 2: BSL + Ecosysteem](/epistola/model-2-bsl-licentie)
+- [Model 3: Centraal Aanbesteed](/epistola/model-3-centraal-aanbesteed)
+- [Organisatiestructuur](/epistola/organisatiestructuur) — De BV en stichting die alle modellen onderbouwen
 - [Financieringsmodellen](/open-source/financieringsmodellen) — De bredere afweging tussen community, licenties en subsidies
