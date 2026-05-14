@@ -47,4 +47,16 @@ De software kan uitstekend zijn. De architectuur kan solide zijn. Het probleem i
 
 Dat mechanisme moet ontworpen worden. En het ontwerp heeft consequenties voor eigenaarschap, governance en de vraag of gebruikers uiteindelijk toch afhankelijk worden van één partij.
 
+---
+
+## Onze eigen verantwoordelijkheid
+
+Epistola is zelf gebouwd op een fundament van open source software — van runtime tot bibliotheken tot infrastructuur. Een verhaal over duurzame financiering van open source zou intellectueel oneerlijk zijn als we onze eigen afhankelijkheid niet erkennen.
+
+Daarom committeert Epistola zich tot een vast aandeel van de overwinst dat terugvloeit naar de open source-gemeenschap, met expliciete voorrang voor **kleinere projecten en solo-maintainers**. Grote projecten als Linux, Kubernetes of React krijgen al ruime corporate funding; de fragiliteit zit bij de kleine, onmisbare bouwstenen die door één of twee mensen worden onderhouden. Daar willen we onze bijdrage laten landen.
+
+→ Hoe deze toezegging structureel verankerd is, staat op [Epistola Organisatiestructuur](/epistola/organisatiestructuur#overwinst-gaat-terug).
+
+---
+
 [→ Welke financieringsmodellen bestaan er?](/open-source/financieringsmodellen)

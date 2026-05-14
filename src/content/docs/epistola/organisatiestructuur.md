@@ -68,6 +68,9 @@ Als de BV structureel meer inkomsten heeft dan nodig voor haar operatie en reser
 
 - **Terug naar klanten** — via lagere tarieven of een eenmalige korting voor bestaande afnemers
 - **Naar de stichting** — voor het ondersteunen van vergelijkbare steward-owned projecten in de publieke sector
+- **Terug naar de open source-gemeenschap** — een vast aandeel gaat naar de open source projecten waar Epistola zelf op draait, met expliciete voorrang voor kleinere projecten en solo-maintainers boven de grote, al ruim gefinancierde projecten
+
+**Waarom open source-bijdrage:** Epistola is gebouwd op een fundament van vrije software. Het is intellectueel oneerlijk om dat te negeren in een verhaal over duurzame financiering van open source. Door bewust te bijdragen — en bewust de kleine projecten te prioriteren waar de fragiliteit het grootst is — sluit het model de cirkel.
 
 ### 100% focus op Epistola
 
