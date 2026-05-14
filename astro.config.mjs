@@ -24,8 +24,8 @@ export default defineConfig({
           }
       }),
       starlight({
-          title: 'Epistola Documentatie',
-          description: 'Open platform voor digitale documentgeneratie zonder vendor lock-in',
+          title: 'Duurzame Open Source voor de Publieke Sector',
+          description: 'Financiering, governance en ecosysteem — Epistola als concreet voorbeeld',
           defaultLocale: 'root',
           locales: {
             root: {
