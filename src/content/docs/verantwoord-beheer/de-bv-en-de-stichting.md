@@ -111,9 +111,45 @@ Het model is niet perfect: groei is begrensd, salarisniveaus zijn begrensd, en n
 
 ---
 
+## Licenties of diensten: de afweging voor Epistola
+
+Epistola's voorkeur is volledig open source te zijn en te verdienen op diensten — zonder licentiemodel. Dat is een bewuste keuze, maar het is eerlijk om de vergelijking te maken.
+
+### De voorkeur: open source + diensten
+
+- Geen adoptiedrempel: iedereen kan starten zonder contractuele verplichting
+- Vertrouwen bij overheden: de publieke sector is sceptisch over "open source met addertjes"
+- Bijdragen van buiten worden niet geremd door licentievragen
+- De echte waarde zit in expertise — template kwaliteitscheck, versie-compatibiliteitsvalidatie, implementatiebegeleiding — niet in de code zelf
+
+De structuur van de BV versterkt dit model: een small team met 100% focus, lage overhead, geen winstdoelstelling. Dat maakt diensten concurrerend prijzen zonder de marges van een commercieel bureau te hoeven doorberekenen.
+
+### Het structurele risico van diensten als enige financiering
+
+Een concurrent die géén platform-onderhoud draagt, kan dezelfde diensten goedkoper aanbieden. Als de BV alle onderhoudslasten draagt en anderen gratis meeliftend diensten aanbieden, verslechtert de concurrentiepositie naarmate het platform succesvoller wordt.
+
+Zie ook de [structurele zwakte van het dienstenmodel](/introductie/de-oplossingen#een-variant-van-product-naar-diensten) in De Oplossingen.
+
+### Als Epistola toch voor licenties zou kiezen
+
+| Aspect | Open source + diensten | Met licentiemodel |
+|---|---|---|
+| **Adoptiedrempel** | Geen | Uitlegbehoefte bij overheden |
+| **Inkomstenstabiliteit** | Afhankelijk van dienstenvraag | Voorspelbare licentiebasis |
+| **Concurrentierisico diensten** | Hoog (anderen liften mee) | Lager (licentie financiert onderhoud apart) |
+| **Vertrouwen bij gemeenten** | Hoog ("echt open source") | Vraagt uitleg |
+| **Financiering bij lage dienstenvraag** | Kwetsbaar | Geborgd via licenties |
+
+Het licentiemodel is de **vangvloer**, niet de eerste keus. Als diensteninkomsten onvoldoende zijn om de BV en stichting te financieren — omdat concurrenten structureel meeliftend diensten aanbieden — dan is het licentiemodel de structurele zekerheid die dat corrigeert.
+
+In dat scenario is de BSL geen ideologische keuze maar een pragmatische: de stichting kan altijd besluiten tot een licentiemodel als het open source + diensten model structureel faalt.
+
+---
+
 ## Zie ook
 
 - [Steward Ownership](/verantwoord-beheer/steward-ownership) — Het bredere model waarvan dit de concrete toepassing is
 - [Organisatievormen Vergeleken](/verantwoord-beheer/organisatievormen) — Waarom commerciële en traditioneel niet-commerciële vormen elk tekortschieten
 - [Structuur & Rollen](/verantwoord-beheer/structuur) — Hoe stichting, BV, suppliers en gemeenten samenwerken
 - [Licenties](/het-verdienmodel/licenties) — Hoe licentie-inkomsten de stichting en BV financieren
+- [De impact van AI](/referentie/ai-impact) — Hoe AI de concurrentiedynamiek verandert voor open source platforms
