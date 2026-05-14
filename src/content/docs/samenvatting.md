@@ -61,6 +61,20 @@ We **adviseren de VNG** om de GIBIT aan te passen zodat afnemers van open source
 
 ---
 
+## Key takeaway: aanbeveling aan de VNG (kies één)
+
+Concreet kan dit op twee manieren — beide adresseren hetzelfde free-rider-probleem vanuit een andere kant:
+
+1. **Verplichte redelijke bijdrage bij open source.** Neem in de GIBIT-voorwaarden op dat een gemeente die open source software gebruikt verplicht is een redelijke bijdrage te leveren aan de partij die de software onderhoudt en doorontwikkelt. *Lost het free-rider-probleem op binnen het bestaande open source-paradigma.*
+
+2. **Erken een nieuwe licentiecategorie: BSL+1jaar.** Voeg in de GIBIT een categorie toe voor source-available software met geborgde overgang naar Apache 2.0 binnen 12 maanden. *Maakt Model 2 als aanbestedingsbare categorie expliciet beschikbaar, met de continuïteitsbescherming in de licentie zelf.*
+
+Optie 1 verplicht bijdrage los van licentievorm; optie 2 erkent een nieuw licentietype dat de continuïteit zelf borgt. Beide maken Epistola — en vergelijkbare publieke-sector open source platforms — structureel financieerbaar.
+
+[→ GIBIT-compatibiliteit per model](/meedoen/gemeenten/gibit-compatibiliteit) · [→ De aanbeveling in detail](/epistola/modelkeuze#aanbeveling-aan-de-vng-pas-de-gibit-aan)
+
+---
+
 ## Meedoen
 
 - [Voor Gemeenten](/meedoen/gemeenten/overzicht) — Kosten, SLA's, aanbestedingen

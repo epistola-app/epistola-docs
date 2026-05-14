@@ -1,12 +1,13 @@
 /**
  * Pure logica voor de financiële simulatie. Geen DOM, geen Astro — alleen
- * berekeningen. Daardoor te testen met Vitest.
+ * berekeningen. Twee gescheiden simulaties met eenrichtingsafhankelijkheid:
  *
- * Model:
- *  - Stichting heeft licentie/cert/SaaS-inkomsten en kiest hoeveel ze
- *    uitbesteedt aan onderhoud en feature-ontwikkeling.
- *  - BV (en eventueel andere preferred suppliers) voeren het werk uit.
- *  - BV-FTE volgt uit het beschikbare budget (cost-plus break-even).
+ *   simulateStichting(inputs, tarieven) → StichtingResult
+ *   simulateBV(stichtingResult, bvInputs) → BVResult
+ *
+ * De stichting ontvangt drie inkomstenstromen (licenties, certificering,
+ * per-document afdracht) en besteedt onderhoud + features uit aan suppliers
+ * waarvan de BV er één is. De BV-prognose volgt direct uit de stichting-output.
  */
 
 export interface Schaal {
@@ -28,65 +29,101 @@ export interface Tarieven {
   schaalvoordeel: Schaalvoordeel[];
 }
 
-export interface SimulationInputs {
+// ----------------------------------------------------------------------------
+// Stichting
+// ----------------------------------------------------------------------------
+
+export interface StichtingInputs {
   /** Aantal gemeenten in jaar 1 */
   startGemeenten: number;
   /** Aantal extra gemeenten per jaar */
-  groei: number;
+  gemeenteGroei: number;
   /** Schaal-id uit tarieven.schalen */
   schaalId: string;
-  /** Aantal preferred suppliers (voor certificeringsbijdrage) */
-  suppliers: number;
-  /** SaaS per-document afdracht (€/jaar, totaal) */
-  perDocBudget: number;
-  /** Stichting basis-onderhoudsbudget per jaar (€) — vast bedrag, niet FTE-gedreven */
+
+  // Ecosysteem-groei
+  /** Aantal preferred suppliers in jaar 1 */
+  startSuppliers: number;
+  /** Aantal nieuwe preferred suppliers per jaar */
+  supplierGroei: number;
+  /** Aantal SaaS-aanbieders (cloud hosters) in jaar 1 */
+  startSaasAanbieders: number;
+  /** Aantal nieuwe SaaS-aanbieders per jaar */
+  saasGroei: number;
+  /** Gemiddelde per-doc afdracht per SaaS-aanbieder per jaar (€) */
+  perDocBudgetPerSaas: number;
+
+  // Uitgaven (stichting beslist hoeveel ze uitbesteedt)
+  /** Basis-onderhoudsbudget per jaar (€) */
   onderhoudsbudget: number;
-  /** Stichting budget voor nieuwe features per jaar (€) */
+  /** Budget voor nieuwe features per jaar (€) */
   features: number;
   /** Administratiekosten + stewards-vergoedingen per jaar (€) */
   admin: number;
-  /** All-in kosten per FTE per jaar (€) — gebruikt om FTE af te leiden */
-  fteKosten: number;
-  /** BV overhead-factor (bv 1.30) */
-  overhead: number;
-  /** Externe BV-omzet per gemeente per jaar (€) — diensten aan gemeenten */
-  bvOmzetPerGemeente: number;
   /** Initiële investering (€) */
   investering: number;
 }
 
-export interface YearRow {
+export interface StichtingYearRow {
   jaar: number;
   gemeenten: number;
-  /** Afgeleide BV-FTE bij het beschikbare budget (gecapt op MAX_BV_FTE) */
-  fte: number;
+  suppliers: number;
+  saasAanbieders: number;
   licentieInkomsten: number;
-  perDocInkomsten: number;
   certInkomsten: number;
+  perDocInkomsten: number;
   totaalInkomsten: number;
-  /** Stichting uitgave: basis-onderhoud (input) */
   onderhoudsbudget: number;
-  /** Stichting uitgave: features (input) */
   featureBudget: number;
-  /** Stichting uitgave: admin (input) */
   adminKosten: number;
   stichtingKosten: number;
   stichtingResultaat: number;
-  /** BV-totaalinkomsten = onderhoud + features + (gemeenten × omzet/gemeente) */
-  bvInkomsten: number;
-  /** BV externe omzet uit gemeente-diensten */
-  bvExterneOmzet: number;
-  /** BV-kosten = fte × kosten × overhead (na cap) */
-  bvKosten: number;
-  /** BV-resultaat — ≈ 0 onder cost-plus, kan klein verschil tonen door FTE-cap of afronding */
-  bvResultaat: number;
   cumulatief: number;
 }
 
-export interface SimulationResult {
-  rows: YearRow[];
+export interface StichtingResult {
+  rows: StichtingYearRow[];
   investering: number;
 }
+
+// ----------------------------------------------------------------------------
+// BV
+// ----------------------------------------------------------------------------
+
+export interface BVInputs {
+  /** Aandeel van stichting-onderhoud dat naar BV gaat (0..1, default 1.0) */
+  aandeelOnderhoud: number;
+  /** Aandeel van stichting-features dat naar BV gaat (0..1) */
+  aandeelFeatures: number;
+  /** Aandeel van gemeenten waarvoor BV preferred supplier is (0..1) */
+  aandeelGemeenten: number;
+  /** Externe BV-omzet per BV-gemeente per jaar (€) */
+  bvOmzetPerGemeente: number;
+  /** All-in kosten per FTE per jaar (€) */
+  fteKosten: number;
+  /** BV overhead-factor (bv 1.30) */
+  overhead: number;
+}
+
+export interface BVYearRow {
+  jaar: number;
+  fte: number;
+  vanStichtingOnderhoud: number;
+  vanStichtingFeatures: number;
+  vanStichting: number;
+  vanGemeenten: number;
+  bvInkomsten: number;
+  bvKosten: number;
+  bvResultaat: number;
+}
+
+export interface BVResult {
+  rows: BVYearRow[];
+}
+
+// ----------------------------------------------------------------------------
+// Constants & helpers
+// ----------------------------------------------------------------------------
 
 export const CERT_PER_SUPPLIER_PER_JAAR = 1000;
 export const MAX_BV_FTE = 20;
@@ -107,80 +144,124 @@ export function schaalKorting(tarieven: Tarieven, gemeenten: number): number {
   return korting;
 }
 
+// ----------------------------------------------------------------------------
+// Stichting-simulatie
+// ----------------------------------------------------------------------------
+
 /**
- * Bereken één jaar in isolatie. Cumulatief wordt door de aanroeper bijgehouden.
+ * Bereken één jaar van de stichting-cashflow in isolatie.
+ * Cumulatief wordt door de aanroeper bijgehouden.
  */
-export function berekenJaar(
+export function berekenStichtingJaar(
   jaar: number,
-  inputs: SimulationInputs,
+  inputs: StichtingInputs,
   tarief: number,
   korting: number,
-): Omit<YearRow, 'cumulatief'> {
-  const gemeenten = inputs.startGemeenten + (jaar - 1) * inputs.groei;
+): Omit<StichtingYearRow, 'cumulatief'> {
+  const gemeenten = inputs.startGemeenten + (jaar - 1) * inputs.gemeenteGroei;
+  const suppliers = inputs.startSuppliers + (jaar - 1) * inputs.supplierGroei;
+  const saasAanbieders = inputs.startSaasAanbieders + (jaar - 1) * inputs.saasGroei;
 
-  // Inkomsten stichting
+  // Drie inkomstenstromen
   const licentieInkomsten = Math.round(gemeenten * tarief * (1 - korting));
-  const perDocInkomsten = inputs.perDocBudget;
-  const certInkomsten = inputs.suppliers * CERT_PER_SUPPLIER_PER_JAAR;
-  const totaalInkomsten = licentieInkomsten + perDocInkomsten + certInkomsten;
+  const certInkomsten = suppliers * CERT_PER_SUPPLIER_PER_JAAR;
+  const perDocInkomsten = saasAanbieders * inputs.perDocBudgetPerSaas;
+  const totaalInkomsten = licentieInkomsten + certInkomsten + perDocInkomsten;
 
-  // Uitgaven stichting (direct vanuit inputs — niet afgeleid)
+  // Uitgaven (rechtstreeks uit inputs)
   const onderhoudsbudget = inputs.onderhoudsbudget;
   const featureBudget = inputs.features;
   const adminKosten = inputs.admin;
   const stichtingKosten = onderhoudsbudget + featureBudget + adminKosten;
   const stichtingResultaat = totaalInkomsten - stichtingKosten;
 
-  // BV-cashflow: krijgt het uitbestedingsbudget + de diensten-omzet van gemeenten
-  const bvExterneOmzet = gemeenten * inputs.bvOmzetPerGemeente;
-  const bvInkomsten = onderhoudsbudget + featureBudget + bvExterneOmzet;
-
-  // BV-FTE wordt afgeleid uit beschikbaar budget (cost-plus break-even)
-  const kostenPerFte = inputs.fteKosten * inputs.overhead;
-  const beoogdeFte = kostenPerFte > 0 ? bvInkomsten / kostenPerFte : 0;
-  const fte = Math.min(Math.round(beoogdeFte), MAX_BV_FTE);
-
-  const bvKosten = Math.round(fte * kostenPerFte);
-  // BV-resultaat = inkomsten − kosten. Onder cost-plus ≈ 0, kan klein verschil
-  // tonen door FTE-cap (te veel budget voor 20 FTE) of afronding.
-  const bvResultaat = bvInkomsten - bvKosten;
-
   return {
     jaar,
     gemeenten,
-    fte,
+    suppliers,
+    saasAanbieders,
     licentieInkomsten,
-    perDocInkomsten,
     certInkomsten,
+    perDocInkomsten,
     totaalInkomsten,
     onderhoudsbudget,
     featureBudget,
     adminKosten,
     stichtingKosten,
     stichtingResultaat,
-    bvInkomsten,
-    bvExterneOmzet,
-    bvKosten,
-    bvResultaat,
   };
 }
 
-/** Volledige 5-jaars simulatie met cumulatief stichting-kassaldo. */
-export function simulate(inputs: SimulationInputs, tarieven: Tarieven): SimulationResult {
+/** Volledige 5-jaars stichting-simulatie. */
+export function simulateStichting(
+  inputs: StichtingInputs,
+  tarieven: Tarieven,
+): StichtingResult {
   const tarief = tariefVoorSchaal(tarieven, inputs.schaalId);
-  const rows: YearRow[] = [];
+  const rows: StichtingYearRow[] = [];
   let cumulatief = inputs.investering;
 
   for (let jaar = 1; jaar <= JAREN; jaar++) {
-    const gemeentenInJaar = inputs.startGemeenten + (jaar - 1) * inputs.groei;
+    const gemeentenInJaar = inputs.startGemeenten + (jaar - 1) * inputs.gemeenteGroei;
     const korting = schaalKorting(tarieven, gemeentenInJaar);
-    const jaarRow = berekenJaar(jaar, inputs, tarief, korting);
+    const jaarRow = berekenStichtingJaar(jaar, inputs, tarief, korting);
     cumulatief += jaarRow.stichtingResultaat;
     rows.push({ ...jaarRow, cumulatief });
   }
 
   return { rows, investering: inputs.investering };
 }
+
+// ----------------------------------------------------------------------------
+// BV-simulatie (afgeleid uit stichting-result)
+// ----------------------------------------------------------------------------
+
+/**
+ * Bereken één jaar van de BV-cashflow gegeven de overeenkomstige stichting-rij.
+ * Onder cost-plus is BV-resultaat ~0, met afwijking als de cap (MAX_BV_FTE) bindt.
+ */
+export function berekenBVJaar(
+  stichtingJaar: StichtingYearRow,
+  inputs: BVInputs,
+): BVYearRow {
+  const vanStichtingOnderhoud = stichtingJaar.onderhoudsbudget * inputs.aandeelOnderhoud;
+  const vanStichtingFeatures = stichtingJaar.featureBudget * inputs.aandeelFeatures;
+  const vanStichting = vanStichtingOnderhoud + vanStichtingFeatures;
+  const vanGemeenten =
+    stichtingJaar.gemeenten * inputs.aandeelGemeenten * inputs.bvOmzetPerGemeente;
+  const bvInkomsten = vanStichting + vanGemeenten;
+
+  const kostenPerFte = inputs.fteKosten * inputs.overhead;
+  const beoogdeFte = kostenPerFte > 0 ? bvInkomsten / kostenPerFte : 0;
+  const fte = Math.min(Math.round(beoogdeFte), MAX_BV_FTE);
+  const bvKosten = Math.round(fte * kostenPerFte);
+  const bvResultaat = bvInkomsten - bvKosten;
+
+  return {
+    jaar: stichtingJaar.jaar,
+    fte,
+    vanStichtingOnderhoud,
+    vanStichtingFeatures,
+    vanStichting,
+    vanGemeenten,
+    bvInkomsten,
+    bvKosten,
+    bvResultaat,
+  };
+}
+
+/** Volledige 5-jaars BV-simulatie. Vereist het stichting-result. */
+export function simulateBV(
+  stichtingResult: StichtingResult,
+  inputs: BVInputs,
+): BVResult {
+  const rows = stichtingResult.rows.map((sr) => berekenBVJaar(sr, inputs));
+  return { rows };
+}
+
+// ----------------------------------------------------------------------------
+// Mijlpalen (op stichting-cashflow)
+// ----------------------------------------------------------------------------
 
 export interface Milestones {
   operationeleBreakEvenJaar: number | null;
@@ -189,7 +270,7 @@ export interface Milestones {
 }
 
 /** Mijlpalen op de stichting-cashflow. */
-export function berekenMijlpalen(result: SimulationResult, buffer = 100_000): Milestones {
+export function berekenMijlpalen(result: StichtingResult, buffer = 100_000): Milestones {
   const breakEven = result.rows.find((r) => r.stichtingResultaat >= 0);
   const terugverdiend = result.rows.find((r) => r.cumulatief - result.investering >= 0);
   const overwinst = result.rows.find((r) => r.cumulatief - result.investering >= buffer);
@@ -198,5 +279,36 @@ export function berekenMijlpalen(result: SimulationResult, buffer = 100_000): Mi
     operationeleBreakEvenJaar: breakEven ? breakEven.jaar : null,
     investeringTerugverdiendJaar: terugverdiend ? terugverdiend.jaar : null,
     overwinstJaar: overwinst ? overwinst.jaar : null,
+  };
+}
+
+// ----------------------------------------------------------------------------
+// Voordelen voor de gemeenschap (afgeleid uit stichting-result)
+// ----------------------------------------------------------------------------
+
+export interface VoordelenGemeenschap {
+  totaalFeatureBudget: number;
+  totaalOnderhoudsbudget: number;
+  suppliersOpHetEinde: number;
+  saasOpHetEinde: number;
+  gemeentenOpHetEinde: number;
+  overschotVoorReserveEnOss: number;
+}
+
+/**
+ * Aggregeert de stichting-result naar zichtbare voordelen over 5 jaar.
+ * `overschotVoorReserveEnOss` is de eindstand minus initiële investering.
+ */
+export function berekenVoordelen(result: StichtingResult): VoordelenGemeenschap {
+  const rows = result.rows;
+  const laatste = rows[rows.length - 1];
+
+  return {
+    totaalFeatureBudget: rows.reduce((sum, r) => sum + r.featureBudget, 0),
+    totaalOnderhoudsbudget: rows.reduce((sum, r) => sum + r.onderhoudsbudget, 0),
+    suppliersOpHetEinde: laatste ? laatste.suppliers : 0,
+    saasOpHetEinde: laatste ? laatste.saasAanbieders : 0,
+    gemeentenOpHetEinde: laatste ? laatste.gemeenten : 0,
+    overschotVoorReserveEnOss: laatste ? laatste.cumulatief - result.investering : 0,
   };
 }

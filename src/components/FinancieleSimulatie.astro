@@ -4,149 +4,243 @@
 ---
 
 <div class="financiele-simulatie">
-  <h3>📈 5-jaars financiële simulatie</h3>
-  <p>De stichting heeft geen personeel — ze gebruikt licentie-inkomsten om onderhoud en feature-ontwikkeling uit te besteden (primair aan Epistola BV). De BV-FTE die hieruit volgt wordt afgeleid en getoond als referentie. Aan de input-sliders kun je verschillende scenario's vergelijken.</p>
-
-  <div class="sim-inputs">
-    <fieldset class="sim-group">
-      <legend>Adoptie &amp; stichting-inkomsten</legend>
-
-      <div class="input-group">
-        <label for="sim-startGemeenten"><strong>Gemeenten in jaar 1:</strong> <span id="sim-startGemeenten-val">5</span></label>
-        <input type="range" id="sim-startGemeenten" min="1" max="30" value="5" step="1" />
-      </div>
-
-      <div class="input-group">
-        <label for="sim-groei"><strong>Nieuwe gemeenten per jaar:</strong> <span id="sim-groei-val">8</span></label>
-        <input type="range" id="sim-groei" min="0" max="30" value="8" step="1" />
-      </div>
-
-      <div class="input-group">
-        <label for="sim-schaal"><strong>Gemiddelde gemeentegrootte:</strong></label>
-        <select id="sim-schaal">
-          <option value="micro">Micro (&lt; 5k inwoners)</option>
-          <option value="klein">Klein (10–20k)</option>
-          <option value="klein-mid">Klein–mid (20–35k)</option>
-          <option value="mid" selected>Mid (35–60k)</option>
-          <option value="mid-groot">Mid–groot (60–100k)</option>
-          <option value="groot">Groot (100–150k)</option>
-        </select>
-      </div>
-
-      <div class="input-group">
-        <label for="sim-suppliers"><strong>Aantal preferred suppliers:</strong> <span id="sim-suppliers-val">3</span></label>
-        <input type="range" id="sim-suppliers" min="0" max="15" value="3" step="1" />
-      </div>
-
-      <div class="input-group">
-        <label for="sim-perDoc"><strong>SaaS per-document afdracht (k€/jaar):</strong> <span id="sim-perDoc-val">0</span></label>
-        <input type="range" id="sim-perDoc" min="0" max="200" value="0" step="5" />
-      </div>
-    </fieldset>
-
-    <fieldset class="sim-group">
-      <legend>Stichting-uitgaven</legend>
-
-      <div class="input-group">
-        <label for="sim-onderhoud"><strong>Onderhoudsbudget (k€/jaar):</strong> <span id="sim-onderhoud-val">100</span></label>
-        <input type="range" id="sim-onderhoud" min="0" max="800" value="100" step="25" />
-        <small>Basis-onderhoud van het platform (security, deps, infra) — uitbesteed aan BV onder cost-plus. Relatief vast bedrag.</small>
-      </div>
-
-      <div class="input-group">
-        <label for="sim-features"><strong>Features-budget (k€/jaar):</strong> <span id="sim-features-val">100</span></label>
-        <input type="range" id="sim-features" min="0" max="500" value="100" step="25" />
-        <small>Strategische productontwikkeling die de stichting uitzet. Met 0 is het scenario zuiver reactief.</small>
-      </div>
-
-      <div class="input-group">
-        <label for="sim-admin"><strong>Administratie + stewards (k€/jaar):</strong> <span id="sim-admin-val">25</span></label>
-        <input type="range" id="sim-admin" min="5" max="100" value="25" step="5" />
-      </div>
-
-      <div class="input-group">
-        <label for="sim-investering"><strong>Initiële investering (k€):</strong> <span id="sim-investering-val">100</span></label>
-        <input type="range" id="sim-investering" min="0" max="500" value="100" step="10" />
-      </div>
-    </fieldset>
-
-    <fieldset class="sim-group">
-      <legend>BV-parameters (FTE wordt afgeleid)</legend>
-
-      <div class="input-group">
-        <label for="sim-fteKosten"><strong>Kosten per FTE (all-in, k€/jaar):</strong> <span id="sim-fteKosten-val">100</span></label>
-        <input type="range" id="sim-fteKosten" min="60" max="140" value="100" step="5" />
-      </div>
-
-      <div class="input-group">
-        <label for="sim-overhead"><strong>BV overhead-factor:</strong> <span id="sim-overhead-val">1.30</span></label>
-        <input type="range" id="sim-overhead" min="1.0" max="1.6" value="1.3" step="0.05" />
-      </div>
-
-      <div class="input-group">
-        <label for="sim-bvOmzetGem"><strong>BV-omzet per gemeente (k€/jaar):</strong> <span id="sim-bvOmzetGem-val">10</span></label>
-        <input type="range" id="sim-bvOmzetGem" min="0" max="40" value="10" step="1" />
-        <small>Diensten die BV als preferred supplier rechtstreeks aan gemeenten levert (training, consultancy, marge op licentie). Cost-plus.</small>
-      </div>
-    </fieldset>
+  <div class="sim-warning">
+    <strong>⚠️ Work in progress — niet indicatief voor de realiteit</strong>
+    <p>Deze calculator is een denkgereedschap, geen prognose. De getallen, formules en aannames zijn nog in beweging en bedoeld om gesprekken over het financiële model te ondersteunen. Verwacht geen accurate voorspellingen — kijk naar de richting en de gevoeligheden, niet naar de exacte uitkomsten.</p>
   </div>
 
-  <div class="sim-output">
-    <h4>Stichting jaarstroom</h4>
+  <h3>📈 5-jaars financiële simulatie</h3>
+  <p>Twee aparte prognoses: één voor de stichting (gedreven door ecosysteem-groei en eigen budgetkeuzes) en één voor de BV (afhankelijk van wat de stichting uitbesteedt en welk marktaandeel de BV pakt onder gemeenten).</p>
+
+  <!-- ============================================================= -->
+  <!-- SECTIE 1: STICHTING                                            -->
+  <!-- ============================================================= -->
+  <section class="sim-section">
+    <h3>🏛️ Stichting Prognose</h3>
+
+    <div class="sim-inputs">
+      <fieldset class="sim-group">
+        <legend>Adoptie &amp; ecosysteem-groei</legend>
+
+        <div class="input-group">
+          <label for="s-startGemeenten"><strong>Gemeenten jaar 1:</strong> <span id="s-startGemeenten-val">5</span></label>
+          <input type="range" id="s-startGemeenten" min="0" max="50" value="5" step="1" />
+        </div>
+        <div class="input-group">
+          <label for="s-gemeenteGroei"><strong>Nieuwe gemeenten/jaar:</strong> <span id="s-gemeenteGroei-val">8</span></label>
+          <input type="range" id="s-gemeenteGroei" min="0" max="30" value="8" step="1" />
+        </div>
+        <div class="input-group">
+          <label for="s-schaal"><strong>Gemiddelde gemeentegrootte:</strong></label>
+          <select id="s-schaal">
+            <option value="micro">Micro (&lt; 5k)</option>
+            <option value="klein">Klein (10–20k)</option>
+            <option value="klein-mid">Klein–mid (20–35k)</option>
+            <option value="mid" selected>Mid (35–60k)</option>
+            <option value="mid-groot">Mid–groot (60–100k)</option>
+            <option value="groot">Groot (100–150k)</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="s-startSuppliers"><strong>Preferred suppliers jaar 1:</strong> <span id="s-startSuppliers-val">3</span></label>
+          <input type="range" id="s-startSuppliers" min="0" max="15" value="3" step="1" />
+        </div>
+        <div class="input-group">
+          <label for="s-supplierGroei"><strong>Nieuwe suppliers/jaar:</strong> <span id="s-supplierGroei-val">1</span></label>
+          <input type="range" id="s-supplierGroei" min="0" max="5" value="1" step="1" />
+        </div>
+        <div class="input-group">
+          <label for="s-startSaas"><strong>SaaS-aanbieders jaar 1:</strong> <span id="s-startSaas-val">1</span></label>
+          <input type="range" id="s-startSaas" min="0" max="10" value="1" step="1" />
+        </div>
+        <div class="input-group">
+          <label for="s-saasGroei"><strong>Nieuwe SaaS-aanbieders/jaar:</strong> <span id="s-saasGroei-val">1</span></label>
+          <input type="range" id="s-saasGroei" min="0" max="5" value="1" step="1" />
+        </div>
+        <div class="input-group">
+          <label for="s-perDocPerSaas"><strong>Per-doc afdracht per SaaS-aanbieder (k€/jaar):</strong> <span id="s-perDocPerSaas-val">25</span></label>
+          <input type="range" id="s-perDocPerSaas" min="0" max="100" value="25" step="5" />
+        </div>
+      </fieldset>
+
+      <fieldset class="sim-group">
+        <legend>Stichting-uitgaven</legend>
+
+        <div class="input-group">
+          <label for="s-onderhoud"><strong>Onderhoudsbudget (k€/jaar):</strong> <span id="s-onderhoud-val">250</span></label>
+          <input type="range" id="s-onderhoud" min="0" max="800" value="250" step="25" />
+          <small>Basis-onderhoud (security, deps, infra, bugs). Uitbesteed onder cost-plus, ongeveer 2 FTE-equivalent.</small>
+        </div>
+        <div class="input-group">
+          <label for="s-features"><strong>Features-budget (k€/jaar):</strong> <span id="s-features-val">50</span></label>
+          <input type="range" id="s-features" min="0" max="500" value="50" step="25" />
+          <small>Proactieve productevolutie. Met 0 is het scenario zuiver reactief.</small>
+        </div>
+        <div class="input-group">
+          <label for="s-admin"><strong>Administratie + stewards (k€/jaar):</strong> <span id="s-admin-val">25</span></label>
+          <input type="range" id="s-admin" min="5" max="80" value="25" step="5" />
+        </div>
+        <div class="input-group">
+          <label for="s-investering"><strong>Initiële investering (k€):</strong> <span id="s-investering-val">100</span></label>
+          <input type="range" id="s-investering" min="0" max="500" value="100" step="10" />
+        </div>
+      </fieldset>
+    </div>
+
+    <h4>📈 Stichting inkomsten per jaar</h4>
     <div class="sim-table-wrap">
       <table>
         <thead>
           <tr>
             <th>Jaar</th>
             <th>Gemeenten</th>
-            <th>Inkomsten</th>
+            <th>Suppliers</th>
+            <th>SaaS</th>
+            <th>Licenties</th>
+            <th>Certificering</th>
+            <th>Per-document</th>
+            <th>Totaal in</th>
+          </tr>
+        </thead>
+        <tbody id="s-inkomsten-tbody"></tbody>
+      </table>
+    </div>
+
+    <h4>📉 Stichting uitgaven per jaar</h4>
+    <div class="sim-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Jaar</th>
             <th>Onderhoud</th>
             <th>Features</th>
             <th>Admin</th>
+            <th>Totaal uit</th>
+          </tr>
+        </thead>
+        <tbody id="s-uitgaven-tbody"></tbody>
+      </table>
+    </div>
+
+    <h4>⚖️ Stichting resultaat per jaar</h4>
+    <div class="sim-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Jaar</th>
+            <th>Inkomsten</th>
+            <th>Uitgaven</th>
             <th>Resultaat</th>
             <th>Cumulatief</th>
           </tr>
         </thead>
-        <tbody id="sim-stichting-tbody"></tbody>
+        <tbody id="s-resultaat-tbody"></tbody>
       </table>
     </div>
 
-    <h4>BV jaarstroom (afgeleid)</h4>
+    <h4>Inkomstenstreams over 5 jaar (gestapeld)</h4>
+    <div class="sim-chart" id="s-chart" aria-label="Inkomstenstreams gestapeld per jaar"></div>
+    <div class="sim-legend">
+      <span><i class="legend-swatch licentie"></i> Licenties</span>
+      <span><i class="legend-swatch cert"></i> Certificering</span>
+      <span><i class="legend-swatch perdoc"></i> Per-document</span>
+    </div>
+
+    <div class="sim-milestones" id="s-milestones"></div>
+    <div class="sim-voordelen" id="s-voordelen"></div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SECTIE 2: BV                                                   -->
+  <!-- ============================================================= -->
+  <section class="sim-section">
+    <h3>🏢 BV Prognose</h3>
+    <p class="sim-explainer">BV ontvangt budgetten van de stichting (zie boven) en concurreert om gemeente-diensten als één van de preferred suppliers. Hieronder zie je hoe BV's positie afhangt van het ecosysteem.</p>
+
+    <div class="sim-inputs">
+      <fieldset class="sim-group">
+        <legend>BV in het ecosysteem</legend>
+
+        <div class="input-group">
+          <label for="b-aandeelOnderhoud"><strong>Aandeel stichting-onderhoud naar BV:</strong> <span id="b-aandeelOnderhoud-val">100</span>%</label>
+          <input type="range" id="b-aandeelOnderhoud" min="0" max="100" value="100" step="10" />
+          <small>BV is de meest voor de hand liggende partij voor platform-onderhoud, maar de stichting kan delen aan andere suppliers uitbesteden.</small>
+        </div>
+        <div class="input-group">
+          <label for="b-aandeelFeatures"><strong>Aandeel stichting-features naar BV:</strong> <span id="b-aandeelFeatures-val">100</span>%</label>
+          <input type="range" id="b-aandeelFeatures" min="0" max="100" value="100" step="10" />
+        </div>
+        <div class="input-group">
+          <label for="b-aandeelGemeenten"><strong>Aandeel gemeenten dat BV als supplier kiest:</strong> <span id="b-aandeelGemeenten-val">40</span>%</label>
+          <input type="range" id="b-aandeelGemeenten" min="0" max="100" value="40" step="5" />
+          <small>Naarmate het ecosysteem groeit verschuift dit aandeel. BV kan absoluut groeien terwijl haar relatieve aandeel daalt.</small>
+        </div>
+      </fieldset>
+
+      <fieldset class="sim-group">
+        <legend>BV operationele parameters</legend>
+
+        <div class="input-group">
+          <label for="b-omzetGem"><strong>BV-omzet per BV-gemeente (k€/jaar):</strong> <span id="b-omzetGem-val">15</span></label>
+          <input type="range" id="b-omzetGem" min="0" max="50" value="15" step="1" />
+          <small>Training, consultancy, dienstverlening, marge op licentie. Cost-plus.</small>
+        </div>
+        <div class="input-group">
+          <label for="b-fteKosten"><strong>Kosten per FTE (all-in, k€/jaar):</strong> <span id="b-fteKosten-val">100</span></label>
+          <input type="range" id="b-fteKosten" min="60" max="140" value="100" step="5" />
+        </div>
+        <div class="input-group">
+          <label for="b-overhead"><strong>Overhead-factor:</strong> <span id="b-overhead-val">1.30</span></label>
+          <input type="range" id="b-overhead" min="1.0" max="1.6" value="1.3" step="0.05" />
+        </div>
+      </fieldset>
+    </div>
+
+    <h4>📈 BV inkomsten per jaar</h4>
     <div class="sim-table-wrap">
       <table>
         <thead>
           <tr>
             <th>Jaar</th>
             <th>FTE</th>
-            <th>Stichting uitbesteed</th>
-            <th>Gemeente-omzet</th>
+            <th>Van stichting (onderhoud)</th>
+            <th>Van stichting (features)</th>
+            <th>Van gemeenten</th>
             <th>Totaal in</th>
-            <th>FTE-kosten</th>
-            <th>Resultaat</th>
           </tr>
         </thead>
-        <tbody id="sim-bv-tbody"></tbody>
+        <tbody id="b-inkomsten-tbody"></tbody>
       </table>
     </div>
 
-    <h4>Stichting: externe inkomsten vs externe uitgaven</h4>
-    <div class="sim-chart" id="sim-chart" aria-label="Grafiek van stichting-inkomsten en -uitgaven over 5 jaar"></div>
-    <div class="sim-legend">
-      <span><i class="legend-swatch inkomsten"></i> Inkomsten</span>
-      <span><i class="legend-swatch kosten"></i> Uitgaven (onderhoud + features + admin)</span>
+    <h4>📉 BV uitgaven en resultaat</h4>
+    <div class="sim-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Jaar</th>
+            <th>FTE-kosten</th>
+            <th>Inkomsten</th>
+            <th>Resultaat</th>
+          </tr>
+        </thead>
+        <tbody id="b-uitgaven-tbody"></tbody>
+      </table>
     </div>
-
-    <div class="sim-milestones" id="sim-milestones"></div>
-  </div>
+  </section>
 
   <script>
     import tarieven from '../data/licentie-tarieven.json';
     import {
-      simulate,
+      simulateStichting,
+      simulateBV,
       berekenMijlpalen,
-      type SimulationInputs,
+      berekenVoordelen,
+      type StichtingInputs,
+      type BVInputs,
+      type StichtingResult,
+      type BVResult,
       type Tarieven,
-      type YearRow,
     } from '../lib/financiele-simulatie';
 
     const tarievenTyped = tarieven as Tarieven;
@@ -167,56 +261,113 @@
       return el;
     }
 
-    const elStartGemeenten = bind('sim-startGemeenten', 'sim-startGemeenten-val');
-    const elGroei = bind('sim-groei', 'sim-groei-val');
-    const elSchaal = bind('sim-schaal');
-    const elSuppliers = bind('sim-suppliers', 'sim-suppliers-val');
-    const elPerDoc = bind('sim-perDoc', 'sim-perDoc-val');
-    const elOnderhoud = bind('sim-onderhoud', 'sim-onderhoud-val');
-    const elFeatures = bind('sim-features', 'sim-features-val');
-    const elAdmin = bind('sim-admin', 'sim-admin-val');
-    const elInvestering = bind('sim-investering', 'sim-investering-val');
-    const elFteKosten = bind('sim-fteKosten', 'sim-fteKosten-val');
-    const elOverhead = bind('sim-overhead', 'sim-overhead-val', 2);
-    const elBvOmzetGem = bind('sim-bvOmzetGem', 'sim-bvOmzetGem-val');
+    // Stichting inputs
+    const sStartGemeenten = bind('s-startGemeenten', 's-startGemeenten-val');
+    const sGemeenteGroei = bind('s-gemeenteGroei', 's-gemeenteGroei-val');
+    const sSchaal = bind('s-schaal');
+    const sStartSuppliers = bind('s-startSuppliers', 's-startSuppliers-val');
+    const sSupplierGroei = bind('s-supplierGroei', 's-supplierGroei-val');
+    const sStartSaas = bind('s-startSaas', 's-startSaas-val');
+    const sSaasGroei = bind('s-saasGroei', 's-saasGroei-val');
+    const sPerDocPerSaas = bind('s-perDocPerSaas', 's-perDocPerSaas-val');
+    const sOnderhoud = bind('s-onderhoud', 's-onderhoud-val');
+    const sFeatures = bind('s-features', 's-features-val');
+    const sAdmin = bind('s-admin', 's-admin-val');
+    const sInvestering = bind('s-investering', 's-investering-val');
 
-    function getInputs(): SimulationInputs {
+    // BV inputs
+    const bAandeelOnderhoud = bind('b-aandeelOnderhoud', 'b-aandeelOnderhoud-val');
+    const bAandeelFeatures = bind('b-aandeelFeatures', 'b-aandeelFeatures-val');
+    const bAandeelGemeenten = bind('b-aandeelGemeenten', 'b-aandeelGemeenten-val');
+    const bOmzetGem = bind('b-omzetGem', 'b-omzetGem-val');
+    const bFteKosten = bind('b-fteKosten', 'b-fteKosten-val');
+    const bOverhead = bind('b-overhead', 'b-overhead-val', 2);
+
+    function getStichtingInputs(): StichtingInputs {
       return {
-        startGemeenten: parseInt(elStartGemeenten.value, 10),
-        groei: parseInt(elGroei.value, 10),
-        schaalId: elSchaal.value,
-        suppliers: parseInt(elSuppliers.value, 10),
-        perDocBudget: parseInt(elPerDoc.value, 10) * 1000,
-        onderhoudsbudget: parseInt(elOnderhoud.value, 10) * 1000,
-        features: parseInt(elFeatures.value, 10) * 1000,
-        admin: parseInt(elAdmin.value, 10) * 1000,
-        investering: parseInt(elInvestering.value, 10) * 1000,
-        fteKosten: parseInt(elFteKosten.value, 10) * 1000,
-        overhead: parseFloat(elOverhead.value),
-        bvOmzetPerGemeente: parseInt(elBvOmzetGem.value, 10) * 1000,
+        startGemeenten: parseInt(sStartGemeenten.value, 10),
+        gemeenteGroei: parseInt(sGemeenteGroei.value, 10),
+        schaalId: sSchaal.value,
+        startSuppliers: parseInt(sStartSuppliers.value, 10),
+        supplierGroei: parseInt(sSupplierGroei.value, 10),
+        startSaasAanbieders: parseInt(sStartSaas.value, 10),
+        saasGroei: parseInt(sSaasGroei.value, 10),
+        perDocBudgetPerSaas: parseInt(sPerDocPerSaas.value, 10) * 1000,
+        onderhoudsbudget: parseInt(sOnderhoud.value, 10) * 1000,
+        features: parseInt(sFeatures.value, 10) * 1000,
+        admin: parseInt(sAdmin.value, 10) * 1000,
+        investering: parseInt(sInvestering.value, 10) * 1000,
+      };
+    }
+
+    function getBVInputs(): BVInputs {
+      return {
+        aandeelOnderhoud: parseInt(bAandeelOnderhoud.value, 10) / 100,
+        aandeelFeatures: parseInt(bAandeelFeatures.value, 10) / 100,
+        aandeelGemeenten: parseInt(bAandeelGemeenten.value, 10) / 100,
+        bvOmzetPerGemeente: parseInt(bOmzetGem.value, 10) * 1000,
+        fteKosten: parseInt(bFteKosten.value, 10) * 1000,
+        overhead: parseFloat(bOverhead.value),
       };
     }
 
     function render() {
-      const result = simulate(getInputs(), tarievenTyped);
-      renderStichting(result.rows);
-      renderBV(result.rows);
-      renderChart(result.rows);
-      renderMilestones(result);
+      const stichting = simulateStichting(getStichtingInputs(), tarievenTyped);
+      const bv = simulateBV(stichting, getBVInputs());
+      renderStichtingInkomsten(stichting);
+      renderStichtingUitgaven(stichting);
+      renderStichtingResultaat(stichting);
+      renderInkomstenChart(stichting);
+      renderMilestones(stichting);
+      renderVoordelen(stichting);
+      renderBVInkomsten(bv);
+      renderBVUitgaven(bv);
     }
 
-    function renderStichting(rows: YearRow[]) {
-      const tbody = document.getElementById('sim-stichting-tbody')!;
-      tbody.innerHTML = rows
+    function renderStichtingInkomsten(s: StichtingResult) {
+      const tbody = document.getElementById('s-inkomsten-tbody')!;
+      tbody.innerHTML = s.rows
         .map(
           (r) => `
         <tr>
           <td>${r.jaar}</td>
           <td>${r.gemeenten}</td>
-          <td>${fmt.format(r.totaalInkomsten)}</td>
+          <td>${r.suppliers}</td>
+          <td>${r.saasAanbieders}</td>
+          <td>${fmt.format(r.licentieInkomsten)}</td>
+          <td>${fmt.format(r.certInkomsten)}</td>
+          <td>${fmt.format(r.perDocInkomsten)}</td>
+          <td><strong>${fmt.format(r.totaalInkomsten)}</strong></td>
+        </tr>`
+        )
+        .join('');
+    }
+
+    function renderStichtingUitgaven(s: StichtingResult) {
+      const tbody = document.getElementById('s-uitgaven-tbody')!;
+      tbody.innerHTML = s.rows
+        .map(
+          (r) => `
+        <tr>
+          <td>${r.jaar}</td>
           <td>${fmt.format(r.onderhoudsbudget)}</td>
           <td>${fmt.format(r.featureBudget)}</td>
           <td>${fmt.format(r.adminKosten)}</td>
+          <td><strong>${fmt.format(r.stichtingKosten)}</strong></td>
+        </tr>`
+        )
+        .join('');
+    }
+
+    function renderStichtingResultaat(s: StichtingResult) {
+      const tbody = document.getElementById('s-resultaat-tbody')!;
+      tbody.innerHTML = s.rows
+        .map(
+          (r) => `
+        <tr>
+          <td>${r.jaar}</td>
+          <td>${fmt.format(r.totaalInkomsten)}</td>
+          <td>${fmt.format(r.stichtingKosten)}</td>
           <td class="${r.stichtingResultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.stichtingResultaat)}</td>
           <td class="${r.cumulatief >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.cumulatief)}</td>
         </tr>`
@@ -224,39 +375,22 @@
         .join('');
     }
 
-    function renderBV(rows: YearRow[]) {
-      const tbody = document.getElementById('sim-bv-tbody')!;
-      tbody.innerHTML = rows
-        .map(
-          (r) => `
-        <tr>
-          <td>${r.jaar}</td>
-          <td>${r.fte}</td>
-          <td>${fmt.format(r.onderhoudsbudget + r.featureBudget)}</td>
-          <td>${fmt.format(r.bvExterneOmzet)}</td>
-          <td>${fmt.format(r.bvInkomsten)}</td>
-          <td>${fmt.format(r.bvKosten)}</td>
-          <td class="${r.bvResultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.bvResultaat)}</td>
-        </tr>`
-        )
-        .join('');
-    }
-
-    function renderChart(rows: YearRow[]) {
-      const max = Math.max(...rows.map((r) => Math.max(r.totaalInkomsten, r.stichtingKosten)));
-      const chart = document.getElementById('sim-chart')!;
-      const bar = (cls: string, val: number, label: string) => {
+    function renderInkomstenChart(s: StichtingResult) {
+      const max = Math.max(...s.rows.map((r) => r.totaalInkomsten));
+      const chart = document.getElementById('s-chart')!;
+      const stack = (cls: string, val: number, label: string) => {
         if (val <= 0) return '';
         const pct = max > 0 ? (val / max) * 100 : 0;
-        return `<div class="bar ${cls}" style="height: ${pct}%" title="${label}: ${fmt.format(val)}"></div>`;
+        return `<div class="stack ${cls}" style="height: ${pct}%" title="${label}: ${fmt.format(val)}"></div>`;
       };
-      chart.innerHTML = rows
+      chart.innerHTML = s.rows
         .map(
           (r) => `
             <div class="bar-group" aria-label="Jaar ${r.jaar}">
-              <div class="bars">
-                ${bar('inkomsten', r.totaalInkomsten, 'Inkomsten')}
-                ${bar('kosten', r.stichtingKosten, 'Uitgaven')}
+              <div class="bars stacked">
+                ${stack('perdoc', r.perDocInkomsten, 'Per-doc')}
+                ${stack('cert', r.certInkomsten, 'Cert')}
+                ${stack('licentie', r.licentieInkomsten, 'Licentie')}
               </div>
               <div class="bar-label">J${r.jaar}</div>
             </div>`
@@ -264,22 +398,69 @@
         .join('');
     }
 
-    function renderMilestones(result: { rows: YearRow[]; investering: number }) {
-      const mp = berekenMijlpalen(result);
+    function renderMilestones(s: StichtingResult) {
+      const mp = berekenMijlpalen(s);
       const items = [
         mp.operationeleBreakEvenJaar !== null
-          ? `<li>✅ <strong>Operationele break-even</strong> in jaar ${mp.operationeleBreakEvenJaar} (inkomsten dekken uitgaven)</li>`
+          ? `<li>✅ <strong>Operationele break-even</strong> in jaar ${mp.operationeleBreakEvenJaar}</li>`
           : `<li>⚠️ <strong>Geen operationele break-even</strong> binnen 5 jaar bij deze aannames</li>`,
         mp.investeringTerugverdiendJaar !== null
           ? `<li>✅ <strong>Investering terugverdiend</strong> in jaar ${mp.investeringTerugverdiendJaar}</li>`
           : `<li>⚠️ <strong>Investering niet terugverdiend</strong> binnen 5 jaar</li>`,
         mp.overwinstJaar !== null
-          ? `<li>✅ <strong>Overwinst beschikbaar</strong> vanaf jaar ${mp.overwinstJaar} (cumulatief > investering + €100k buffer)</li>`
-          : `<li>⏸️ <strong>Nog geen overwinst</strong> om te verdelen binnen 5 jaar</li>`,
+          ? `<li>✅ <strong>Overschot beschikbaar</strong> vanaf jaar ${mp.overwinstJaar} (boven investering + €100k buffer)</li>`
+          : `<li>⏸️ <strong>Nog geen overschot</strong> binnen 5 jaar</li>`,
       ];
-
-      const milestones = document.getElementById('sim-milestones')!;
+      const milestones = document.getElementById('s-milestones')!;
       milestones.innerHTML = `<h4>Mijlpalen (stichting cashflow)</h4><ul>${items.join('')}</ul>`;
+    }
+
+    function renderVoordelen(s: StichtingResult) {
+      const v = berekenVoordelen(s);
+      const el = document.getElementById('s-voordelen')!;
+      el.innerHTML = `
+        <h4>🌱 Voordelen voor de gemeenschap (5 jaar)</h4>
+        <ul>
+          <li>Totaal onderhoud uitbesteed: <strong>${fmt.format(v.totaalOnderhoudsbudget)}</strong></li>
+          <li>Totaal feature-ontwikkeling: <strong>${fmt.format(v.totaalFeatureBudget)}</strong></li>
+          <li>Gemeenten op platform aan einde jaar 5: <strong>${v.gemeentenOpHetEinde}</strong></li>
+          <li>Preferred suppliers in ecosysteem: <strong>${v.suppliersOpHetEinde}</strong></li>
+          <li>SaaS-aanbieders: <strong>${v.saasOpHetEinde}</strong></li>
+          <li>Overschot beschikbaar voor reserve + open source-bijdragen: <strong class="${v.overschotVoorReserveEnOss >= 0 ? 'positief' : 'negatief'}">${fmt.format(v.overschotVoorReserveEnOss)}</strong></li>
+        </ul>
+      `;
+    }
+
+    function renderBVInkomsten(bv: BVResult) {
+      const tbody = document.getElementById('b-inkomsten-tbody')!;
+      tbody.innerHTML = bv.rows
+        .map(
+          (r) => `
+        <tr>
+          <td>${r.jaar}</td>
+          <td>${r.fte}</td>
+          <td>${fmt.format(r.vanStichtingOnderhoud)}</td>
+          <td>${fmt.format(r.vanStichtingFeatures)}</td>
+          <td>${fmt.format(r.vanGemeenten)}</td>
+          <td><strong>${fmt.format(r.bvInkomsten)}</strong></td>
+        </tr>`
+        )
+        .join('');
+    }
+
+    function renderBVUitgaven(bv: BVResult) {
+      const tbody = document.getElementById('b-uitgaven-tbody')!;
+      tbody.innerHTML = bv.rows
+        .map(
+          (r) => `
+        <tr>
+          <td>${r.jaar}</td>
+          <td>${fmt.format(r.bvKosten)}</td>
+          <td>${fmt.format(r.bvInkomsten)}</td>
+          <td class="${r.bvResultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.bvResultaat)}</td>
+        </tr>`
+        )
+        .join('');
     }
 
     render();
@@ -294,6 +475,35 @@
     background-color: var(--sl-color-bg-nav);
   }
 
+  .sim-warning {
+    border: 2px solid #b04a2a;
+    background: rgba(176, 74, 42, 0.08);
+    padding: 1rem 1.25rem;
+    margin: 0 0 1.5rem;
+    font-size: 0.9375rem;
+  }
+
+  :root[data-theme='dark'] .sim-warning {
+    border-color: #f0a890;
+    background: rgba(240, 168, 144, 0.1);
+  }
+
+  .sim-warning strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #b04a2a;
+    font-size: 1rem;
+  }
+
+  :root[data-theme='dark'] .sim-warning strong {
+    color: #f0a890;
+  }
+
+  .sim-warning p {
+    margin: 0;
+    color: var(--sl-color-white);
+  }
+
   .financiele-simulatie h3,
   .financiele-simulatie h4 {
     margin-top: 0;
@@ -305,6 +515,23 @@
     margin-bottom: 0.5rem;
   }
 
+  .sim-section {
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+  }
+
+  .sim-section + .sim-section {
+    border-top: 2px solid var(--sl-color-gray-5);
+    padding-top: 1.5rem;
+  }
+
+  .sim-explainer {
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-2);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
   .sim-inputs {
     display: grid;
     grid-template-columns: 1fr;
@@ -314,7 +541,7 @@
 
   @media (min-width: 60rem) {
     .sim-inputs {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
@@ -356,6 +583,13 @@
     background: var(--sl-color-bg);
     color: var(--sl-color-white);
     border: 1px solid var(--sl-color-gray-5);
+  }
+
+  .input-group small {
+    display: block;
+    color: var(--sl-color-gray-2);
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
   }
 
   .sim-table-wrap {
@@ -400,7 +634,7 @@
   .sim-chart {
     display: flex;
     align-items: flex-end;
-    height: 180px;
+    height: 200px;
     gap: 1rem;
     padding: 1rem;
     border: 1px solid var(--sl-color-gray-5);
@@ -424,18 +658,26 @@
     flex: 1;
   }
 
-  .sim-chart :global(.bar) {
-    width: 16px;
-    min-height: 6px;
-    border-radius: 0;
+  .sim-chart :global(.bars.stacked) {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    width: 20px;
   }
 
-  .sim-chart :global(.bar.inkomsten) {
+  .sim-chart :global(.stack) {
+    width: 100%;
+    min-height: 4px;
+  }
+
+  .sim-chart :global(.stack.licentie) {
     background: var(--sl-color-accent);
   }
-
-  .sim-chart :global(.bar.kosten) {
+  .sim-chart :global(.stack.cert) {
     background: var(--sl-color-gray-4);
+  }
+  .sim-chart :global(.stack.perdoc) {
+    background: var(--sl-color-gray-3);
   }
 
   .sim-chart :global(.bar-label) {
@@ -450,6 +692,7 @@
     font-size: 0.8125rem;
     color: var(--sl-color-gray-2);
     margin-bottom: 1rem;
+    flex-wrap: wrap;
   }
 
   .legend-swatch {
@@ -460,29 +703,33 @@
     vertical-align: middle;
   }
 
-  .legend-swatch.inkomsten {
+  .legend-swatch.licentie {
     background: var(--sl-color-accent);
   }
-
-  .legend-swatch.kosten {
+  .legend-swatch.cert {
     background: var(--sl-color-gray-4);
   }
+  .legend-swatch.perdoc {
+    background: var(--sl-color-gray-3);
+  }
 
-  .sim-milestones ul {
+  .sim-milestones ul,
+  .sim-voordelen ul {
     list-style: none;
     padding-left: 0;
     margin: 0.5rem 0 0;
   }
 
-  .sim-milestones li {
+  .sim-milestones li,
+  .sim-voordelen li {
     margin: 0.25rem 0;
     font-size: 0.9375rem;
   }
 
-  .input-group small {
-    display: block;
-    color: var(--sl-color-gray-2);
-    font-size: 0.75rem;
-    margin-top: 0.25rem;
+  .sim-voordelen {
+    border: 1px solid var(--sl-color-gray-5);
+    padding: 1rem;
+    margin-top: 1rem;
+    background: var(--sl-color-bg);
   }
 </style>
