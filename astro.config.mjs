@@ -57,11 +57,6 @@ export default defineConfig({
                       { label: 'For-Profit', link: '/organisatiestructuur/for-profit' },
                       { label: 'Missiegedreven & Steward Ownership', link: '/organisatiestructuur/steward-ownership' },
                       { label: 'Cost-Recovery Model', link: '/organisatiestructuur/cost-recovery' },
-                      {
-                          label: 'Governance',
-                          collapsed: true,
-                          autogenerate: { directory: 'organisatiestructuur/governance' },
-                      },
                   ],
               },
               {
@@ -71,6 +66,11 @@ export default defineConfig({
                       { label: 'Organisatiestructuur', link: '/epistola/organisatiestructuur' },
                       { label: 'Model 1: Open Source + Diensten', link: '/epistola/model-1-open-source' },
                       { label: 'Model 2: BSL + Ecosysteem', link: '/epistola/model-2-bsl-licentie' },
+                      {
+                          label: 'Governance',
+                          collapsed: true,
+                          autogenerate: { directory: 'epistola/governance' },
+                      },
                   ],
               },
               {
