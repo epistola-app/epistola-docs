@@ -112,7 +112,7 @@ Een terechte zorg, gegeven de precedenten van HashiCorp (Terraform), Elastic en 
 1. **Statutair vastgelegd** — De statuten leggen vast dat het intellectueel eigendom bij de stichting berust en dat wijziging van de licentie als zwaar besluit geldt (Artikel 6). Zware besluiten vereisen een verzwaarde meerderheid en toetsing aan het doel van de stichting (Artikel 10).
 2. **Stewards hebben instemmingsrecht** — De stewards zijn extern benoemde toezichthouders. Een licentiewijziging vereist hun expliciete instemming. Stewards zijn statutair verplicht het doel van de stichting voorop te stellen, niet financiële belangen.
 3. **De change date werkt onafhankelijk van besluiten** — Elke versie ouder dan één jaar is al onherroepelijk Apache 2.0. Een hypothetische licentiewijziging op de nieuwste versie verandert daar niets aan: de bestaande, vrijgegeven code blijft vrij en is forkbaar.
-4. **Bij ontbinding wordt het IP geborgd voor een gelijksoortig publiek doel** — Artikel 11 verbiedt dat het IP bij ontbinding overgaat naar een commerciële partij of bestuurders. De publieke missie moet worden voortgezet.
+4. **Bij ontbinding gaat de code direct over naar Apache 2.0** — Artikel 11 borgt dat het IP niet kan overgaan naar een commerciële partij of bestuurders. In de praktijk betekent dit dat alle nog-BSL code onmiddellijk wordt vrijgegeven onder Apache 2.0; de community kan ongestoord doorbouwen op de bestaande basis.
 
 ### Het HashiCorp-precedent — waarom dat hier niet kan
 

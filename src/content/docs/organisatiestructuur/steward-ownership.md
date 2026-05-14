@@ -94,7 +94,7 @@ Het verschil met "we beloven het" is juridisch en structureel:
 | Winst kan niet worden uitgekeerd | Statutair verbod op winstuitkering |
 | Stewards hebben geen eigenbelang | Onafhankelijkheidseis in samenstelling |
 | Missie-wijziging vereist supermeerderheid | Zwaar besluit: 2/3 bestuur + 2/3 stewards |
-| IP blijft publiek bij opheffing | Statutair: bij ontbinding gaat IP naar publiek domein |
+| IP blijft beschikbaar bij opheffing | Statutair: bij ontbinding gaat de code direct over naar Apache 2.0 |
 
 ---
 
@@ -113,7 +113,7 @@ Steward ownership voorkomt dit structureel:
 | Prijswijzigingen vereisen stewardinstemming | Zware besluitvorming; stewards hebben geen commercieel belang |
 | Schaalvoordelen zijn verankerd | Naarmate meer klanten meedoen, dalen de prijzen — niet stijgen |
 | BSL change date is onherroepelijk | Kan niet worden teruggedraaid; code wordt altijd Apache 2.0 na 1 jaar |
-| IP gaat naar publiek domein bij ontbinding | Geen scenario waarbij code achter slot verdwijnt |
+| Code gaat direct over naar Apache 2.0 bij ontbinding | Geen scenario waarbij code achter slot verdwijnt |
 
 De kern: de stichting heeft **geen aandeelhouders die winst willen maximaliseren**. Hogere licentieprijzen leveren de stichting niets op buiten wat nodig is voor haar missie.
 
