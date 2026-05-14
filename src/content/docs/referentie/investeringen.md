@@ -88,6 +88,6 @@ Investeerders kunnen optioneel een adviseur- of observatorfunctie vervullen met 
 
 ## Zie ook
 
-- [Het Verdienmodel: Overzicht](/het-verdienmodel/overzicht) — Hoe inkomsten worden gegenereerd
-- [Licenties](/het-verdienmodel/licenties) — Prijsopbouw en financieel traject stichting
-- [Steward Ownership](/verantwoord-beheer/steward-ownership) — Governance en missieborging
+- [Modelkeuze & Transitiestrategie](/epistola/modelkeuze) — Hoe inkomsten worden gegenereerd
+- [Model 2: BSL + Ecosysteem](/epistola/model-2-bsl-licentie) — Prijsopbouw en financieel traject stichting
+- [Steward Ownership](/organisatiestructuur/steward-ownership) — Governance en missieborging

@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check:links": "mise exec -- lychee --offline --no-progress --root-dir dist 'dist/**/*.html'"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.37.3",

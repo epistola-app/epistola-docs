@@ -1,0 +1,5 @@
+## Lychee link checker config
+## Run: npm run check:links (requires `npm run build` first)
+
+cache = false
+timeout = 10

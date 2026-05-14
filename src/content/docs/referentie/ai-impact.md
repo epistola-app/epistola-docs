@@ -71,7 +71,7 @@ Met AI kan een team van 20 mensen effectief meer werk verzetten dan voorheen. De
 
 ## Wat dit betekent voor de licentie-vs-diensten afweging
 
-AI vergroot de urgentie van de vraag die in [De BV en de Stichting](/verantwoord-beheer/de-bv-en-de-stichting) wordt gesteld: als diensten de primaire financieringsbron zijn, maar AI de toetredingsdrempel voor concurrerende diensten verlaagt — hoe lang is het dienstenmodel dan houdbaar?
+AI vergroot de urgentie van de vraag die in [Epistola Organisatiestructuur](/epistola/organisatiestructuur) wordt gesteld: als diensten de primaire financieringsbron zijn, maar AI de toetredingsdrempel voor concurrerende diensten verlaagt — hoe lang is het dienstenmodel dan houdbaar?
 
 Er zijn twee scenario's:
 
@@ -87,6 +87,6 @@ De conclusie: AI maakt het argument voor een sterke stichting met eigendomsrecht
 
 ## Zie ook
 
-- [De Oplossingen](/introductie/de-oplossingen) — De drie basisopties voor open source financiering, inclusief de structurele zwakte van het dienstenmodel
-- [De BV en de Stichting](/verantwoord-beheer/de-bv-en-de-stichting) — Hoe Epistola het licentie-vs-diensten vraagstuk aanpakt
-- [Continuïteitsbijdrage](/het-verdienmodel/continuiteits-bijdrage) — Wat er verwacht wordt van organisaties die gebruik maken zonder te betalen
+- [Financieringsmodellen](/open-source/financieringsmodellen) — De drie basisopties voor open source financiering, inclusief de structurele zwakte van het dienstenmodel
+- [Epistola Organisatiestructuur](/epistola/organisatiestructuur) — Hoe Epistola het licentie-vs-diensten vraagstuk aanpakt
+- [Modelkeuze & Transitiestrategie](/epistola/modelkeuze) — De GIBIT-aanbeveling voor een continuïteitsbijdrage

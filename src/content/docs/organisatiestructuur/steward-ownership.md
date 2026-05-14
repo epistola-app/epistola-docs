@@ -143,5 +143,5 @@ Stewards zijn onafhankelijke personen die toezien op de missie en de governance.
 
 - [For-Profit](/organisatiestructuur/for-profit) — Waarom commercieel eigenaarschap structureel wringt
 - [Cost-Recovery Model](/organisatiestructuur/cost-recovery) — Hoe schaal leidt tot lagere prijzen
-- [Governance](/organisatiestructuur/governance/governance) — Hoe besluiten worden genomen
-- [Stewards](/organisatiestructuur/governance/stewards) — Wie de stewards zijn en wat ze doen
+- [Governance](/epistola/governance/governance) — Hoe besluiten worden genomen
+- [Stewards](/epistola/governance/stewards) — Wie de stewards zijn en wat ze doen

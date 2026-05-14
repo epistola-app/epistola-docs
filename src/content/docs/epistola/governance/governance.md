@@ -177,8 +177,8 @@ Dit bevordert adaptatie zonder statutaire breuk.
 
 ## Zie ook
 
-- [Stewards](/verantwoord-beheer/governance/stewards) - Rol en samenstelling van stewards
-- [Reglement Stewards](/verantwoord-beheer/governance/reglement-stewards) - Gedetailleerd reglement voor stewards
-- [Statuten](/verantwoord-beheer/governance/statuten) - Statutaire borging van governance
-- [Structuur & Rollen](/verantwoord-beheer/structuur) - Hoe rollen zijn verdeeld
-- [Steward Ownership](/verantwoord-beheer/steward-ownership) - Het eigendomsmodel
+- [Stewards](/epistola/governance/stewards) - Rol en samenstelling van stewards
+- [Reglement Stewards](/epistola/governance/reglement-stewards) - Gedetailleerd reglement voor stewards
+- [Statuten](/epistola/governance/statuten) - Statutaire borging van governance
+- [Epistola Organisatiestructuur](/epistola/organisatiestructuur) - Hoe rollen zijn verdeeld
+- [Steward Ownership](/organisatiestructuur/steward-ownership) - Het eigendomsmodel
