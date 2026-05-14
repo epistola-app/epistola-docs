@@ -141,14 +141,19 @@ Met andere woorden: zelfs in een totaal falenscenario blijft er een werkend, vri
 
 ## BSL versus andere licenties
 
-| | BSL | AGPL | SSPL | Propriëtair | Dual licensing |
-|---|---|---|---|---|---|
-| **Broncode inzichtelijk** | Ja | Ja | Ja | Nee | Ja (community) |
-| **Vrij voor intern gebruik** | Beperkt | Ja (copyleft) | Beperkt | Nee | Beperkt |
-| **Vrij voor commercieel gebruik** | Niet in jaar 1 | Ja (copyleft) | Beperkt | Nee | Nee |
-| **Wordt volledig vrij** | Ja (na 1 jaar) | Al vrij | Nee | Nee | Nee |
-| **Copyleft** | Nee | Sterk | Sterk | Nee | Nee |
-| **Maximale lock-in** | 1 jaar | Geen | Permanent | Permanent | Permanent |
+| | BSL | EUPL | AGPL | SSPL | Propriëtair | Dual licensing |
+|---|---|---|---|---|---|---|
+| **Broncode inzichtelijk** | Ja | Ja | Ja | Ja | Nee | Ja (community) |
+| **Vrij voor intern gebruik** | Beperkt | Ja (copyleft) | Ja (copyleft) | Beperkt | Nee | Beperkt |
+| **Vrij voor commercieel gebruik** | Niet in jaar 1 | Ja (copyleft) | Ja (copyleft) | Beperkt | Nee | Nee |
+| **Wordt volledig vrij** | Ja (na 1 jaar) | Nee | Al vrij | Nee | Nee | Nee |
+| **Copyleft** | Nee | Zwak | Sterk | Sterk | Nee | Nee |
+| **SaaS-gat gedicht** | n.v.t. | Nee | Ja | Ja | Permanent gesloten | Per editie |
+| **Maximale lock-in** | 1 jaar | Geen | Geen | Permanent | Permanent | Permanent |
+
+### EUPL
+
+De European Union Public Licence is een zwak copyleft-licentie ontwikkeld door de Europese Commissie, expliciet bedoeld voor publieke-sector software. EUPL voorkomt commerciële privatisering (afgeleide werken moeten EUPL blijven), maar adresseert het free-rider-probleem tijdens de actieve ontwikkelfase niet: iedereen mag de software vanaf dag 1 commercieel gebruiken. Daarmee biedt EUPL geen mechanisme voor licentiegebaseerde platformfinanciering. Voor Epistola is EUPL alleen relevant als alternatief binnen Model 1 — niet als vervanger van BSL. [→ Volledige analyse](/referentie/eupl-vergelijking)
 
 ### AGPL
 
@@ -201,6 +206,8 @@ Er is daarmee **geen scenario** waarin gemeenten achterblijven zonder toegang to
 ## Zie ook
 
 - [Model 2: BSL + Ecosysteem](/epistola/model-2-bsl-licentie) — Prijzen en wat licentie-inkomsten financieren
+- [Open source licenties: een overzicht](/referentie/licentievergelijking) — Het brede licentielandschap met alle categorieën
+- [EUPL — alleen relevant binnen Model 1](/referentie/eupl-vergelijking) — Waarom EUPL niet vergeleken wordt met BSL maar met AGPL
 - [Steward Ownership](/organisatiestructuur/steward-ownership) — Hoe eigenaarschap prijsmisbruik structureel voorkomt
 - [SaaS Aanbieden](/meedoen/leveranciers/saas-aanbieden) — Hoe SaaS-leveranciers afdragen
 - [Bronnen](/referentie/bronnen) — Externe links over BSL en open source licenties
