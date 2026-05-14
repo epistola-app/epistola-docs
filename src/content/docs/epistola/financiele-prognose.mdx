@@ -16,21 +16,31 @@ Hoe ontwikkelt een stichting+BV-combinatie zoals Epistola zich financieel over d
 
 ## De geldstroom
 
-De stichting neemt in principe geen mensen aan — ze besteedt het ontwikkelwerk uit aan Epistola BV onder cost-plus pricing. Wat de BV kost om te draaien, factureert ze terug aan de stichting als onderhoudsbudget.
+Gemeenten betalen niet rechtstreeks aan de stichting. Ze contracteren met een **preferred supplier** — een gecertificeerde leverancier die licentie, hosting en diensten in één offerte aanbiedt. **Epistola BV is zelf één van die preferred suppliers**, naast eventueel derde partijen.
+
+De supplier doet drie dingen tegelijk:
+
+1. **Levert diensten** aan de gemeente (hosting, support, training, consultancy) — hier zit zijn omzet
+2. **Belast de licentie door** naar de gemeente, met een maximale marge erbovenop — die marge blijft bij de supplier
+3. **Draagt de licentie-afdracht en de jaarlijkse certificeringsbijdrage af** aan de stichting
+
+De stichting heeft zelf geen personeel. Voor het ontwikkel- en onderhoudswerk van het platform besteedt ze uit — onder cost-plus pricing — aan één of meer leveranciers. Epistola BV is dan de meest voor de hand liggende partij vanwege diepe platformkennis, maar de stichting kan dat werk ook (deels) bij andere preferred suppliers beleggen. Voor de BV is platform-onderhoud daarmee één inkomstenbron naast haar dienstverlening aan gemeenten, geen vanzelfsprekendheid.
+
+De simulatie hieronder gaat er voor de eenvoud van uit dat al het platform-onderhoud door de BV wordt gedaan. In de praktijk kan het werk verdeeld worden; de totale stichting-uitgave blijft hetzelfde, alleen de BV-inkomsten verschuiven dan deels naar andere leveranciers.
 
 ```mermaid
 flowchart LR
     G["🏘️ Gemeenten"]
+    PS["🏢 Preferred Supplier<br/>(Epistola BV of derde)"]
+    SAAS["☁️ SaaS-aanbieder<br/>(ook een supplier)"]
     S["🏛️ Stichting"]
-    BV["🏢 Epistola BV"]
-    SAAS["☁️ SaaS-aanbieders"]
-    PS["🏢 Preferred suppliers"]
+    BV["🏢 Epistola BV<br/>als platformbouwer"]
 
-    G -->|"Licentie (vast tarief per inwonertal)"| S
-    SAAS -->|"Per-document afdracht"| S
-    PS -->|"Certificeringsbijdrage (jaarlijks)"| S
-    S -->|"Onderhoudsbudget (cost-plus)"| BV
-    S -->|"Administratie + stewards-vergoedingen"| S
+    G -->|"Licentie + diensten<br/>(één factuur)"| PS
+    G -->|"Multi-tenant abonnement"| SAAS
+    PS -->|"Licentie-afdracht + certificering"| S
+    SAAS -->|"Per-document afdracht + certificering"| S
+    S -->|"Onderhoudsbudget<br/>(cost-plus)"| BV
 
     style S fill:#e1f5fe
     style BV fill:#fff3e0
@@ -39,7 +49,7 @@ flowchart LR
     style PS fill:#fce4ec
 ```
 
-De simulatie modelleert de stichting en de BV als aparte cash-flows. De BV is structureel break-even (cost-plus). De interessante dynamiek zit aan de stichting-kant: dekken de externe inkomsten het BV-onderhoudsbudget plus de admin-overhead?
+De simulatie modelleert de stichting en de BV als aparte cash-flows. De BV is structureel break-even (cost-plus). De interessante dynamiek zit aan de stichting-kant: dekken de afdrachten vanuit de suppliers het BV-onderhoudsbudget plus de admin-overhead?
 
 ---
 
