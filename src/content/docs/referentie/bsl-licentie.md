@@ -29,15 +29,47 @@ Na precies de opgegeven periode — in dit geval één jaar — gaat de licentie
 |---|---|
 | Broncode lezen en inspecteren | Ja |
 | Lokaal draaien voor ontwikkeling en testen | Ja |
+| Test- en acceptatie-omgevingen (onbeperkt) | Ja |
+| **Niet-commercieel gebruik (onbeperkt)** | **Ja — volledige gratis licentie** |
+| Commercieel productiegebruik tot 200 documenten per dag | Ja |
+| Commercieel productiegebruik boven 200 documenten per dag | Nee — licentie vereist |
 | Bijdragen aan het project (patches, bugfixes) | Ja |
-| Niet-commercieel gebruik (research, onderwijs) | Ja |
 | Gebruik van de Apache 2.0-versie (ouder dan 1 jaar) | Ja, volledig |
-| Commercieel gebruik van de nieuwste versie | Nee — licentie vereist |
-| Aanbieden als dienst aan derden | Nee — licentie vereist |
+| Aanbieden als dienst aan derden | Nee — preferred supplier + afdracht vereist |
 
 ### Wat "commercieel gebruik" betekent
 
 In dit model betalen gemeenten de licentie niet rechtstreeks — de preferred supplier draagt de licentiebijdrage af aan de stichting en belast dit door aan de gemeente. Een gemeente die het platform intern gebruikt via een gecertificeerde supplier, handelt niet zelf als licentiehouder.
+
+---
+
+## De Additional Use Grant: gratis gebruiksruimte
+
+Elke BSL-licentie definieert een **Additional Use Grant**: de gebruiksruimte die zonder licentie is toegestaan, bovenop wat de BSL standaard toelaat. Voor Epistola is die grant bewust ruim opgezet:
+
+- **Niet-commercieel gebruik**: onbeperkt en volledig gratis — geen volumegrens, geen voorwaarden
+- **Test- en acceptatie-omgevingen**: onbeperkt voor iedereen, ook commercieel
+- **Commercieel productiegebruik**: tot **200 documenten per dag**, per organisatie
+
+Pas wanneer een commerciële organisatie structureel meer dan 200 documenten per dag in productie genereert, is een licentie vereist.
+
+### Wat dit voor wie betekent
+
+| Type organisatie | Praktische gevolgen |
+|---|---|
+| Niet-commercieel (onderzoek, onderwijs, hobby, vrijwilligers, NGO's) | Volledig gratis, geen volumegrens |
+| Klein commercieel bedrijf (productie ≤ 200 docs/dag) | Volledig gratis |
+| Bedrijf met groeiend volume | Gratis tot 200 docs/dag; licentie zodra dat structureel overschreden wordt |
+| Gemeenten via preferred supplier | Vallen onder het gemeentelicentiemodel — niet onder deze grant |
+| SaaS-aanbieders die het platform aan derden leveren | Vallen onder de preferred-supplier-afdracht — niet onder deze grant |
+
+### Waarom een gratis tier?
+
+1. **Lage drempel** — Kleine partijen kunnen het platform integreren zonder eerst een commerciële onderhandeling te starten
+2. **Eerlijke verdeling** — Wie het platform op kleine schaal gebruikt, raakt de onderhoudslast nauwelijks; een licentie vragen voor zulk gebruik staat niet in verhouding
+3. **Validatiepad** — Organisaties die overwegen het op grotere schaal in te zetten, kunnen het eerst beproeven zonder commerciële verplichting
+
+200 documenten per dag is ruim genoeg om voor een klein team of organisatie een volwaardig productiegebruik te zijn, maar laat de structurele kostenbasis van het platform onveranderd.
 
 ---
 
@@ -132,6 +164,7 @@ Er is daarmee **geen scenario** waarin gemeenten achterblijven zonder toegang to
 
 ## Zie ook
 
-- [Licenties](/het-verdienmodel/licenties) — Prijzen en wat licentie-inkomsten financieren
-- [Steward Ownership](/verantwoord-beheer/steward-ownership) — Hoe eigenaarschap prijsmisbruik structureel voorkomt
+- [Model 2: BSL + Ecosysteem](/epistola/model-2-bsl-licentie) — Prijzen en wat licentie-inkomsten financieren
+- [Steward Ownership](/organisatiestructuur/steward-ownership) — Hoe eigenaarschap prijsmisbruik structureel voorkomt
+- [SaaS Aanbieden](/meedoen/leveranciers/saas-aanbieden) — Hoe SaaS-leveranciers afdragen
 - [Bronnen](/referentie/bronnen) — Externe links over BSL en open source licenties
