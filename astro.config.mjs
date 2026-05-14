@@ -67,6 +67,7 @@ export default defineConfig({
                   items: [
                       { label: 'Organisatievormen Vergeleken', link: '/verantwoord-beheer/organisatievormen' },
                       { label: 'Steward Ownership', link: '/verantwoord-beheer/steward-ownership' },
+                      { label: 'De BV en de Stichting', link: '/verantwoord-beheer/de-bv-en-de-stichting' },
                       { label: 'Structuur & Rollen', link: '/verantwoord-beheer/structuur' },
                       {
                           label: 'Governance',
