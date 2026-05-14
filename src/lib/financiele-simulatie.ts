@@ -50,8 +50,10 @@ export interface StichtingInputs {
   startSaasAanbieders: number;
   /** Aantal nieuwe SaaS-aanbieders per jaar */
   saasGroei: number;
-  /** Gemiddelde per-doc afdracht per SaaS-aanbieder per jaar (€) */
-  perDocBudgetPerSaas: number;
+  /** Tarief per gegenereerd document (€), afdracht naar stichting */
+  tariefPerDoc: number;
+  /** Gemiddeld aantal documenten per SaaS-aanbieder per jaar */
+  docsPerSaasAanbieder: number;
 
   // Uitgaven (stichting beslist hoeveel ze uitbesteedt)
   /** Basis-onderhoudsbudget per jaar (€) */
@@ -165,7 +167,9 @@ export function berekenStichtingJaar(
   // Drie inkomstenstromen
   const licentieInkomsten = Math.round(gemeenten * tarief * (1 - korting));
   const certInkomsten = suppliers * CERT_PER_SUPPLIER_PER_JAAR;
-  const perDocInkomsten = saasAanbieders * inputs.perDocBudgetPerSaas;
+  const perDocInkomsten = Math.round(
+    saasAanbieders * inputs.docsPerSaasAanbieder * inputs.tariefPerDoc,
+  );
   const totaalInkomsten = licentieInkomsten + certInkomsten + perDocInkomsten;
 
   // Uitgaven (rechtstreeks uit inputs)

@@ -27,7 +27,8 @@ const stichtingDefaults: StichtingInputs = {
   supplierGroei: 1,
   startSaasAanbieders: 1,
   saasGroei: 1,
-  perDocBudgetPerSaas: 25_000,
+  tariefPerDoc: 0.1,
+  docsPerSaasAanbieder: 250_000,
   onderhoudsbudget: 250_000,
   features: 50_000,
   admin: 25_000,
@@ -98,8 +99,8 @@ describe('berekenStichtingJaar — defaults jaar 1', () => {
     expect(r.certInkomsten).toBe(3 * CERT_PER_SUPPLIER_PER_JAAR);
   });
 
-  it('per-doc = SaaS-aanbieders × budget/aanbieder', () => {
-    expect(r.perDocInkomsten).toBe(1 * 25_000);
+  it('per-doc = SaaS-aanbieders × docs/aanbieder × tarief', () => {
+    expect(r.perDocInkomsten).toBe(1 * 250_000 * 0.1);
   });
 
   it('totaalInkomsten somt de drie stromen', () => {
@@ -134,7 +135,7 @@ describe('simulateStichting — ecosysteem-groei', () => {
 
   it('per-doc inkomsten schalen mee met SaaS-aanbieders', () => {
     const result = simulateStichting(stichtingDefaults, tarievenTyped);
-    expect(result.rows[4].perDocInkomsten).toBe(5 * 25_000);
+    expect(result.rows[4].perDocInkomsten).toBe(5 * 250_000 * 0.1);
   });
 
   it('licentie past schaalkorting toe vanaf juiste jaar', () => {

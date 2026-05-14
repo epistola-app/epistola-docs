@@ -58,8 +58,14 @@
           <input type="range" id="s-saasGroei" min="0" max="5" value="1" step="1" />
         </div>
         <div class="input-group">
-          <label for="s-perDocPerSaas"><strong>Per-doc afdracht per SaaS-aanbieder (k€/jaar):</strong> <span id="s-perDocPerSaas-val">25</span></label>
-          <input type="range" id="s-perDocPerSaas" min="0" max="100" value="25" step="5" />
+          <label for="s-tariefPerDoc"><strong>Tarief per document (€):</strong> <span id="s-tariefPerDoc-val">0.10</span></label>
+          <input type="range" id="s-tariefPerDoc" min="0" max="0.50" value="0.10" step="0.01" />
+          <small>Afdracht per gegenereerd document naar de stichting.</small>
+        </div>
+        <div class="input-group">
+          <label for="s-docsPerSaas"><strong>Documenten per SaaS-aanbieder (per jaar):</strong> <span id="s-docsPerSaas-val">250.000</span></label>
+          <input type="range" id="s-docsPerSaas" min="0" max="2000000" value="250000" step="50000" />
+          <small>Gemiddeld aantal documenten per SaaS-aanbieder. Bij 250.000 = ±700/dag.</small>
         </div>
       </fieldset>
 
@@ -269,7 +275,16 @@
     const sSupplierGroei = bind('s-supplierGroei', 's-supplierGroei-val');
     const sStartSaas = bind('s-startSaas', 's-startSaas-val');
     const sSaasGroei = bind('s-saasGroei', 's-saasGroei-val');
-    const sPerDocPerSaas = bind('s-perDocPerSaas', 's-perDocPerSaas-val');
+    const sTariefPerDoc = bind('s-tariefPerDoc', 's-tariefPerDoc-val', 2);
+
+    // Docs-slider toont met duizendtal-separator
+    const sDocsPerSaas = document.getElementById('s-docsPerSaas') as HTMLInputElement;
+    const sDocsPerSaasVal = document.getElementById('s-docsPerSaas-val')!;
+    const docsFmt = new Intl.NumberFormat('nl-NL');
+    sDocsPerSaas.addEventListener('input', () => {
+      sDocsPerSaasVal.textContent = docsFmt.format(parseInt(sDocsPerSaas.value, 10));
+      render();
+    });
     const sOnderhoud = bind('s-onderhoud', 's-onderhoud-val');
     const sFeatures = bind('s-features', 's-features-val');
     const sAdmin = bind('s-admin', 's-admin-val');
@@ -292,7 +307,8 @@
         supplierGroei: parseInt(sSupplierGroei.value, 10),
         startSaasAanbieders: parseInt(sStartSaas.value, 10),
         saasGroei: parseInt(sSaasGroei.value, 10),
-        perDocBudgetPerSaas: parseInt(sPerDocPerSaas.value, 10) * 1000,
+        tariefPerDoc: parseFloat(sTariefPerDoc.value),
+        docsPerSaasAanbieder: parseInt(sDocsPerSaas.value, 10),
         onderhoudsbudget: parseInt(sOnderhoud.value, 10) * 1000,
         features: parseInt(sFeatures.value, 10) * 1000,
         admin: parseInt(sAdmin.value, 10) * 1000,
