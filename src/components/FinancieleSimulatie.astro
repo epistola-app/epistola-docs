@@ -5,11 +5,11 @@
 
 <div class="financiele-simulatie">
   <h3>📈 5-jaars financiële simulatie</h3>
-  <p>De stichting heeft geen personeel — ze besteedt het ontwikkelwerk uit aan Epistola BV onder cost-plus pricing. Deze simulator toont beide cash-flows apart: de stichting (met licentie-inkomsten en uitbestedingsbudget) en de BV (met FTE-kosten).</p>
+  <p>De stichting heeft geen personeel — ze gebruikt licentie-inkomsten om onderhoud en feature-ontwikkeling uit te besteden (primair aan Epistola BV). De BV-FTE die hieruit volgt wordt afgeleid en getoond als referentie. Aan de input-sliders kun je verschillende scenario's vergelijken.</p>
 
   <div class="sim-inputs">
     <fieldset class="sim-group">
-      <legend>Adoptie &amp; inkomsten (stichting)</legend>
+      <legend>Adoptie &amp; stichting-inkomsten</legend>
 
       <div class="input-group">
         <label for="sim-startGemeenten"><strong>Gemeenten in jaar 1:</strong> <span id="sim-startGemeenten-val">5</span></label>
@@ -45,17 +45,33 @@
     </fieldset>
 
     <fieldset class="sim-group">
-      <legend>BV-kostenstructuur &amp; eigen omzet</legend>
+      <legend>Stichting-uitgaven</legend>
 
       <div class="input-group">
-        <label for="sim-fteStart"><strong>FTE in jaar 1:</strong> <span id="sim-fteStart-val">2</span></label>
-        <input type="range" id="sim-fteStart" min="1" max="10" value="2" step="1" />
+        <label for="sim-onderhoud"><strong>Onderhoudsbudget (k€/jaar):</strong> <span id="sim-onderhoud-val">300</span></label>
+        <input type="range" id="sim-onderhoud" min="0" max="800" value="300" step="25" />
+        <small>Basis-onderhoud van het platform (security, deps, infra) — uitbesteed aan BV onder cost-plus. Relatief vast bedrag.</small>
       </div>
 
       <div class="input-group">
-        <label for="sim-fteGroei"><strong>FTE-uitbreiding per jaar:</strong> <span id="sim-fteGroei-val">3</span></label>
-        <input type="range" id="sim-fteGroei" min="0" max="6" value="3" step="1" />
+        <label for="sim-features"><strong>Features-budget (k€/jaar):</strong> <span id="sim-features-val">100</span></label>
+        <input type="range" id="sim-features" min="0" max="500" value="100" step="25" />
+        <small>Strategische productontwikkeling die de stichting uitzet. Met 0 is het scenario zuiver reactief.</small>
       </div>
+
+      <div class="input-group">
+        <label for="sim-admin"><strong>Administratie + stewards (k€/jaar):</strong> <span id="sim-admin-val">25</span></label>
+        <input type="range" id="sim-admin" min="5" max="100" value="25" step="5" />
+      </div>
+
+      <div class="input-group">
+        <label for="sim-investering"><strong>Initiële investering (k€):</strong> <span id="sim-investering-val">100</span></label>
+        <input type="range" id="sim-investering" min="0" max="500" value="100" step="10" />
+      </div>
+    </fieldset>
+
+    <fieldset class="sim-group">
+      <legend>BV-parameters (FTE wordt afgeleid)</legend>
 
       <div class="input-group">
         <label for="sim-fteKosten"><strong>Kosten per FTE (all-in, k€/jaar):</strong> <span id="sim-fteKosten-val">100</span></label>
@@ -70,27 +86,7 @@
       <div class="input-group">
         <label for="sim-bvOmzetGem"><strong>BV-omzet per gemeente (k€/jaar):</strong> <span id="sim-bvOmzetGem-val">10</span></label>
         <input type="range" id="sim-bvOmzetGem" min="0" max="40" value="10" step="1" />
-        <small>Training, consultancy, dienstverlening en marge op licentie-doorbelasting samen. Onder cost-plus dekt dit een deel van BV-kosten, waardoor minder via stichting-onderhoud nodig is.</small>
-      </div>
-    </fieldset>
-
-    <fieldset class="sim-group">
-      <legend>Stichting overhead &amp; investering</legend>
-
-      <div class="input-group">
-        <label for="sim-admin"><strong>Administratie + stewards (k€/jaar):</strong> <span id="sim-admin-val">25</span></label>
-        <input type="range" id="sim-admin" min="5" max="100" value="25" step="5" />
-      </div>
-
-      <div class="input-group">
-        <label for="sim-features"><strong>Budget voor nieuwe features (k€/jaar):</strong> <span id="sim-features-val">0</span></label>
-        <input type="range" id="sim-features" min="0" max="500" value="0" step="10" />
-        <small>Opdrachten voor productevolutie die de stichting uitzet — komt bovenop het onderhoudsbudget en is een extra BV-inkomstenbron.</small>
-      </div>
-
-      <div class="input-group">
-        <label for="sim-investering"><strong>Initiële investering (k€):</strong> <span id="sim-investering-val">100</span></label>
-        <input type="range" id="sim-investering" min="0" max="500" value="100" step="10" />
+        <small>Diensten die BV als preferred supplier rechtstreeks aan gemeenten levert (training, consultancy, marge op licentie). Cost-plus.</small>
       </div>
     </fieldset>
   </div>
@@ -104,7 +100,7 @@
             <th>Jaar</th>
             <th>Gemeenten</th>
             <th>Inkomsten</th>
-            <th>BV-onderhoud</th>
+            <th>Onderhoud</th>
             <th>Features</th>
             <th>Admin</th>
             <th>Resultaat</th>
@@ -115,16 +111,16 @@
       </table>
     </div>
 
-    <h4>BV jaarstroom</h4>
+    <h4>BV jaarstroom (afgeleid)</h4>
     <div class="sim-table-wrap">
       <table>
         <thead>
           <tr>
             <th>Jaar</th>
             <th>FTE</th>
-            <th>Externe omzet</th>
-            <th>Stichting onderhoud</th>
-            <th>Stichting features</th>
+            <th>Stichting uitbesteed</th>
+            <th>Gemeente-omzet</th>
+            <th>Totaal in</th>
             <th>FTE-kosten</th>
             <th>Resultaat</th>
           </tr>
@@ -133,11 +129,11 @@
       </table>
     </div>
 
-    <h4>Stichting: externe inkomsten vs externe kosten</h4>
-    <div class="sim-chart" id="sim-chart" aria-label="Grafiek van stichting-inkomsten en -kosten over 5 jaar"></div>
+    <h4>Stichting: externe inkomsten vs externe uitgaven</h4>
+    <div class="sim-chart" id="sim-chart" aria-label="Grafiek van stichting-inkomsten en -uitgaven over 5 jaar"></div>
     <div class="sim-legend">
       <span><i class="legend-swatch inkomsten"></i> Inkomsten</span>
-      <span><i class="legend-swatch kosten"></i> Kosten (BV-onderhoud + admin)</span>
+      <span><i class="legend-swatch kosten"></i> Uitgaven (onderhoud + features + admin)</span>
     </div>
 
     <div class="sim-milestones" id="sim-milestones"></div>
@@ -176,14 +172,13 @@
     const elSchaal = bind('sim-schaal');
     const elSuppliers = bind('sim-suppliers', 'sim-suppliers-val');
     const elPerDoc = bind('sim-perDoc', 'sim-perDoc-val');
-    const elFteStart = bind('sim-fteStart', 'sim-fteStart-val');
-    const elFteGroei = bind('sim-fteGroei', 'sim-fteGroei-val');
+    const elOnderhoud = bind('sim-onderhoud', 'sim-onderhoud-val');
+    const elFeatures = bind('sim-features', 'sim-features-val');
+    const elAdmin = bind('sim-admin', 'sim-admin-val');
+    const elInvestering = bind('sim-investering', 'sim-investering-val');
     const elFteKosten = bind('sim-fteKosten', 'sim-fteKosten-val');
     const elOverhead = bind('sim-overhead', 'sim-overhead-val', 2);
     const elBvOmzetGem = bind('sim-bvOmzetGem', 'sim-bvOmzetGem-val');
-    const elAdmin = bind('sim-admin', 'sim-admin-val');
-    const elFeatures = bind('sim-features', 'sim-features-val');
-    const elInvestering = bind('sim-investering', 'sim-investering-val');
 
     function getInputs(): SimulationInputs {
       return {
@@ -192,14 +187,13 @@
         schaalId: elSchaal.value,
         suppliers: parseInt(elSuppliers.value, 10),
         perDocBudget: parseInt(elPerDoc.value, 10) * 1000,
-        fteStart: parseInt(elFteStart.value, 10),
-        fteGroei: parseInt(elFteGroei.value, 10),
+        onderhoudsbudget: parseInt(elOnderhoud.value, 10) * 1000,
+        features: parseInt(elFeatures.value, 10) * 1000,
+        admin: parseInt(elAdmin.value, 10) * 1000,
+        investering: parseInt(elInvestering.value, 10) * 1000,
         fteKosten: parseInt(elFteKosten.value, 10) * 1000,
         overhead: parseFloat(elOverhead.value),
         bvOmzetPerGemeente: parseInt(elBvOmzetGem.value, 10) * 1000,
-        admin: parseInt(elAdmin.value, 10) * 1000,
-        features: parseInt(elFeatures.value, 10) * 1000,
-        investering: parseInt(elInvestering.value, 10) * 1000,
       };
     }
 
@@ -220,7 +214,7 @@
           <td>${r.jaar}</td>
           <td>${r.gemeenten}</td>
           <td>${fmt.format(r.totaalInkomsten)}</td>
-          <td>${fmt.format(r.bvOnderhoud)}</td>
+          <td>${fmt.format(r.onderhoudsbudget)}</td>
           <td>${fmt.format(r.featureBudget)}</td>
           <td>${fmt.format(r.adminKosten)}</td>
           <td class="${r.stichtingResultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.stichtingResultaat)}</td>
@@ -238,9 +232,9 @@
         <tr>
           <td>${r.jaar}</td>
           <td>${r.fte}</td>
+          <td>${fmt.format(r.onderhoudsbudget + r.featureBudget)}</td>
           <td>${fmt.format(r.bvExterneOmzet)}</td>
-          <td>${fmt.format(r.bvOnderhoud)}</td>
-          <td>${fmt.format(r.featureBudget)}</td>
+          <td>${fmt.format(r.bvInkomsten)}</td>
           <td>${fmt.format(r.bvKosten)}</td>
           <td class="${r.bvResultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.bvResultaat)}</td>
         </tr>`
@@ -262,7 +256,7 @@
             <div class="bar-group" aria-label="Jaar ${r.jaar}">
               <div class="bars">
                 ${bar('inkomsten', r.totaalInkomsten, 'Inkomsten')}
-                ${bar('kosten', r.stichtingKosten, 'Kosten')}
+                ${bar('kosten', r.stichtingKosten, 'Uitgaven')}
               </div>
               <div class="bar-label">J${r.jaar}</div>
             </div>`
@@ -274,7 +268,7 @@
       const mp = berekenMijlpalen(result);
       const items = [
         mp.operationeleBreakEvenJaar !== null
-          ? `<li>✅ <strong>Operationele break-even</strong> in jaar ${mp.operationeleBreakEvenJaar} (inkomsten dekken kosten)</li>`
+          ? `<li>✅ <strong>Operationele break-even</strong> in jaar ${mp.operationeleBreakEvenJaar} (inkomsten dekken uitgaven)</li>`
           : `<li>⚠️ <strong>Geen operationele break-even</strong> binnen 5 jaar bij deze aannames</li>`,
         mp.investeringTerugverdiendJaar !== null
           ? `<li>✅ <strong>Investering terugverdiend</strong> in jaar ${mp.investeringTerugverdiendJaar}</li>`
@@ -375,8 +369,6 @@
     font-size: 0.875rem;
   }
 
-  /* Tabel-cellen worden dynamisch toegevoegd; :global() zodat ze niet de
-     scope-class hoeven te dragen */
   .financiele-simulatie :global(th),
   .financiele-simulatie :global(td) {
     padding: 0.5rem 0.75rem;
@@ -416,7 +408,6 @@
     background: var(--sl-color-bg);
   }
 
-  /* Bars worden dynamisch toegevoegd; :global() zodat ze de styling krijgen */
   .sim-chart :global(.bar-group) {
     flex: 1;
     display: flex;
@@ -486,5 +477,12 @@
   .sim-milestones li {
     margin: 0.25rem 0;
     font-size: 0.9375rem;
+  }
+
+  .input-group small {
+    display: block;
+    color: var(--sl-color-gray-2);
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
   }
 </style>

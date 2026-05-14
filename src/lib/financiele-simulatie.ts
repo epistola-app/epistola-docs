@@ -1,6 +1,12 @@
 /**
  * Pure logica voor de financiële simulatie. Geen DOM, geen Astro — alleen
  * berekeningen. Daardoor te testen met Vitest.
+ *
+ * Model:
+ *  - Stichting heeft licentie/cert/SaaS-inkomsten en kiest hoeveel ze
+ *    uitbesteedt aan onderhoud en feature-ontwikkeling.
+ *  - BV (en eventueel andere preferred suppliers) voeren het werk uit.
+ *  - BV-FTE volgt uit het beschikbare budget (cost-plus break-even).
  */
 
 export interface Schaal {
@@ -33,20 +39,18 @@ export interface SimulationInputs {
   suppliers: number;
   /** SaaS per-document afdracht (€/jaar, totaal) */
   perDocBudget: number;
-  /** FTE in jaar 1 */
-  fteStart: number;
-  /** FTE-uitbreiding per jaar */
-  fteGroei: number;
-  /** All-in kosten per FTE per jaar (€) */
+  /** Stichting basis-onderhoudsbudget per jaar (€) — vast bedrag, niet FTE-gedreven */
+  onderhoudsbudget: number;
+  /** Stichting budget voor nieuwe features per jaar (€) */
+  features: number;
+  /** Administratiekosten + stewards-vergoedingen per jaar (€) */
+  admin: number;
+  /** All-in kosten per FTE per jaar (€) — gebruikt om FTE af te leiden */
   fteKosten: number;
   /** BV overhead-factor (bv 1.30) */
   overhead: number;
-  /** Externe BV-omzet per gemeente per jaar (€) */
+  /** Externe BV-omzet per gemeente per jaar (€) — diensten aan gemeenten */
   bvOmzetPerGemeente: number;
-  /** Administratiekosten + stewards-vergoedingen per jaar (€) */
-  admin: number;
-  /** Stichting feature-budget per jaar (€) */
-  features: number;
   /** Initiële investering (€) */
   investering: number;
 }
@@ -54,18 +58,27 @@ export interface SimulationInputs {
 export interface YearRow {
   jaar: number;
   gemeenten: number;
+  /** Afgeleide BV-FTE bij het beschikbare budget (gecapt op MAX_BV_FTE) */
   fte: number;
   licentieInkomsten: number;
   perDocInkomsten: number;
   certInkomsten: number;
   totaalInkomsten: number;
-  bvKosten: number;
-  bvExterneOmzet: number;
-  bvOnderhoud: number;
+  /** Stichting uitgave: basis-onderhoud (input) */
+  onderhoudsbudget: number;
+  /** Stichting uitgave: features (input) */
   featureBudget: number;
+  /** Stichting uitgave: admin (input) */
   adminKosten: number;
   stichtingKosten: number;
   stichtingResultaat: number;
+  /** BV-totaalinkomsten = onderhoud + features + (gemeenten × omzet/gemeente) */
+  bvInkomsten: number;
+  /** BV externe omzet uit gemeente-diensten */
+  bvExterneOmzet: number;
+  /** BV-kosten = fte × kosten × overhead (na cap) */
+  bvKosten: number;
+  /** BV-resultaat — ≈ 0 onder cost-plus, kan klein verschil tonen door FTE-cap of afronding */
   bvResultaat: number;
   cumulatief: number;
 }
@@ -95,8 +108,7 @@ export function schaalKorting(tarieven: Tarieven, gemeenten: number): number {
 }
 
 /**
- * Bereken één jaar in isolatie.
- * Cumulatief moet door de aanroeper bijgehouden worden.
+ * Bereken één jaar in isolatie. Cumulatief wordt door de aanroeper bijgehouden.
  */
 export function berekenJaar(
   jaar: number,
@@ -105,27 +117,33 @@ export function berekenJaar(
   korting: number,
 ): Omit<YearRow, 'cumulatief'> {
   const gemeenten = inputs.startGemeenten + (jaar - 1) * inputs.groei;
-  const fte = Math.min(inputs.fteStart + (jaar - 1) * inputs.fteGroei, MAX_BV_FTE);
 
+  // Inkomsten stichting
   const licentieInkomsten = Math.round(gemeenten * tarief * (1 - korting));
   const perDocInkomsten = inputs.perDocBudget;
   const certInkomsten = inputs.suppliers * CERT_PER_SUPPLIER_PER_JAAR;
   const totaalInkomsten = licentieInkomsten + perDocInkomsten + certInkomsten;
 
-  const bvKosten = Math.round(fte * inputs.fteKosten * inputs.overhead);
-  const bvExterneOmzet = gemeenten * inputs.bvOmzetPerGemeente;
+  // Uitgaven stichting (direct vanuit inputs — niet afgeleid)
+  const onderhoudsbudget = inputs.onderhoudsbudget;
   const featureBudget = inputs.features;
-
-  // BV werkt cost-plus: stichting dekt het deel dat BV niet zelf via gemeenten-
-  // diensten of feature-opdrachten kan financieren (ondergrens 0).
-  const bvOnderhoud = Math.max(0, bvKosten - bvExterneOmzet - featureBudget);
-
   const adminKosten = inputs.admin;
-  const stichtingKosten = bvOnderhoud + featureBudget + adminKosten;
+  const stichtingKosten = onderhoudsbudget + featureBudget + adminKosten;
   const stichtingResultaat = totaalInkomsten - stichtingKosten;
 
-  // BV-resultaat ≈ 0 onder cost-plus, positief als BV meer ophaalt dan kost.
-  const bvResultaat = bvOnderhoud + bvExterneOmzet + featureBudget - bvKosten;
+  // BV-cashflow: krijgt het uitbestedingsbudget + de diensten-omzet van gemeenten
+  const bvExterneOmzet = gemeenten * inputs.bvOmzetPerGemeente;
+  const bvInkomsten = onderhoudsbudget + featureBudget + bvExterneOmzet;
+
+  // BV-FTE wordt afgeleid uit beschikbaar budget (cost-plus break-even)
+  const kostenPerFte = inputs.fteKosten * inputs.overhead;
+  const beoogdeFte = kostenPerFte > 0 ? bvInkomsten / kostenPerFte : 0;
+  const fte = Math.min(Math.round(beoogdeFte), MAX_BV_FTE);
+
+  const bvKosten = Math.round(fte * kostenPerFte);
+  // BV-resultaat = inkomsten − kosten. Onder cost-plus ≈ 0, kan klein verschil
+  // tonen door FTE-cap (te veel budget voor 20 FTE) of afronding.
+  const bvResultaat = bvInkomsten - bvKosten;
 
   return {
     jaar,
@@ -135,13 +153,14 @@ export function berekenJaar(
     perDocInkomsten,
     certInkomsten,
     totaalInkomsten,
-    bvKosten,
-    bvExterneOmzet,
-    bvOnderhoud,
+    onderhoudsbudget,
     featureBudget,
     adminKosten,
     stichtingKosten,
     stichtingResultaat,
+    bvInkomsten,
+    bvExterneOmzet,
+    bvKosten,
     bvResultaat,
   };
 }
@@ -153,7 +172,6 @@ export function simulate(inputs: SimulationInputs, tarieven: Tarieven): Simulati
   let cumulatief = inputs.investering;
 
   for (let jaar = 1; jaar <= JAREN; jaar++) {
-    // Korting hangt af van het aantal gemeenten in dit jaar
     const gemeentenInJaar = inputs.startGemeenten + (jaar - 1) * inputs.groei;
     const korting = schaalKorting(tarieven, gemeentenInJaar);
     const jaarRow = berekenJaar(jaar, inputs, tarief, korting);
