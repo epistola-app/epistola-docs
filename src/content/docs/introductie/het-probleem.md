@@ -41,6 +41,12 @@ Risicokapitaal financiert de eerste jaren, in de hoop op een grote exit of IPO. 
 
 ## Het eigenlijke probleem: free-riding en continuïteitsrisico
 
+:::note[Een veelgehoord misverstand]
+Gemeenten zetten regelmatig een aanbesteding uit van **€300.000** voor een propriëtaire documentgeneratieoplossing. Wordt diezelfde gemeente gevraagd **€50.000** bij te dragen aan een open source alternatief, dan is het antwoord nogal eens: "Maar dat is toch gratis?"
+
+Open source betekent vrij te gebruiken. Het betekent niet: zonder onderhoudskosten, zonder governance, zonder architecten. Wie denkt dat open source letterlijk gratis is, betaalt uiteindelijk de hoofdprijs — in de vorm van een product dat niet meer onderhouden wordt.
+:::
+
 Alle vier de modellen lopen vroeg of laat vast op dezelfde dynamiek: **wie voordeel trekt uit het platform draagt niet automatisch bij aan de instandhouding ervan.**
 
 Als voldoende organisaties het platform gebruiken zonder bij te dragen — via betaling of bijdragen in natura — sterft het platform. Niet direct, maar geleidelijk: patches blijven uit, architectuur veroudert, de community krimpt.
