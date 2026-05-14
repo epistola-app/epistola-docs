@@ -1,5 +1,6 @@
 ---
-import tarieven from '../data/licentie-tarieven.json';
+// Pure simulation logic + types live in src/lib/financiele-simulatie.ts
+// (tested in financiele-simulatie.test.ts). This component only handles UI.
 ---
 
 <div class="financiele-simulatie">
@@ -142,38 +143,23 @@ import tarieven from '../data/licentie-tarieven.json';
     <div class="sim-milestones" id="sim-milestones"></div>
   </div>
 
-  <script id="sim-tarieven-data" type="application/json" set:html={JSON.stringify(tarieven)} />
-
   <script>
-    type Schaal = { id: string; tarief: number };
-    type Tarieven = {
-      schalen: Schaal[];
-      schaalvoordeel: { vanaf: number; korting: number }[];
-    };
+    import tarieven from '../data/licentie-tarieven.json';
+    import {
+      simulate,
+      berekenMijlpalen,
+      type SimulationInputs,
+      type Tarieven,
+      type YearRow,
+    } from '../lib/financiele-simulatie';
 
-    const dataEl = document.getElementById('sim-tarieven-data');
-    const tarieven: Tarieven = JSON.parse(dataEl!.textContent!);
-
-    const CERT_PER_SUPPLIER_PER_JAAR = 1000;
+    const tarievenTyped = tarieven as Tarieven;
 
     const fmt = new Intl.NumberFormat('nl-NL', {
       style: 'currency',
       currency: 'EUR',
       maximumFractionDigits: 0,
     });
-
-    function tariefVoorSchaal(id: string): number {
-      const match = tarieven.schalen.find((s) => s.id === id);
-      return match ? match.tarief : 0;
-    }
-
-    function schaalKorting(gemeenten: number): number {
-      let korting = 0;
-      for (const drempel of tarieven.schaalvoordeel) {
-        if (gemeenten >= drempel.vanaf) korting = drempel.korting;
-      }
-      return korting;
-    }
 
     function bind(id: string, valId: string | null = null, decimals = 0) {
       const el = document.getElementById(id) as HTMLInputElement;
@@ -199,101 +185,33 @@ import tarieven from '../data/licentie-tarieven.json';
     const elFeatures = bind('sim-features', 'sim-features-val');
     const elInvestering = bind('sim-investering', 'sim-investering-val');
 
-    type Row = {
-      jaar: number;
-      gemeenten: number;
-      fte: number;
-      licentieInkomsten: number;
-      perDocInkomsten: number;
-      certInkomsten: number;
-      totaalInkomsten: number;
-      bvKosten: number;
-      bvExterneOmzet: number;
-      bvOnderhoud: number;
-      featureBudget: number;
-      adminKosten: number;
-      stichtingKosten: number;
-      stichtingResultaat: number;
-      bvResultaat: number;
-      cumulatief: number;
-    };
-
-    function simulate(): { rows: Row[]; investering: number } {
-      const startGemeenten = parseInt(elStartGemeenten.value, 10);
-      const groei = parseInt(elGroei.value, 10);
-      const schaalId = elSchaal.value;
-      const suppliers = parseInt(elSuppliers.value, 10);
-      const perDocBudget = parseInt(elPerDoc.value, 10) * 1000;
-      const fteStart = parseInt(elFteStart.value, 10);
-      const fteGroei = parseInt(elFteGroei.value, 10);
-      const fteKosten = parseInt(elFteKosten.value, 10) * 1000;
-      const overhead = parseFloat(elOverhead.value);
-      const bvOmzetPerGemeente = parseInt(elBvOmzetGem.value, 10) * 1000;
-      const admin = parseInt(elAdmin.value, 10) * 1000;
-      const features = parseInt(elFeatures.value, 10) * 1000;
-      const investering = parseInt(elInvestering.value, 10) * 1000;
-      const tarief = tariefVoorSchaal(schaalId);
-
-      const rows: Row[] = [];
-      let cumulatief = investering;
-
-      for (let jaar = 1; jaar <= 5; jaar++) {
-        const gemeenten = startGemeenten + (jaar - 1) * groei;
-        const fte = Math.min(fteStart + (jaar - 1) * fteGroei, 20);
-        const korting = schaalKorting(gemeenten);
-
-        const licentieInkomsten = Math.round(gemeenten * tarief * (1 - korting));
-        const perDocInkomsten = perDocBudget;
-        const certInkomsten = suppliers * CERT_PER_SUPPLIER_PER_JAAR;
-        const totaalInkomsten = licentieInkomsten + perDocInkomsten + certInkomsten;
-
-        const bvKosten = Math.round(fte * fteKosten * overhead);
-        const bvExterneOmzet = gemeenten * bvOmzetPerGemeente;
-        const featureBudget = features;
-        // BV werkt cost-plus: stichting dekt het deel dat BV niet zelf via
-        // gemeenten-diensten of feature-opdrachten kan financieren.
-        const bvOnderhoud = Math.max(0, bvKosten - bvExterneOmzet - featureBudget);
-        const adminKosten = admin;
-        const stichtingKosten = bvOnderhoud + featureBudget + adminKosten;
-        const stichtingResultaat = totaalInkomsten - stichtingKosten;
-        // BV-resultaat ≈ 0 onder cost-plus; positief als externe + features
-        // groter zijn dan BV-kosten (overschot vloeit terug naar gemeenschap)
-        const bvResultaat = bvOnderhoud + bvExterneOmzet + featureBudget - bvKosten;
-
-        cumulatief += stichtingResultaat;
-
-        rows.push({
-          jaar,
-          gemeenten,
-          fte,
-          licentieInkomsten,
-          perDocInkomsten,
-          certInkomsten,
-          totaalInkomsten,
-          bvKosten,
-          bvExterneOmzet,
-          bvOnderhoud,
-          featureBudget,
-          adminKosten,
-          stichtingKosten,
-          stichtingResultaat,
-          bvResultaat,
-          cumulatief,
-        });
-      }
-
-      return { rows, investering };
+    function getInputs(): SimulationInputs {
+      return {
+        startGemeenten: parseInt(elStartGemeenten.value, 10),
+        groei: parseInt(elGroei.value, 10),
+        schaalId: elSchaal.value,
+        suppliers: parseInt(elSuppliers.value, 10),
+        perDocBudget: parseInt(elPerDoc.value, 10) * 1000,
+        fteStart: parseInt(elFteStart.value, 10),
+        fteGroei: parseInt(elFteGroei.value, 10),
+        fteKosten: parseInt(elFteKosten.value, 10) * 1000,
+        overhead: parseFloat(elOverhead.value),
+        bvOmzetPerGemeente: parseInt(elBvOmzetGem.value, 10) * 1000,
+        admin: parseInt(elAdmin.value, 10) * 1000,
+        features: parseInt(elFeatures.value, 10) * 1000,
+        investering: parseInt(elInvestering.value, 10) * 1000,
+      };
     }
 
     function render() {
-      const { rows, investering } = simulate();
-      renderStichting(rows);
-      renderBV(rows);
-      renderChart(rows);
-      renderMilestones(rows, investering);
+      const result = simulate(getInputs(), tarievenTyped);
+      renderStichting(result.rows);
+      renderBV(result.rows);
+      renderChart(result.rows);
+      renderMilestones(result);
     }
 
-    function renderStichting(rows: Row[]) {
+    function renderStichting(rows: YearRow[]) {
       const tbody = document.getElementById('sim-stichting-tbody')!;
       tbody.innerHTML = rows
         .map(
@@ -312,7 +230,7 @@ import tarieven from '../data/licentie-tarieven.json';
         .join('');
     }
 
-    function renderBV(rows: Row[]) {
+    function renderBV(rows: YearRow[]) {
       const tbody = document.getElementById('sim-bv-tbody')!;
       tbody.innerHTML = rows
         .map(
@@ -330,7 +248,7 @@ import tarieven from '../data/licentie-tarieven.json';
         .join('');
     }
 
-    function renderChart(rows: Row[]) {
+    function renderChart(rows: YearRow[]) {
       const max = Math.max(...rows.map((r) => Math.max(r.totaalInkomsten, r.stichtingKosten)));
       const chart = document.getElementById('sim-chart')!;
       const bar = (cls: string, val: number, label: string) => {
@@ -352,20 +270,17 @@ import tarieven from '../data/licentie-tarieven.json';
         .join('');
     }
 
-    function renderMilestones(rows: Row[], investering: number) {
-      const breakEven = rows.find((r) => r.stichtingResultaat >= 0);
-      const cumulatiefPositief = rows.find((r) => r.cumulatief - investering >= 0);
-      const overwinst = rows.find((r) => r.cumulatief - investering >= 100_000);
-
+    function renderMilestones(result: { rows: YearRow[]; investering: number }) {
+      const mp = berekenMijlpalen(result);
       const items = [
-        breakEven
-          ? `<li>✅ <strong>Operationele break-even</strong> in jaar ${breakEven.jaar} (inkomsten dekken kosten)</li>`
+        mp.operationeleBreakEvenJaar !== null
+          ? `<li>✅ <strong>Operationele break-even</strong> in jaar ${mp.operationeleBreakEvenJaar} (inkomsten dekken kosten)</li>`
           : `<li>⚠️ <strong>Geen operationele break-even</strong> binnen 5 jaar bij deze aannames</li>`,
-        cumulatiefPositief
-          ? `<li>✅ <strong>Investering terugverdiend</strong> in jaar ${cumulatiefPositief.jaar}</li>`
+        mp.investeringTerugverdiendJaar !== null
+          ? `<li>✅ <strong>Investering terugverdiend</strong> in jaar ${mp.investeringTerugverdiendJaar}</li>`
           : `<li>⚠️ <strong>Investering niet terugverdiend</strong> binnen 5 jaar</li>`,
-        overwinst
-          ? `<li>✅ <strong>Overwinst beschikbaar</strong> vanaf jaar ${overwinst.jaar} (cumulatief > investering + €100k buffer)</li>`
+        mp.overwinstJaar !== null
+          ? `<li>✅ <strong>Overwinst beschikbaar</strong> vanaf jaar ${mp.overwinstJaar} (cumulatief > investering + €100k buffer)</li>`
           : `<li>⏸️ <strong>Nog geen overwinst</strong> om te verdelen binnen 5 jaar</li>`,
       ];
 
