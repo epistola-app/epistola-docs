@@ -82,6 +82,12 @@ import tarieven from '../data/licentie-tarieven.json';
       </div>
 
       <div class="input-group">
+        <label for="sim-features"><strong>Budget voor nieuwe features (k€/jaar):</strong> <span id="sim-features-val">0</span></label>
+        <input type="range" id="sim-features" min="0" max="500" value="0" step="10" />
+        <small>Opdrachten voor productevolutie die de stichting uitzet — komt bovenop het onderhoudsbudget en is een extra BV-inkomstenbron.</small>
+      </div>
+
+      <div class="input-group">
         <label for="sim-investering"><strong>Initiële investering (k€):</strong> <span id="sim-investering-val">100</span></label>
         <input type="range" id="sim-investering" min="0" max="500" value="100" step="10" />
       </div>
@@ -98,6 +104,7 @@ import tarieven from '../data/licentie-tarieven.json';
             <th>Gemeenten</th>
             <th>Inkomsten</th>
             <th>BV-onderhoud</th>
+            <th>Features</th>
             <th>Admin</th>
             <th>Resultaat</th>
             <th>Cumulatief</th>
@@ -115,7 +122,8 @@ import tarieven from '../data/licentie-tarieven.json';
             <th>Jaar</th>
             <th>FTE</th>
             <th>Externe omzet</th>
-            <th>Stichting-onderhoud</th>
+            <th>Stichting onderhoud</th>
+            <th>Stichting features</th>
             <th>FTE-kosten</th>
             <th>Resultaat</th>
           </tr>
@@ -188,6 +196,7 @@ import tarieven from '../data/licentie-tarieven.json';
     const elOverhead = bind('sim-overhead', 'sim-overhead-val', 2);
     const elBvOmzetGem = bind('sim-bvOmzetGem', 'sim-bvOmzetGem-val');
     const elAdmin = bind('sim-admin', 'sim-admin-val');
+    const elFeatures = bind('sim-features', 'sim-features-val');
     const elInvestering = bind('sim-investering', 'sim-investering-val');
 
     type Row = {
@@ -201,6 +210,7 @@ import tarieven from '../data/licentie-tarieven.json';
       bvKosten: number;
       bvExterneOmzet: number;
       bvOnderhoud: number;
+      featureBudget: number;
       adminKosten: number;
       stichtingKosten: number;
       stichtingResultaat: number;
@@ -220,6 +230,7 @@ import tarieven from '../data/licentie-tarieven.json';
       const overhead = parseFloat(elOverhead.value);
       const bvOmzetPerGemeente = parseInt(elBvOmzetGem.value, 10) * 1000;
       const admin = parseInt(elAdmin.value, 10) * 1000;
+      const features = parseInt(elFeatures.value, 10) * 1000;
       const investering = parseInt(elInvestering.value, 10) * 1000;
       const tarief = tariefVoorSchaal(schaalId);
 
@@ -238,16 +249,16 @@ import tarieven from '../data/licentie-tarieven.json';
 
         const bvKosten = Math.round(fte * fteKosten * overhead);
         const bvExterneOmzet = gemeenten * bvOmzetPerGemeente;
-        // BV werkt cost-plus: stichting dekt alleen het deel dat BV niet zelf
-        // via gemeenten-diensten financiert. Als BV genoeg uit externe omzet
-        // haalt, is geen onderhoudsbudget meer nodig (ondergrens 0).
-        const bvOnderhoud = Math.max(0, bvKosten - bvExterneOmzet);
+        const featureBudget = features;
+        // BV werkt cost-plus: stichting dekt het deel dat BV niet zelf via
+        // gemeenten-diensten of feature-opdrachten kan financieren.
+        const bvOnderhoud = Math.max(0, bvKosten - bvExterneOmzet - featureBudget);
         const adminKosten = admin;
-        const stichtingKosten = bvOnderhoud + adminKosten;
+        const stichtingKosten = bvOnderhoud + featureBudget + adminKosten;
         const stichtingResultaat = totaalInkomsten - stichtingKosten;
-        // BV-resultaat is normaal ≈ 0 onder cost-plus; positief als externe
-        // omzet groter is dan BV-kosten (overschot vloeit terug naar gemeenschap)
-        const bvResultaat = bvOnderhoud + bvExterneOmzet - bvKosten;
+        // BV-resultaat ≈ 0 onder cost-plus; positief als externe + features
+        // groter zijn dan BV-kosten (overschot vloeit terug naar gemeenschap)
+        const bvResultaat = bvOnderhoud + bvExterneOmzet + featureBudget - bvKosten;
 
         cumulatief += stichtingResultaat;
 
@@ -262,6 +273,7 @@ import tarieven from '../data/licentie-tarieven.json';
           bvKosten,
           bvExterneOmzet,
           bvOnderhoud,
+          featureBudget,
           adminKosten,
           stichtingKosten,
           stichtingResultaat,
@@ -291,6 +303,7 @@ import tarieven from '../data/licentie-tarieven.json';
           <td>${r.gemeenten}</td>
           <td>${fmt.format(r.totaalInkomsten)}</td>
           <td>${fmt.format(r.bvOnderhoud)}</td>
+          <td>${fmt.format(r.featureBudget)}</td>
           <td>${fmt.format(r.adminKosten)}</td>
           <td class="${r.stichtingResultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.stichtingResultaat)}</td>
           <td class="${r.cumulatief >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.cumulatief)}</td>
@@ -309,6 +322,7 @@ import tarieven from '../data/licentie-tarieven.json';
           <td>${r.fte}</td>
           <td>${fmt.format(r.bvExterneOmzet)}</td>
           <td>${fmt.format(r.bvOnderhoud)}</td>
+          <td>${fmt.format(r.featureBudget)}</td>
           <td>${fmt.format(r.bvKosten)}</td>
           <td class="${r.bvResultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.bvResultaat)}</td>
         </tr>`
