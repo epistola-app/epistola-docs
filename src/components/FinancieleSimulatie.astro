@@ -238,11 +238,14 @@ import tarieven from '../data/licentie-tarieven.json';
 
         const bvKosten = Math.round(fte * fteKosten * overhead);
         const bvExterneOmzet = Math.min(gemeenten * bvOmzetPerGemeente, bvKosten);
-        const bvOnderhoud = bvKosten - bvExterneOmzet; // cost-plus: stichting dekt het restant
+        // BV werkt cost-plus, dus stichting hoeft alleen het deel te dekken
+        // dat BV niet uit eigen dienstverlening kan financieren
+        const bvOnderhoud = bvKosten - bvExterneOmzet;
         const adminKosten = admin;
         const stichtingKosten = bvOnderhoud + adminKosten;
         const stichtingResultaat = totaalInkomsten - stichtingKosten;
-        const bvResultaat = bvExterneOmzet + bvOnderhoud - bvKosten; // ≈ 0 onder cost-plus
+        // BV cost-plus: totaal inkomsten ≈ totaal kosten
+        const bvResultaat = bvOnderhoud + bvExterneOmzet - bvKosten;
 
         cumulatief += stichtingResultaat;
 
