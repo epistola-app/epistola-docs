@@ -15,11 +15,21 @@ Het meest zuivere open source model: geen licenties, geen commercieel eigenaar. 
 
 Dit model werkt uitstekend voor grote projecten met een brede gebruikersbasis. Linux wordt onderhouden door duizenden engineers die in dienst zijn van bedrijven die er commercieel belang bij hebben. PostgreSQL wordt gefinancierd door tientallen organisaties wereldwijd. De community is groot genoeg dat uitval van één bijdrager wordt opgevangen door anderen.
 
+Een belangrijk patroon bij die succesvolle projecten: veel ervan zijn begonnen als interne tools bij grote technologiebedrijven. Google had Kubernetes sowieso nodig voor zijn eigen infrastructuur. Meta had React sowieso gebouwd voor zijn eigen frontend. Ze publiceerden de code niet als liefdadigheid — het was gewoon geen core-business, en als concurrenten dezelfde tool gebruiken, verlaagt dat de gedeelde onderhoudslasten en vergroot het de talentenpool. Die dynamiek ontbreekt bij een niche platform voor Nederlandse gemeenten: er is geen grote organisatie die dit platform sowieso had gebouwd en publiceren als bijproduct.
+
 **Wanneer werkt dit niet?**
 
 Voor een niche platform voor 300+ Nederlandse gemeenten is die kritische massa er niet automatisch. De gebruikersgroep is klein. Bijdragen zijn ongelijkmatig verdeeld — een handvol actieve bijdragers draagt het voor de rest. En bijdragen in natura zijn moeilijk te plannen: ze verdrogen als organisaties bezuinigen, van prioriteit wisselen, of sleutelfiguren vertrekken.
 
 Een platform dat afhankelijk is van vrijwillige bijdragen kan er niet op rekenen dat die bijdragen er zijn op het moment dat ze nodig zijn. Dat is een structureel continuïteitsrisico voor software waarvan gemeenten dagelijks afhankelijk zijn.
+
+**Een variant: van product naar diensten**
+
+Soms wordt open source beschreven als een beweging van product naar diensten: je verdient niet aan de software zelf, maar aan de expertise, support en implementatie eromheen. Dat model klinkt aantrekkelijk — je geeft de code weg, maar de kennis en service zijn de echte waarde.
+
+De structurele zwakte: een concurrent die jouw open source code gebruikt maar niet bijdraagt aan het onderhoud, kan diezelfde diensten goedkoper aanbieden. Ze dragen de infrastructuurlasten niet, maar kunnen wel de vruchten plukken. Naarmate een platform succesvoller wordt, groeit de kans dat precies dit gebeurt — en dan draai je als enige op voor de kosten van een platform dat anderen ook exploiteren.
+
+Het dienstenmodel werkt het best als aanvulling op een duurzame onderhoudsfinanciering, niet als vervanging ervan.
 
 ---
 
