@@ -182,19 +182,22 @@ import tarieven from '../data/licentie-tarieven.json';
     function renderChart(rows: ReturnType<typeof simulate>['rows']) {
       const max = Math.max(...rows.map((r) => Math.max(r.inkomsten, r.kosten)));
       const chart = document.getElementById('sim-chart')!;
+      const bar = (cls: string, val: number, label: string) => {
+        if (val <= 0) return '';
+        const pct = max > 0 ? (val / max) * 100 : 0;
+        return `<div class="bar ${cls}" style="height: ${pct}%" title="${label}: ${fmt.format(val)}"></div>`;
+      };
       chart.innerHTML = rows
-        .map((r) => {
-          const inkH = max > 0 ? (r.inkomsten / max) * 100 : 0;
-          const kosH = max > 0 ? (r.kosten / max) * 100 : 0;
-          return `
+        .map(
+          (r) => `
             <div class="bar-group" aria-label="Jaar ${r.jaar}">
               <div class="bars">
-                <div class="bar inkomsten" style="height: ${inkH}%" title="Inkomsten: ${fmt.format(r.inkomsten)}"></div>
-                <div class="bar kosten" style="height: ${kosH}%" title="Kosten: ${fmt.format(r.kosten)}"></div>
+                ${bar('inkomsten', r.inkomsten, 'Inkomsten')}
+                ${bar('kosten', r.kosten, 'Kosten')}
               </div>
               <div class="bar-label">J${r.jaar}</div>
-            </div>`;
-        })
+            </div>`
+        )
         .join('');
     }
 
@@ -330,7 +333,8 @@ import tarieven from '../data/licentie-tarieven.json';
 
   .bar {
     width: 16px;
-    min-height: 2px;
+    min-height: 6px;
+    border-radius: 0;
   }
 
   .bar.inkomsten {
