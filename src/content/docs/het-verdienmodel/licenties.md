@@ -29,6 +29,20 @@ Met andere woorden: de maximale "lock-in" is één jaar — en in de praktijk no
 
 Het licentiemodel creëert dus **geen duurzame afhankelijkheid**. Het creëert een korte aanloopperiode met kwaliteitsregie, gevolgd door volledige openheid.
 
+[→ Uitgebreide uitleg van hoe de BSL technisch en juridisch werkt](/referentie/bsl-licentie)
+
+---
+
+## Wat voorkomt dat de licentiekosten ineens verdubbelen?
+
+Een terechte vraag: wat houdt de stichting tegen om volgend jaar de prijzen fors te verhogen?
+
+Het korte antwoord: de eigendomsstructuur. De stichting heeft geen aandeelhouders die baat hebben bij hogere prijzen. Bestuurders en stewards profiteren niet van hogere licentie-inkomsten. En prijswijzigingen vereisen een besluitvormingsproces waarbij de stewards — onafhankelijke toezichthouders zonder commercieel belang — instemmingsrecht hebben.
+
+Bovendien geldt: naarmate meer gemeenten meedoen, **dalen** de tarieven (zie schaalvoordelen hieronder) — het model is structureel gericht op toegankelijkheid, niet op maximalisering.
+
+[→ Hoe steward ownership prijsmisbruik structureel voorkomt](/verantwoord-beheer/steward-ownership#bescherming-tegen-prijsverhogingen)
+
 ---
 
 ## Het licentiemodel: van BSL naar open source

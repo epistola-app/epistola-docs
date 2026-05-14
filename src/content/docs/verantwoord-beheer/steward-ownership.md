@@ -73,6 +73,29 @@ Het verschil met "we beloven het" is juridisch en structureel:
 
 ---
 
+## Bescherming tegen prijsverhogingen
+
+Een legitieme zorg bij elk licentiemodel: wat voorkomt dat de licentiekosten volgend jaar verdubbelen?
+
+In de software-industrie zijn dit soort "rug pulls" geen hypothetisch risico. Unity verhoogde in 2023 plotseling de runtime fees voor elke game-installatie — inclusief al gepubliceerde games. Elastic en HashiCorp stapten over naar restrictievere licenties nadat ze jarenlang groei hadden opgebouwd op hun open source reputatie. In elk geval: organisaties die al geïnvesteerd hadden in het platform, werden geconfronteerd met nieuwe regels die ze niet hadden voorzien.
+
+Steward ownership voorkomt dit structureel — niet via een belofte, maar via de eigendomsstructuur.
+
+| Waarborg | Hoe geborgd? |
+|---|---|
+| Stichting kan niet worden overgenomen | Geen aandeelhouders; statuten verbieden overname en privatisering |
+| Bestuurders profiteren niet van hogere prijzen | Scheiding van financieel belang en zeggenschap |
+| Prijswijzigingen vereisen stewardinstemming | Zware besluitvorming; stewards hebben geen commercieel belang |
+| Schaalvoordelen zijn verankerd | Naarmate meer gemeenten meedoen, dalen de prijzen — niet stijgen |
+| BSL change date is onherroepelijk | Kan niet worden teruggedraaid; code wordt altijd Apache 2.0 na 1 jaar |
+| IP gaat naar publiek domein bij ontbinding | Geen scenario waarbij code achter slot verdwijnt |
+
+De kern: de stichting heeft **geen aandeelhouders die winst willen maximaliseren**. Hogere licentieprijzen leveren de stichting niets op buiten wat nodig is voor haar missie. Er is geen commerciële prikkel om te verhogen — en structurele barrières om dat te kunnen doen zonder brede instemming.
+
+[→ Meer over hoe de BSL werkt en wat er gebeurt bij ontbinding](/referentie/bsl-licentie)
+
+---
+
 ## Stewards: de wakers van de missie
 
 Stewards zijn onafhankelijke personen die toezien op de missie en de governance. Ze hebben **geen financieel belang** in commerciële leveranciers en kunnen niet profiteren van de waardeontwikkeling van het platform.
