@@ -237,14 +237,16 @@ import tarieven from '../data/licentie-tarieven.json';
         const totaalInkomsten = licentieInkomsten + perDocInkomsten + certInkomsten;
 
         const bvKosten = Math.round(fte * fteKosten * overhead);
-        const bvExterneOmzet = Math.min(gemeenten * bvOmzetPerGemeente, bvKosten);
-        // BV werkt cost-plus, dus stichting hoeft alleen het deel te dekken
-        // dat BV niet uit eigen dienstverlening kan financieren
-        const bvOnderhoud = bvKosten - bvExterneOmzet;
+        const bvExterneOmzet = gemeenten * bvOmzetPerGemeente;
+        // BV werkt cost-plus: stichting dekt alleen het deel dat BV niet zelf
+        // via gemeenten-diensten financiert. Als BV genoeg uit externe omzet
+        // haalt, is geen onderhoudsbudget meer nodig (ondergrens 0).
+        const bvOnderhoud = Math.max(0, bvKosten - bvExterneOmzet);
         const adminKosten = admin;
         const stichtingKosten = bvOnderhoud + adminKosten;
         const stichtingResultaat = totaalInkomsten - stichtingKosten;
-        // BV cost-plus: totaal inkomsten ≈ totaal kosten
+        // BV-resultaat is normaal ≈ 0 onder cost-plus; positief als externe
+        // omzet groter is dan BV-kosten (overschot vloeit terug naar gemeenschap)
         const bvResultaat = bvOnderhoud + bvExterneOmzet - bvKosten;
 
         cumulatief += stichtingResultaat;
