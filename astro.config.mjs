@@ -42,39 +42,35 @@ export default defineConfig({
           ],
           sidebar: [
               {
-                  label: 'Introductie',
+                  label: 'Open Source',
                   collapsed: false,
                   items: [
-                      { label: 'Het Probleem', link: '/introductie/het-probleem' },
-                      { label: 'De Oplossingen', link: '/introductie/de-oplossingen' },
-                      { label: 'Snelstart per Doelgroep', link: '/introductie/snelstart' },
+                      { label: 'Financiële Uitdagingen', link: '/open-source/financiele-uitdagingen' },
+                      { label: 'Financieringsmodellen', link: '/open-source/financieringsmodellen' },
+                      { label: 'Afnemersperspectief', link: '/open-source/afnemersperspectief' },
                   ],
               },
               {
-                  label: 'Het Verdienmodel',
+                  label: 'Organisatiestructuur',
                   collapsed: false,
                   items: [
-                      { label: 'Overzicht', link: '/het-verdienmodel/overzicht' },
-                      { label: 'Licenties', link: '/het-verdienmodel/licenties' },
-                      { label: 'SaaS Hosting', link: '/het-verdienmodel/saas-hosting' },
-                      { label: 'SLA & Support', link: '/het-verdienmodel/sla-en-support' },
-                      { label: 'Diensten', link: '/het-verdienmodel/diensten' },
-                      { label: 'Continuïteitsbijdrage', link: '/het-verdienmodel/continuiteits-bijdrage' },
-                  ],
-              },
-              {
-                  label: 'Verantwoord Beheer',
-                  collapsed: false,
-                  items: [
-                      { label: 'Organisatievormen Vergeleken', link: '/verantwoord-beheer/organisatievormen' },
-                      { label: 'Steward Ownership', link: '/verantwoord-beheer/steward-ownership' },
-                      { label: 'De BV en de Stichting', link: '/verantwoord-beheer/de-bv-en-de-stichting' },
-                      { label: 'Structuur & Rollen', link: '/verantwoord-beheer/structuur' },
+                      { label: 'For-Profit', link: '/organisatiestructuur/for-profit' },
+                      { label: 'Missiegedreven & Steward Ownership', link: '/organisatiestructuur/steward-ownership' },
+                      { label: 'Cost-Recovery Model', link: '/organisatiestructuur/cost-recovery' },
                       {
                           label: 'Governance',
                           collapsed: true,
-                          autogenerate: { directory: 'verantwoord-beheer/governance' },
+                          autogenerate: { directory: 'organisatiestructuur/governance' },
                       },
+                  ],
+              },
+              {
+                  label: 'Epistola',
+                  collapsed: false,
+                  items: [
+                      { label: 'Organisatiestructuur', link: '/epistola/organisatiestructuur' },
+                      { label: 'Model 1: Open Source + Diensten', link: '/epistola/model-1-open-source' },
+                      { label: 'Model 2: BSL + Ecosysteem', link: '/epistola/model-2-bsl-licentie' },
                   ],
               },
               {

@@ -1,5 +1,5 @@
 ---
-title: Het Probleem
+title: Financiële Uitdagingen van Open Source
 description: Waarom open source platformsoftware voor de publieke sector betrouwbare inkomsten nodig heeft
 ---
 
@@ -47,4 +47,4 @@ De software kan uitstekend zijn. De architectuur kan solide zijn. Het probleem i
 
 Dat mechanisme moet ontworpen worden. En het ontwerp heeft consequenties voor eigenaarschap, governance en de vraag of gebruikers uiteindelijk toch afhankelijk worden van één partij.
 
-[→ Lees over de mogelijke oplossingen](/introductie/de-oplossingen)
+[→ Welke financieringsmodellen bestaan er?](/open-source/financieringsmodellen)

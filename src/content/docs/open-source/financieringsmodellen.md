@@ -1,5 +1,5 @@
 ---
-title: De Oplossingen
+title: Financieringsmodellen
 description: Drie manieren om een open source platform te financieren — en wat de eerlijke afweging is
 ---
 
@@ -85,4 +85,6 @@ Het eerlijke antwoord: voor een platform met een kleine maar afhankelijke gebrui
 
 Dat wil niet zeggen dat licenties voor iedereen verplicht zijn. Organisaties die niet in de positie zijn om een licentie te betalen maar wel gebruik maken van het platform, worden gevraagd op een andere manier bij te dragen — via code, documentatie of directe ondersteuning. De bijdrage is wat telt, niet de vorm.
 
-[→ Meer over hoe de financiering wordt ingezet en de missie geborgd](/verantwoord-beheer/organisatievormen)
+[→ Welke belangen spelen er bij de verschillende betrokkenen?](/open-source/afnemersperspectief)
+
+[→ Hoe zorg je dat de financiering eerlijk ingezet wordt?](/organisatiestructuur/steward-ownership)
