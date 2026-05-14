@@ -103,6 +103,42 @@ timeline
 
 ---
 
+## Kan de licentie nog veranderen?
+
+Een terechte zorg, gegeven de precedenten van HashiCorp (Terraform), Elastic en MongoDB die hun licentie unilateraal verzwaarden. In het Epistola-model is dat scenario **structureel onmogelijk gemaakt** — niet door beloften, maar door waarborgen die in elkaar grijpen.
+
+### Vier waarborgen, samen sluitend
+
+1. **Statutair vastgelegd** — De statuten leggen vast dat het intellectueel eigendom bij de stichting berust en dat wijziging van de licentie als zwaar besluit geldt (Artikel 6). Zware besluiten vereisen een verzwaarde meerderheid en toetsing aan het doel van de stichting (Artikel 10).
+2. **Stewards hebben instemmingsrecht** — De stewards zijn extern benoemde toezichthouders. Een licentiewijziging vereist hun expliciete instemming. Stewards zijn statutair verplicht het doel van de stichting voorop te stellen, niet financiële belangen.
+3. **De change date werkt onafhankelijk van besluiten** — Elke versie ouder dan één jaar is al onherroepelijk Apache 2.0. Een hypothetische licentiewijziging op de nieuwste versie verandert daar niets aan: de bestaande, vrijgegeven code blijft vrij en is forkbaar.
+4. **Bij ontbinding wordt het IP geborgd voor een gelijksoortig publiek doel** — Artikel 11 verbiedt dat het IP bij ontbinding overgaat naar een commerciële partij of bestuurders. De publieke missie moet worden voortgezet.
+
+### Het HashiCorp-precedent — waarom dat hier niet kan
+
+HashiCorp wijzigde in 2023 de licentie van Terraform unilateraal van MPL naar BSL. Dat kon omdat HashiCorp een beursgenoteerd for-profit-bedrijf was met het IP volledig in eigen handen, en de board kon besluiten vanuit aandeelhoudersbelang.
+
+| Voorwaarde voor unilaterale wijziging | HashiCorp | Stichting Epistola |
+|---|---|---|
+| Rechtsvorm | For-profit, beursgenoteerd | Stichting zonder winstoogmerk |
+| IP-eigendom | Bij bedrijf | Statutair bij stichting |
+| Besluitvormingsmacht | Board autonoom | Bestuur + steward-instemming + doel-toetsing |
+| Externe druk | Aandeelhouders, exit-belang | Geen aandeelhouders, geen exit-druk |
+
+De community-fork (OpenTofu) was bij HashiCorp het noodscenario. In dit model is die fork-route nooit als enige redmiddel nodig, omdat de wijziging zelf structureel verhinderd wordt.
+
+### Het worst-case scenario
+
+Stel — onwaarschijnlijk — dat alle waarborgen tegelijkertijd falen en een licentiewijziging toch wordt doorgevoerd. Wat dan?
+
+1. Alle versies ouder dan één jaar staan al onder Apache 2.0 — vrij en forkbaar
+2. Een rechtsgang tegen statutair-strijdige besluitvorming staat open
+3. De community kan op basis van de vrijgegeven Apache 2.0-code direct een fork starten — precies wat OpenTofu na de HashiCorp-switch deed
+
+Met andere woorden: zelfs in een totaal falenscenario blijft er een werkend, vrij platform beschikbaar. De vraag "wat als jullie de licentie veranderen?" heeft geen scenario waarin afnemers met lege handen staan.
+
+---
+
 ## BSL versus andere licenties
 
 | | BSL | AGPL | SSPL | Propriëtair | Dual licensing |

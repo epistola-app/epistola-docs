@@ -110,6 +110,19 @@ Je betaalt **niet** rechtstreeks aan stichting. Supplier draagt licentiekosten a
 
 **Voor jou:** Je hebt altijd toegang, geen discontinuïteitsvrees.
 
+### En als jullie de licentie ineens veranderen — zoals HashiCorp deed?
+
+Dat scenario is **structureel onmogelijk** in dit model. Vier waarborgen die samen sluiten:
+
+1. **Statutair geborgd** — De licentie is in de statuten van de stichting vastgelegd; wijziging is een zwaar besluit
+2. **Stewards hebben instemmingsrecht** — Externe toezichthouders moeten instemmen; zij dienen het doel, geen aandeelhouder
+3. **Eerdere versies blijven vrij** — Alles dat ouder is dan één jaar staat al onder Apache 2.0 en kan worden geforked
+4. **Bij ontbinding gaat het IP naar een gelijksoortig publiek doel** — niet naar een commerciële partij
+
+HashiCorp kon Terraform's licentie unilateraal wijzigen omdat het een beursgenoteerd for-profit-bedrijf was met IP in eigen handen. Hier ligt het IP bij een stichting zonder winstoogmerk, met externe stewards en statutair vastgelegde voorwaarden. De condities die de HashiCorp-wijziging mogelijk maakten, zijn hier afwezig.
+
+[→ Volledige uitleg met statutaire artikelen](/referentie/bsl-licentie#kan-de-licentie-nog-veranderen)
+
 ---
 
 ## 6. Wie beheert de software en de architectuur?

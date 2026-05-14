@@ -123,7 +123,9 @@ Dit heeft drie consequenties voor het ecosysteem:
 
 **Voor de stichting:** de licentie financiert het beheer van het platform gedurende het jaar dat de code nog BSL is. De change date is statutair geborgd — de stichting kan dat niet terugdraaien zonder verzwaarde besluitvorming inclusief steward-instemmingsrecht.
 
-[→ Uitgebreide technische uitleg van de BSL](/referentie/bsl-licentie)
+**Voor andere organisaties:** niet-commercieel gebruik is volledig gratis. Commerciële organisaties kunnen het platform zonder licentie inzetten tot **200 documenten per dag** in productie; daarboven is een licentie nodig. Test- en acceptatieomgevingen zijn altijd onbeperkt vrij.
+
+[→ Uitgebreide technische uitleg van de BSL en de gratis gebruiksruimte](/referentie/bsl-licentie#de-additional-use-grant-gratis-gebruiksruimte)
 
 ---
 
