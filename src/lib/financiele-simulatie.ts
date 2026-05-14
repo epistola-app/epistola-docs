@@ -237,7 +237,10 @@ export function berekenBVJaar(
 
   const kostenPerFte = inputs.fteKosten * inputs.overhead;
   const beoogdeFte = kostenPerFte > 0 ? bvInkomsten / kostenPerFte : 0;
-  const fte = Math.min(Math.round(beoogdeFte), MAX_BV_FTE);
+  // Conservatieve staffing: floor naar beneden zodat BV nooit overcommitteert.
+  // Het FTE-afrondingsverschil blijft over als positieve buffer (overwinst die
+  // terugvloeit naar de gemeenschap). BV-resultaat is daarmee per definitie ≥ 0.
+  const fte = Math.min(Math.floor(beoogdeFte), MAX_BV_FTE);
   const bvKosten = Math.round(fte * kostenPerFte);
   const bvResultaat = bvInkomsten - bvKosten;
 

@@ -217,11 +217,11 @@ describe('berekenBVJaar — afhankelijkheid van stichting', () => {
     expect(r.bvInkomsten).toBe(300_000 + 30_000);
   });
 
-  it('FTE volgt uit beschikbaar budget / (fteKosten × overhead)', () => {
+  it('FTE volgt uit beschikbaar budget, conservatief naar beneden afgerond', () => {
     const stichtingResult = simulateStichting(stichtingDefaults, tarievenTyped);
     const r = berekenBVJaar(stichtingResult.rows[0], bvDefaults);
-    // Budget 330k / (100k × 1.3 = 130k) = 2.54 → 3
-    expect(r.fte).toBe(3);
+    // Budget 330k / (100k × 1.3 = 130k) = 2.54 → floor → 2
+    expect(r.fte).toBe(2);
   });
 
   it('FTE is gecapt op MAX_BV_FTE', () => {
@@ -268,14 +268,21 @@ describe('simulateBV — pipeline met stichting', () => {
     expect(bv.rows.length).toBe(stichting.rows.length);
   });
 
-  it('cost-plus benadering: bv resultaat is normaal beperkt', () => {
+  it('BV-resultaat is altijd niet-negatief (conservatieve staffing)', () => {
     const stichting = simulateStichting(stichtingDefaults, tarievenTyped);
     const bv = simulateBV(stichting, bvDefaults);
     for (const r of bv.rows) {
-      // Bij geen cap is afwijking < kostenPerFte (afrondingsverschil)
-      const kostenPerFte = bvDefaults.fteKosten * bvDefaults.overhead;
+      expect(r.bvResultaat).toBeGreaterThanOrEqual(0);
+    }
+  });
+
+  it('BV-resultaat blijft bij geen FTE-cap onder kostenPerFte (1 FTE-equivalent)', () => {
+    const stichting = simulateStichting(stichtingDefaults, tarievenTyped);
+    const bv = simulateBV(stichting, bvDefaults);
+    const kostenPerFte = bvDefaults.fteKosten * bvDefaults.overhead;
+    for (const r of bv.rows) {
       if (r.fte < MAX_BV_FTE) {
-        expect(Math.abs(r.bvResultaat)).toBeLessThan(kostenPerFte);
+        expect(r.bvResultaat).toBeLessThan(kostenPerFte);
       }
     }
   });
