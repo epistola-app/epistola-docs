@@ -1,0 +1,76 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+
+const { entry } = Astro.locals.starlightRoute;
+const isSplash = entry.data.template === 'splash';
+const commentsEnabled = !isSplash && entry.data.comments !== false;
+---
+
+<Default><slot /></Default>
+
+{commentsEnabled && (
+  <section class="comments-section" aria-labelledby="comments-heading">
+    <h2 id="comments-heading">Discussie</h2>
+    <p class="comments-intro">
+      Vragen, aanvullingen of tegenargumenten? Laat het achter. Reageren kan met
+      een GitHub-account; selecteer een passage door deze in je reactie te
+      citeren.
+    </p>
+    <script
+      is:inline
+      src="https://giscus.app/client.js"
+      data-repo="epistola-app/visie-op-opensource"
+      data-repo-id="R_kgDOQ-G15w"
+      data-category="Website Comments"
+      data-category-id="DIC_kwDOQ-G1584C9DD4"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="gruvbox_light"
+      data-lang="nl"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async
+    ></script>
+    <script is:inline>
+      (function syncGiscusTheme() {
+        function send(theme) {
+          const frame = document.querySelector('iframe.giscus-frame');
+          if (!frame) return;
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: theme } } },
+            'https://giscus.app'
+          );
+        }
+        function current() {
+          return document.documentElement.dataset.theme === 'dark' ? 'gruvbox_dark' : 'gruvbox_light';
+        }
+        new MutationObserver(() => send(current())).observe(
+          document.documentElement,
+          { attributes: true, attributeFilter: ['data-theme'] }
+        );
+      })();
+    </script>
+  </section>
+)}
+
+<style>
+  .comments-section {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+  }
+  .comments-section h2 {
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .comments-intro {
+    color: var(--sl-color-gray-2);
+    margin-bottom: 1.5rem;
+    font-size: 0.9375rem;
+  }
+</style>

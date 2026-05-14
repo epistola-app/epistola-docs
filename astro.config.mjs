@@ -30,6 +30,9 @@ export default defineConfig({
             src: './public/logo.svg',
             replacesTitle: false,
           },
+          components: {
+            Footer: './src/components/Footer.astro',
+          },
           defaultLocale: 'root',
           locales: {
             root: {
