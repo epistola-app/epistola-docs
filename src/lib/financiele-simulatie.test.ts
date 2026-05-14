@@ -21,7 +21,7 @@ const defaultInputs: SimulationInputs = {
   schaalId: 'mid',
   suppliers: 3,
   perDocBudget: 0,
-  onderhoudsbudget: 300_000,
+  onderhoudsbudget: 100_000,
   features: 100_000,
   admin: 25_000,
   fteKosten: 100_000,
@@ -81,7 +81,7 @@ describe('berekenJaar — stichting cashflow', () => {
   });
 
   it('onderhoudsbudget vloeit 1:1 uit input naar uitgave', () => {
-    expect(r.onderhoudsbudget).toBe(300_000);
+    expect(r.onderhoudsbudget).toBe(100_000);
   });
 
   it('feature-budget vloeit 1:1 uit input naar uitgave', () => {
@@ -89,11 +89,11 @@ describe('berekenJaar — stichting cashflow', () => {
   });
 
   it('stichting-kosten = onderhoud + features + admin', () => {
-    expect(r.stichtingKosten).toBe(300_000 + 100_000 + 25_000);
+    expect(r.stichtingKosten).toBe(100_000 + 100_000 + 25_000);
   });
 
   it('stichting-resultaat = inkomsten − kosten', () => {
-    expect(r.stichtingResultaat).toBe(25_500 - 425_000); // -399.500
+    expect(r.stichtingResultaat).toBe(25_500 - 225_000); // -199.500
   });
 });
 
@@ -102,17 +102,17 @@ describe('berekenJaar — BV-FTE afleiding', () => {
 
   it('FTE volgt uit beschikbaar budget / (kosten × overhead)', () => {
     const r = berekenJaar(1, defaultInputs, tarief, 0);
-    // Beschikbaar = onderhoud 300k + features 100k + (5 gem × 10k) = 450k
+    // Beschikbaar = onderhoud 100k + features 100k + (5 gem × 10k) = 250k
     // Kosten per FTE = 100k × 1.3 = 130k
-    // Beoogde FTE = 450 / 130 ≈ 3.46 → rond naar 3
-    expect(r.fte).toBe(3);
+    // Beoogde FTE = 250 / 130 ≈ 1.92 → rond naar 2
+    expect(r.fte).toBe(2);
   });
 
   it('FTE schaalt mee met aantal gemeenten (via externe omzet)', () => {
     const inputs: SimulationInputs = { ...defaultInputs, startGemeenten: 50 };
     const r = berekenJaar(1, inputs, tarief, 0);
-    // 300k + 100k + (50 × 10k) = 900k; / 130k ≈ 6.92 → 7
-    expect(r.fte).toBe(7);
+    // 100k + 100k + (50 × 10k) = 700k; / 130k ≈ 5.38 → 5
+    expect(r.fte).toBe(5);
   });
 
   it('FTE is gecapt op MAX_BV_FTE bij groot budget', () => {
@@ -144,7 +144,7 @@ describe('berekenJaar — BV cashflow (cost-plus)', () => {
 
   it('BV-inkomsten = onderhoud + features + externe omzet', () => {
     const r = berekenJaar(1, defaultInputs, tarief, 0);
-    expect(r.bvInkomsten).toBe(300_000 + 100_000 + 5 * 10_000);
+    expect(r.bvInkomsten).toBe(100_000 + 100_000 + 5 * 10_000);
   });
 
   it('externe omzet = gemeenten × omzet per gemeente', () => {
@@ -248,7 +248,7 @@ describe('edge cases', () => {
     const result = simulate(inputs, tarievenTyped);
     expect(result.rows[0].totaalInkomsten).toBe(0);
     // Stichting heeft nog steeds onderhouds- en feature-uitgaven
-    expect(result.rows[0].stichtingKosten).toBe(425_000);
+    expect(result.rows[0].stichtingKosten).toBe(225_000);
   });
 
   it('werkt met onbekende schaal-id (tarief = 0)', () => {
