@@ -96,6 +96,13 @@ export default defineConfig({
                               { label: 'Doorontwikkeling & Roadmap', link: '/meedoen/leveranciers/roadmap-en-doorontwikkeling' },
                           ],
                       },
+                      {
+                          label: 'Voor Investeerders',
+                          collapsed: true,
+                          items: [
+                              { label: 'Overzicht', link: '/meedoen/investeerders/overzicht' },
+                          ],
+                      },
                   ],
               },
               {
