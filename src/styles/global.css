@@ -4,19 +4,153 @@
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
 
+/* Self-hosted fonts (1:1 met de hoofdsite) */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/space-grotesk-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-latin.woff2") format("woff2");
+}
+
+/* Peach-paper design tokens (uit de hoofdsite) */
+:root {
+  --color-peach-paper-accent: hsl(15, 42%, 51%);
+  --color-peach-paper-accent-hover: #9d5741;
+  --color-peach-paper-border: #e6c2b0;
+  --color-peach-paper-border-strong: #d7ab97;
+  --color-peach-paper-heading: #4f2f2b;
+  --color-peach-paper-copy: #724e47;
+  --color-peach-paper-surface: rgba(255, 250, 246, 0.92);
+  --color-peach-paper-surface-soft: #fffcf8;
+  --color-peach-paper-surface-strong: #fff4ec;
+  --gradient-peach-paper: linear-gradient(138deg, #fff9f4 0%, #fff2ea 56%, #f8f4ff 100%);
+  --gradient-peach-paper-dark: linear-gradient(148deg, #1a1110 0%, #221821 54%, #2d2233 100%);
+}
+
+/* Starlight CSS-variabelen mappen op merktokens (light mode) */
+:root,
+:root[data-theme='light'] {
+  --sl-color-accent-low: #f5d9cb;
+  --sl-color-accent: #b7684e;
+  --sl-color-accent-high: #4f2f2b;
+  --sl-color-white: #4f2f2b;
+  --sl-color-gray-1: #5b3a35;
+  --sl-color-gray-2: #724e47;
+  --sl-color-gray-3: #8a675f;
+  --sl-color-gray-4: #b78f86;
+  --sl-color-gray-5: #d7ab97;
+  --sl-color-gray-6: #edd5c9;
+  --sl-color-gray-7: #faeee5;
+  --sl-color-black: #fffcf8;
+  --sl-color-bg: #fffcf8;
+  --sl-color-bg-nav: rgba(255, 250, 246, 0.92);
+  --sl-color-bg-sidebar: rgba(255, 250, 246, 0.85);
+  --sl-color-bg-inline-code: var(--color-peach-paper-surface-strong);
+
+  --sl-font: "Inter", system-ui, -apple-system, sans-serif;
+  --sl-font-system-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+
+  --sl-radius-sm: 0px;
+  --sl-radius-md: 0px;
+  --sl-radius-lg: 0px;
+}
+
+/* Dark mode mapping */
+:root[data-theme='dark'] {
+  --sl-color-accent-low: #5f4041;
+  --sl-color-accent: #f0b39a;
+  --sl-color-accent-high: #ffe7dd;
+  --sl-color-white: #ffe7dd;
+  --sl-color-gray-1: #ffe7dd;
+  --sl-color-gray-2: #e5c8c1;
+  --sl-color-gray-3: #c0a39c;
+  --sl-color-gray-4: #8a6a64;
+  --sl-color-gray-5: #5f4041;
+  --sl-color-gray-6: #3a2826;
+  --sl-color-gray-7: #2c1d1c;
+  --sl-color-black: #1a1110;
+  --sl-color-bg: #1a1110;
+  --sl-color-bg-nav: rgba(36, 25, 24, 0.92);
+  --sl-color-bg-sidebar: rgba(36, 25, 24, 0.85);
+  --sl-color-bg-inline-code: #2c1d1c;
+}
+
+/* Tailwind v4 @theme tokens — passend bij de Starlight remap */
 @theme {
-    /* Generated accent color palettes. */
-    --color-accent-200: #92d1fe;
-    --color-accent-600: #0073aa;
-    --color-accent-900: #003653;
-    --color-accent-950: #00273d;
-    /* Generated gray color palettes. */
-    --color-gray-100: #f3f7f9;
-    --color-gray-200: #e7eff2;
-    --color-gray-300: #bac4c8;
-    --color-gray-400: #7b8f96;
-    --color-gray-500: #495c62;
-    --color-gray-700: #2a3b41;
-    --color-gray-800: #182a2f;
-    --color-gray-900: #121a1c;
+  --color-accent-200: #f5d9cb;
+  --color-accent-600: #b7684e;
+  --color-accent-900: #4f2f2b;
+  --color-accent-950: #2c1d1c;
+  --color-gray-100: #faeee5;
+  --color-gray-200: #edd5c9;
+  --color-gray-300: #d7ab97;
+  --color-gray-400: #b78f86;
+  --color-gray-500: #724e47;
+  --color-gray-700: #4f2f2b;
+  --color-gray-800: #2c1d1c;
+  --color-gray-900: #1a1110;
+}
+
+@layer base {
+  body {
+    font-family: var(--sl-font);
+    background: var(--gradient-peach-paper);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  :root[data-theme='dark'] body {
+    background: var(--gradient-peach-paper-dark);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  /* Scherpe hoeken — match het editorial uiterlijk van de hoofdsite */
+  .sl-markdown-content code,
+  .sl-markdown-content pre,
+  .starlight-aside,
+  details,
+  table,
+  th,
+  td,
+  img,
+  button,
+  input,
+  textarea,
+  select,
+  kbd,
+  .card,
+  .action,
+  .sl-link-button,
+  .sl-badge,
+  [class*="card"],
+  [class*="button"] {
+    border-radius: 0 !important;
+  }
+
+  /* Hero-actie ('Lees de samenvatting'): editorial accent met merk-mono font */
+  .sl-link-button {
+    font-family: var(--sl-font-system-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.875rem;
+  }
 }

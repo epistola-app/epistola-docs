@@ -26,6 +26,10 @@ export default defineConfig({
       starlight({
           title: 'Duurzame Open Source voor de Publieke Sector',
           description: 'Financiering, governance en ecosysteem — Epistola als concreet voorbeeld',
+          logo: {
+            src: './public/logo.svg',
+            replacesTitle: false,
+          },
           defaultLocale: 'root',
           locales: {
             root: {
