@@ -4,77 +4,132 @@ import tarieven from '../data/licentie-tarieven.json';
 
 <div class="financiele-simulatie">
   <h3>📈 5-jaars financiële simulatie</h3>
-  <p>Schuif aan de aannames en zie hoe een Epistola-achtige stichting+BV-combinatie zich financieel zou ontwikkelen.</p>
+  <p>De stichting heeft geen personeel — ze besteedt het ontwikkelwerk uit aan Epistola BV onder cost-plus pricing. Deze simulator toont beide cash-flows apart: de stichting (met licentie-inkomsten en uitbestedingsbudget) en de BV (met FTE-kosten).</p>
 
   <div class="sim-inputs">
-    <div class="input-group">
-      <label for="sim-startGemeenten"><strong>Gemeenten in jaar 1:</strong> <span id="sim-startGemeenten-val">5</span></label>
-      <input type="range" id="sim-startGemeenten" min="1" max="30" value="5" step="1" />
-    </div>
+    <fieldset class="sim-group">
+      <legend>Adoptie &amp; inkomsten (stichting)</legend>
 
-    <div class="input-group">
-      <label for="sim-groei"><strong>Nieuwe gemeenten per jaar:</strong> <span id="sim-groei-val">8</span></label>
-      <input type="range" id="sim-groei" min="0" max="30" value="8" step="1" />
-    </div>
+      <div class="input-group">
+        <label for="sim-startGemeenten"><strong>Gemeenten in jaar 1:</strong> <span id="sim-startGemeenten-val">5</span></label>
+        <input type="range" id="sim-startGemeenten" min="1" max="30" value="5" step="1" />
+      </div>
 
-    <div class="input-group">
-      <label for="sim-schaal"><strong>Gemiddelde gemeentegrootte:</strong></label>
-      <select id="sim-schaal">
-        <option value="micro">Micro (&lt; 5k inwoners)</option>
-        <option value="klein">Klein (10–20k)</option>
-        <option value="klein-mid">Klein–mid (20–35k)</option>
-        <option value="mid" selected>Mid (35–60k)</option>
-        <option value="mid-groot">Mid–groot (60–100k)</option>
-        <option value="groot">Groot (100–150k)</option>
-      </select>
-    </div>
+      <div class="input-group">
+        <label for="sim-groei"><strong>Nieuwe gemeenten per jaar:</strong> <span id="sim-groei-val">8</span></label>
+        <input type="range" id="sim-groei" min="0" max="30" value="8" step="1" />
+      </div>
 
-    <div class="input-group">
-      <label for="sim-fteStart"><strong>FTE in jaar 1:</strong> <span id="sim-fteStart-val">2</span></label>
-      <input type="range" id="sim-fteStart" min="1" max="10" value="2" step="1" />
-    </div>
+      <div class="input-group">
+        <label for="sim-schaal"><strong>Gemiddelde gemeentegrootte:</strong></label>
+        <select id="sim-schaal">
+          <option value="micro">Micro (&lt; 5k inwoners)</option>
+          <option value="klein">Klein (10–20k)</option>
+          <option value="klein-mid">Klein–mid (20–35k)</option>
+          <option value="mid" selected>Mid (35–60k)</option>
+          <option value="mid-groot">Mid–groot (60–100k)</option>
+          <option value="groot">Groot (100–150k)</option>
+        </select>
+      </div>
 
-    <div class="input-group">
-      <label for="sim-fteGroei"><strong>FTE-uitbreiding per jaar:</strong> <span id="sim-fteGroei-val">3</span></label>
-      <input type="range" id="sim-fteGroei" min="0" max="6" value="3" step="1" />
-    </div>
+      <div class="input-group">
+        <label for="sim-suppliers"><strong>Aantal preferred suppliers:</strong> <span id="sim-suppliers-val">3</span></label>
+        <input type="range" id="sim-suppliers" min="0" max="15" value="3" step="1" />
+      </div>
 
-    <div class="input-group">
-      <label for="sim-fteKosten"><strong>Kosten per FTE (all-in, k€/jaar):</strong> <span id="sim-fteKosten-val">100</span></label>
-      <input type="range" id="sim-fteKosten" min="60" max="140" value="100" step="5" />
-    </div>
+      <div class="input-group">
+        <label for="sim-perDoc"><strong>SaaS per-document afdracht (k€/jaar):</strong> <span id="sim-perDoc-val">0</span></label>
+        <input type="range" id="sim-perDoc" min="0" max="200" value="0" step="5" />
+      </div>
+    </fieldset>
 
-    <div class="input-group">
-      <label for="sim-vasteKosten"><strong>Vaste kosten (infra, audits, overhead — k€/jaar):</strong> <span id="sim-vasteKosten-val">25</span></label>
-      <input type="range" id="sim-vasteKosten" min="10" max="80" value="25" step="5" />
-    </div>
+    <fieldset class="sim-group">
+      <legend>BV-kostenstructuur &amp; eigen omzet</legend>
 
-    <div class="input-group">
-      <label for="sim-investering"><strong>Initiële investering (k€):</strong> <span id="sim-investering-val">100</span></label>
-      <input type="range" id="sim-investering" min="0" max="300" value="100" step="10" />
-    </div>
+      <div class="input-group">
+        <label for="sim-fteStart"><strong>FTE in jaar 1:</strong> <span id="sim-fteStart-val">2</span></label>
+        <input type="range" id="sim-fteStart" min="1" max="10" value="2" step="1" />
+      </div>
+
+      <div class="input-group">
+        <label for="sim-fteGroei"><strong>FTE-uitbreiding per jaar:</strong> <span id="sim-fteGroei-val">3</span></label>
+        <input type="range" id="sim-fteGroei" min="0" max="6" value="3" step="1" />
+      </div>
+
+      <div class="input-group">
+        <label for="sim-fteKosten"><strong>Kosten per FTE (all-in, k€/jaar):</strong> <span id="sim-fteKosten-val">100</span></label>
+        <input type="range" id="sim-fteKosten" min="60" max="140" value="100" step="5" />
+      </div>
+
+      <div class="input-group">
+        <label for="sim-overhead"><strong>BV overhead-factor:</strong> <span id="sim-overhead-val">1.30</span></label>
+        <input type="range" id="sim-overhead" min="1.0" max="1.6" value="1.3" step="0.05" />
+      </div>
+
+      <div class="input-group">
+        <label for="sim-bvOmzetGem"><strong>BV-omzet per gemeente (k€/jaar):</strong> <span id="sim-bvOmzetGem-val">10</span></label>
+        <input type="range" id="sim-bvOmzetGem" min="0" max="40" value="10" step="1" />
+        <small>Training, consultancy, dienstverlening en marge op licentie-doorbelasting samen. Onder cost-plus dekt dit een deel van BV-kosten, waardoor minder via stichting-onderhoud nodig is.</small>
+      </div>
+    </fieldset>
+
+    <fieldset class="sim-group">
+      <legend>Stichting overhead &amp; investering</legend>
+
+      <div class="input-group">
+        <label for="sim-admin"><strong>Administratie + stewards (k€/jaar):</strong> <span id="sim-admin-val">25</span></label>
+        <input type="range" id="sim-admin" min="5" max="100" value="25" step="5" />
+      </div>
+
+      <div class="input-group">
+        <label for="sim-investering"><strong>Initiële investering (k€):</strong> <span id="sim-investering-val">100</span></label>
+        <input type="range" id="sim-investering" min="0" max="500" value="100" step="10" />
+      </div>
+    </fieldset>
   </div>
 
   <div class="sim-output">
-    <h4>Resultaat per jaar</h4>
+    <h4>Stichting jaarstroom</h4>
     <div class="sim-table-wrap">
-      <table id="sim-table">
+      <table>
         <thead>
           <tr>
             <th>Jaar</th>
             <th>Gemeenten</th>
-            <th>FTE</th>
             <th>Inkomsten</th>
-            <th>Kosten</th>
+            <th>BV-onderhoud</th>
+            <th>Admin</th>
             <th>Resultaat</th>
             <th>Cumulatief</th>
           </tr>
         </thead>
-        <tbody id="sim-tbody"></tbody>
+        <tbody id="sim-stichting-tbody"></tbody>
       </table>
     </div>
 
-    <div class="sim-chart" id="sim-chart" aria-label="Grafiek van inkomsten en kosten over 5 jaar"></div>
+    <h4>BV jaarstroom</h4>
+    <div class="sim-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Jaar</th>
+            <th>FTE</th>
+            <th>Externe omzet</th>
+            <th>Stichting-onderhoud</th>
+            <th>FTE-kosten</th>
+            <th>Resultaat</th>
+          </tr>
+        </thead>
+        <tbody id="sim-bv-tbody"></tbody>
+      </table>
+    </div>
+
+    <h4>Stichting: externe inkomsten vs externe kosten</h4>
+    <div class="sim-chart" id="sim-chart" aria-label="Grafiek van stichting-inkomsten en -kosten over 5 jaar"></div>
+    <div class="sim-legend">
+      <span><i class="legend-swatch inkomsten"></i> Inkomsten</span>
+      <span><i class="legend-swatch kosten"></i> Kosten (BV-onderhoud + admin)</span>
+    </div>
 
     <div class="sim-milestones" id="sim-milestones"></div>
   </div>
@@ -90,6 +145,8 @@ import tarieven from '../data/licentie-tarieven.json';
 
     const dataEl = document.getElementById('sim-tarieven-data');
     const tarieven: Tarieven = JSON.parse(dataEl!.textContent!);
+
+    const CERT_PER_SUPPLIER_PER_JAAR = 1000;
 
     const fmt = new Intl.NumberFormat('nl-NL', {
       style: 'currency',
@@ -110,11 +167,11 @@ import tarieven from '../data/licentie-tarieven.json';
       return korting;
     }
 
-    function bind(id: string, valId: string | null = null) {
+    function bind(id: string, valId: string | null = null, decimals = 0) {
       const el = document.getElementById(id) as HTMLInputElement;
       const val = valId ? document.getElementById(valId) : null;
       el.addEventListener('input', () => {
-        if (val) val.textContent = el.value;
+        if (val) val.textContent = decimals > 0 ? parseFloat(el.value).toFixed(decimals) : el.value;
         render();
       });
       return el;
@@ -123,35 +180,89 @@ import tarieven from '../data/licentie-tarieven.json';
     const elStartGemeenten = bind('sim-startGemeenten', 'sim-startGemeenten-val');
     const elGroei = bind('sim-groei', 'sim-groei-val');
     const elSchaal = bind('sim-schaal');
+    const elSuppliers = bind('sim-suppliers', 'sim-suppliers-val');
+    const elPerDoc = bind('sim-perDoc', 'sim-perDoc-val');
     const elFteStart = bind('sim-fteStart', 'sim-fteStart-val');
     const elFteGroei = bind('sim-fteGroei', 'sim-fteGroei-val');
     const elFteKosten = bind('sim-fteKosten', 'sim-fteKosten-val');
-    const elVasteKosten = bind('sim-vasteKosten', 'sim-vasteKosten-val');
+    const elOverhead = bind('sim-overhead', 'sim-overhead-val', 2);
+    const elBvOmzetGem = bind('sim-bvOmzetGem', 'sim-bvOmzetGem-val');
+    const elAdmin = bind('sim-admin', 'sim-admin-val');
     const elInvestering = bind('sim-investering', 'sim-investering-val');
 
-    function simulate() {
+    type Row = {
+      jaar: number;
+      gemeenten: number;
+      fte: number;
+      licentieInkomsten: number;
+      perDocInkomsten: number;
+      certInkomsten: number;
+      totaalInkomsten: number;
+      bvKosten: number;
+      bvExterneOmzet: number;
+      bvOnderhoud: number;
+      adminKosten: number;
+      stichtingKosten: number;
+      stichtingResultaat: number;
+      bvResultaat: number;
+      cumulatief: number;
+    };
+
+    function simulate(): { rows: Row[]; investering: number } {
       const startGemeenten = parseInt(elStartGemeenten.value, 10);
       const groei = parseInt(elGroei.value, 10);
       const schaalId = elSchaal.value;
+      const suppliers = parseInt(elSuppliers.value, 10);
+      const perDocBudget = parseInt(elPerDoc.value, 10) * 1000;
       const fteStart = parseInt(elFteStart.value, 10);
       const fteGroei = parseInt(elFteGroei.value, 10);
       const fteKosten = parseInt(elFteKosten.value, 10) * 1000;
-      const vasteKosten = parseInt(elVasteKosten.value, 10) * 1000;
+      const overhead = parseFloat(elOverhead.value);
+      const bvOmzetPerGemeente = parseInt(elBvOmzetGem.value, 10) * 1000;
+      const admin = parseInt(elAdmin.value, 10) * 1000;
       const investering = parseInt(elInvestering.value, 10) * 1000;
       const tarief = tariefVoorSchaal(schaalId);
 
-      const rows = [];
-      let cumulatief = investering; // start positive with investment
+      const rows: Row[] = [];
+      let cumulatief = investering;
 
       for (let jaar = 1; jaar <= 5; jaar++) {
         const gemeenten = startGemeenten + (jaar - 1) * groei;
         const fte = Math.min(fteStart + (jaar - 1) * fteGroei, 20);
         const korting = schaalKorting(gemeenten);
-        const inkomsten = Math.round(gemeenten * tarief * (1 - korting));
-        const kosten = fte * fteKosten + vasteKosten;
-        const resultaat = inkomsten - kosten;
-        cumulatief += resultaat;
-        rows.push({ jaar, gemeenten, fte, inkomsten, kosten, resultaat, cumulatief });
+
+        const licentieInkomsten = Math.round(gemeenten * tarief * (1 - korting));
+        const perDocInkomsten = perDocBudget;
+        const certInkomsten = suppliers * CERT_PER_SUPPLIER_PER_JAAR;
+        const totaalInkomsten = licentieInkomsten + perDocInkomsten + certInkomsten;
+
+        const bvKosten = Math.round(fte * fteKosten * overhead);
+        const bvExterneOmzet = Math.min(gemeenten * bvOmzetPerGemeente, bvKosten);
+        const bvOnderhoud = bvKosten - bvExterneOmzet; // cost-plus: stichting dekt het restant
+        const adminKosten = admin;
+        const stichtingKosten = bvOnderhoud + adminKosten;
+        const stichtingResultaat = totaalInkomsten - stichtingKosten;
+        const bvResultaat = bvExterneOmzet + bvOnderhoud - bvKosten; // ≈ 0 onder cost-plus
+
+        cumulatief += stichtingResultaat;
+
+        rows.push({
+          jaar,
+          gemeenten,
+          fte,
+          licentieInkomsten,
+          perDocInkomsten,
+          certInkomsten,
+          totaalInkomsten,
+          bvKosten,
+          bvExterneOmzet,
+          bvOnderhoud,
+          adminKosten,
+          stichtingKosten,
+          stichtingResultaat,
+          bvResultaat,
+          cumulatief,
+        });
       }
 
       return { rows, investering };
@@ -159,28 +270,49 @@ import tarieven from '../data/licentie-tarieven.json';
 
     function render() {
       const { rows, investering } = simulate();
-      const tbody = document.getElementById('sim-tbody')!;
+      renderStichting(rows);
+      renderBV(rows);
+      renderChart(rows);
+      renderMilestones(rows, investering);
+    }
+
+    function renderStichting(rows: Row[]) {
+      const tbody = document.getElementById('sim-stichting-tbody')!;
       tbody.innerHTML = rows
         .map(
           (r) => `
         <tr>
           <td>${r.jaar}</td>
           <td>${r.gemeenten}</td>
-          <td>${r.fte}</td>
-          <td>${fmt.format(r.inkomsten)}</td>
-          <td>${fmt.format(r.kosten)}</td>
-          <td class="${r.resultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.resultaat)}</td>
+          <td>${fmt.format(r.totaalInkomsten)}</td>
+          <td>${fmt.format(r.bvOnderhoud)}</td>
+          <td>${fmt.format(r.adminKosten)}</td>
+          <td class="${r.stichtingResultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.stichtingResultaat)}</td>
           <td class="${r.cumulatief >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.cumulatief)}</td>
         </tr>`
         )
         .join('');
-
-      renderChart(rows);
-      renderMilestones(rows, investering);
     }
 
-    function renderChart(rows: ReturnType<typeof simulate>['rows']) {
-      const max = Math.max(...rows.map((r) => Math.max(r.inkomsten, r.kosten)));
+    function renderBV(rows: Row[]) {
+      const tbody = document.getElementById('sim-bv-tbody')!;
+      tbody.innerHTML = rows
+        .map(
+          (r) => `
+        <tr>
+          <td>${r.jaar}</td>
+          <td>${r.fte}</td>
+          <td>${fmt.format(r.bvExterneOmzet)}</td>
+          <td>${fmt.format(r.bvOnderhoud)}</td>
+          <td>${fmt.format(r.bvKosten)}</td>
+          <td class="${r.bvResultaat >= 0 ? 'positief' : 'negatief'}">${fmt.format(r.bvResultaat)}</td>
+        </tr>`
+        )
+        .join('');
+    }
+
+    function renderChart(rows: Row[]) {
+      const max = Math.max(...rows.map((r) => Math.max(r.totaalInkomsten, r.stichtingKosten)));
       const chart = document.getElementById('sim-chart')!;
       const bar = (cls: string, val: number, label: string) => {
         if (val <= 0) return '';
@@ -192,8 +324,8 @@ import tarieven from '../data/licentie-tarieven.json';
           (r) => `
             <div class="bar-group" aria-label="Jaar ${r.jaar}">
               <div class="bars">
-                ${bar('inkomsten', r.inkomsten, 'Inkomsten')}
-                ${bar('kosten', r.kosten, 'Kosten')}
+                ${bar('inkomsten', r.totaalInkomsten, 'Inkomsten')}
+                ${bar('kosten', r.stichtingKosten, 'Kosten')}
               </div>
               <div class="bar-label">J${r.jaar}</div>
             </div>`
@@ -201,8 +333,8 @@ import tarieven from '../data/licentie-tarieven.json';
         .join('');
     }
 
-    function renderMilestones(rows: ReturnType<typeof simulate>['rows'], investering: number) {
-      const breakEven = rows.find((r) => r.resultaat >= 0);
+    function renderMilestones(rows: Row[], investering: number) {
+      const breakEven = rows.find((r) => r.stichtingResultaat >= 0);
       const cumulatiefPositief = rows.find((r) => r.cumulatief - investering >= 0);
       const overwinst = rows.find((r) => r.cumulatief - investering >= 100_000);
 
@@ -219,7 +351,7 @@ import tarieven from '../data/licentie-tarieven.json';
       ];
 
       const milestones = document.getElementById('sim-milestones')!;
-      milestones.innerHTML = `<h4>Mijlpalen</h4><ul>${items.join('')}</ul>`;
+      milestones.innerHTML = `<h4>Mijlpalen (stichting cashflow)</h4><ul>${items.join('')}</ul>`;
     }
 
     render();
@@ -240,17 +372,50 @@ import tarieven from '../data/licentie-tarieven.json';
     color: var(--sl-color-white);
   }
 
+  .financiele-simulatie h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
   .sim-inputs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
     margin: 1rem 0 1.5rem;
+  }
+
+  @media (min-width: 60rem) {
+    .sim-inputs {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .sim-group {
+    border: 1px solid var(--sl-color-gray-5);
+    padding: 1rem;
+    margin: 0;
+    background: var(--sl-color-bg);
+  }
+
+  .sim-group legend {
+    padding: 0 0.5rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+    font-size: 0.875rem;
+  }
+
+  .input-group {
+    margin-bottom: 0.75rem;
+  }
+
+  .input-group:last-child {
+    margin-bottom: 0;
   }
 
   .input-group label {
     display: block;
     margin-bottom: 0.25rem;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
   }
 
   .input-group input[type='range'] {
@@ -311,7 +476,7 @@ import tarieven from '../data/licentie-tarieven.json';
     gap: 1rem;
     padding: 1rem;
     border: 1px solid var(--sl-color-gray-5);
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     background: var(--sl-color-bg);
   }
 
@@ -349,6 +514,30 @@ import tarieven from '../data/licentie-tarieven.json';
     font-size: 0.75rem;
     margin-top: 0.25rem;
     color: var(--sl-color-gray-2);
+  }
+
+  .sim-legend {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.8125rem;
+    color: var(--sl-color-gray-2);
+    margin-bottom: 1rem;
+  }
+
+  .legend-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 0.375rem;
+    vertical-align: middle;
+  }
+
+  .legend-swatch.inkomsten {
+    background: var(--sl-color-accent);
+  }
+
+  .legend-swatch.kosten {
+    background: var(--sl-color-gray-4);
   }
 
   .sim-milestones ul {
