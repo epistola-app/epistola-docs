@@ -17,7 +17,8 @@ Een open source platform kán prima draaien zonder licenties — als de meerderh
 
 | Inkomstenbron | Wie betaalt? | Wat krijgen ze? | Prijsstelling |
 |---|---|---|---|
-| **1. Licenties** | Afnemers (via preferred supplier) | Recht op commercieel gebruik van het platform | Vaste schaal (op inwonertal) |
+| **1a. Licenties** | Afnemers (zelf-hosten, via preferred supplier) | Recht op commercieel gebruik van het platform | Vaste schaal (op inwonertal) |
+| **1b. SaaS-afdracht** | SaaS-aanbieders namens hun klanten | Recht op multi-tenant aanbod van het platform | Per gegenereerd document |
 | **2. SLA & Support** | Afnemers | Garanties op beschikbaarheid, patches, support | Vrije markt (per leverancier) |
 | **3. Diensten** | Afnemers of leveranciers | Expertise, audits, migraties, maatwerk | Vrije markt (per dienst) |
 | **4. Continuïteitsbijdrage** | Organisaties die gebruik maken zonder 1–3 | Gebruik van het platform, bijdrage aan continuïteit | Variabel (code, geld, tijd) |
@@ -38,6 +39,12 @@ De licentieopbrengsten financieren uitsluitend het beheer van het platform:
 Licenties financieren **geen** ontwikkeling, SLA of support. Die kosten liggen bij de leveranciers.
 
 [→ Meer over licenties en prijzen](/het-verdienmodel/licenties)
+
+**Variant: SaaS-afdracht**
+
+Wanneer het platform als multi-tenant cloud-dienst wordt aangeboden, is een vaste licentie per gemeente onpraktisch. In dat geval geldt een gebruik-gebaseerde afdracht: een klein bedrag per gegenereerd document. Meerdere partijen kunnen SaaS-hosting aanbieden en concurreren op kwaliteit.
+
+[→ Meer over SaaS-hosting en gebruik-gebaseerde afdracht](/het-verdienmodel/saas-hosting)
 
 ---
 

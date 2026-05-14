@@ -56,6 +56,7 @@ export default defineConfig({
                   items: [
                       { label: 'Overzicht', link: '/het-verdienmodel/overzicht' },
                       { label: 'Licenties', link: '/het-verdienmodel/licenties' },
+                      { label: 'SaaS Hosting', link: '/het-verdienmodel/saas-hosting' },
                       { label: 'SLA & Support', link: '/het-verdienmodel/sla-en-support' },
                       { label: 'Diensten', link: '/het-verdienmodel/diensten' },
                       { label: 'Continuïteitsbijdrage', link: '/het-verdienmodel/continuiteits-bijdrage' },
