@@ -93,6 +93,7 @@ export default defineConfig({
                           collapsed: true,
                           items: [
                               { label: 'Overzicht', link: '/meedoen/leveranciers/overzicht' },
+                              { label: 'Certificering', link: '/meedoen/leveranciers/certificering' },
                               { label: 'Doorontwikkeling & Roadmap', link: '/meedoen/leveranciers/roadmap-en-doorontwikkeling' },
                           ],
                       },
