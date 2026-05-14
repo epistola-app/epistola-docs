@@ -3,9 +3,31 @@ title: Licenties
 description: Licentiemodel, prijsopbouw en wat licentie-inkomsten financieren
 ---
 
-De licentie is de primaire financieringsbron voor de stichting die het platform beheert. Afnemers betalen een jaarlijkse licentiebijdrage — doorbelast door hun preferred supplier — in ruil voor het recht op commercieel gebruik van het platform.
+De licentie is de meest voorspelbare bijdragevorm voor de stichting die het platform beheert. Afnemers betalen een jaarlijkse licentiebijdrage — doorbelast door hun preferred supplier — en financieren daarmee de governance en architectuurregie van het platform.
+
+Licenties zijn niet de enige manier om bij te dragen, maar wel de stabielste. Ze maken inkomsten planbaar en onafhankelijk van de goodwill van het moment. Zie [Het Verdienmodel](/het-verdienmodel/overzicht) voor de andere bijdragevormen.
 
 Dit is de **canonieke locatie** voor prijsinformatie. Alle andere pagina's verwijzen hiernaar.
+
+---
+
+## Waarom BSL geen lock-in creëert
+
+Een veelgehoord bezwaar tegen licentiemodellen voor open source software is vendor lock-in. Bij dit model is dat bezwaar niet van toepassing — en wel om een eenvoudige reden.
+
+Na precies één jaar gaat de code automatisch en onherroepelijk over naar **Apache 2.0**: volledig vrij te gebruiken, aan te passen en te hosten door iedereen. Geen restrictie meer. Geen afhankelijkheid van de stichting of van een specifieke leverancier.
+
+Dit heeft een directe consequentie voor de lock-in vraag:
+
+| Situatie | Wat kan een concurrent doen? |
+|---|---|
+| Licentiecontract is 1 jaar | Na afloop is de code van dat jaar Apache 2.0 — een nieuwe leverancier kan ermee aan de slag |
+| Licentiecontract is 3 jaar | Halverwege het contract is de code van jaar 1 al ruim vrij — een nieuwe leverancier kan intrede doen met die basis |
+| Stichting houdt op te bestaan | Code gaat onmiddellijk naar Apache 2.0, geen enkele afhankelijkheid resteert |
+
+Met andere woorden: de maximale "lock-in" is één jaar — en in de praktijk nog minder, omdat concurrerende leveranciers al met de vrijgegeven code van voorgaande versies kunnen werken. Wie een meerjaarscontract sluit, zit voor het grootste deel van die periode al in het Apache 2.0-tijdperk van de code.
+
+Het licentiemodel creëert dus **geen duurzame afhankelijkheid**. Het creëert een korte aanloopperiode met kwaliteitsregie, gevolgd door volledige openheid.
 
 ---
 

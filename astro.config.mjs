@@ -46,7 +46,7 @@ export default defineConfig({
                   collapsed: false,
                   items: [
                       { label: 'Het Probleem', link: '/introductie/het-probleem' },
-                      { label: 'Het Model in Één Oogopslag', link: '/introductie/het-model-in-een-oogopslag' },
+                      { label: 'De Oplossingen', link: '/introductie/de-oplossingen' },
                       { label: 'Snelstart per Doelgroep', link: '/introductie/snelstart' },
                   ],
               },
@@ -54,17 +54,18 @@ export default defineConfig({
                   label: 'Het Verdienmodel',
                   collapsed: false,
                   items: [
-                      { label: 'Overzicht & Escalatieladder', link: '/het-verdienmodel/overzicht' },
-                      { label: '1. Licenties', link: '/het-verdienmodel/licenties' },
-                      { label: '2. SLA & Support', link: '/het-verdienmodel/sla-en-support' },
-                      { label: '3. Diensten', link: '/het-verdienmodel/diensten' },
-                      { label: '4. Continuïteitsbijdrage', link: '/het-verdienmodel/continuiteits-bijdrage' },
+                      { label: 'Overzicht', link: '/het-verdienmodel/overzicht' },
+                      { label: 'Licenties', link: '/het-verdienmodel/licenties' },
+                      { label: 'SLA & Support', link: '/het-verdienmodel/sla-en-support' },
+                      { label: 'Diensten', link: '/het-verdienmodel/diensten' },
+                      { label: 'Continuïteitsbijdrage', link: '/het-verdienmodel/continuiteits-bijdrage' },
                   ],
               },
               {
                   label: 'Verantwoord Beheer',
                   collapsed: false,
                   items: [
+                      { label: 'Organisatievormen Vergeleken', link: '/verantwoord-beheer/organisatievormen' },
                       { label: 'Steward Ownership', link: '/verantwoord-beheer/steward-ownership' },
                       { label: 'Structuur & Rollen', link: '/verantwoord-beheer/structuur' },
                       {
@@ -92,7 +93,7 @@ export default defineConfig({
                           collapsed: true,
                           items: [
                               { label: 'Overzicht', link: '/meedoen/leveranciers/overzicht' },
-                              { label: 'Doorontwikkeling & Roadmap', link: '/meedoen/leveranciers/doorontwikkeling' },
+                              { label: 'Doorontwikkeling & Roadmap', link: '/meedoen/leveranciers/roadmap-en-doorontwikkeling' },
                           ],
                       },
                   ],

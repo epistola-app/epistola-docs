@@ -1,9 +1,9 @@
 ---
 title: Het Probleem
-description: Waarom open source platformsoftware voor de publieke sector een bijzonder verdienmodel nodig heeft
+description: Waarom open source platformsoftware voor de publieke sector betrouwbare inkomsten nodig heeft
 ---
 
-Open source software voor de publieke sector klinkt als een ideaal: transparant, herbruikbaar, geen vendor lock-in. Maar er is een fundamentele vraag die elk goed bedoeld open source project moet beantwoorden:
+Open source software voor de publieke sector klinkt als een ideaal: transparant, herbruikbaar, geen vendor lock-in. Maar er is een fundamentele vraag die elk goed bedoeld open source project vroeg of laat moet beantwoorden:
 
 **Wie betaalt er voor het onderhoud, de doorontwikkeling, en de continuïteit?**
 
@@ -11,89 +11,40 @@ Zonder een eerlijk antwoord op die vraag gaat zelfs het beste platform uiteindel
 
 ---
 
-## De vier modellen die elk op hun eigen manier falen
+## De afhankelijkheid die niemand ziet
 
-### 1. Puur open source (geen inkomsten)
+Gemeenten zijn afhankelijk van digitale infrastructuur. Brieven moeten verstuurd worden. Vergunningen gegenereerd. Beschikkingen aangemaakt. Dat gaat dag in dag uit door — ook als de onderliggende software geen actieve beheerder meer heeft.
 
-Het platform is gratis beschikbaar. Gemeenten hosten het zelf of via een leverancier. Maar wie betaalt de architecten, de security patches, de governance? Niemand structureel. Ontwikkelaars werken onbetaald of via subsidies. Als de initiatiefnemers stoppen, stopt het project.
-
-**Probleem:** Gratis gebruik zonder bijdrage is niet houdbaar. Het platform bestaat zolang er vrijwilligers zijn.
-
-### 2. Subsidiemodel
-
-De overheid of een fonds financiert het initiatief. Dit werkt tijdelijk goed, maar subsidies zijn politiek afhankelijk, worden niet verlengd, en stimuleren geen schaalbare organisatie.
-
-**Probleem:** Subsidies zijn horizongebonden. Ze verplaatsen het probleem naar de volgende aanvraagcyclus.
-
-### 3. Propriëtair model (één leverancier)
-
-Eén commercieel bedrijf ontwikkelt, beheert én verkoopt het platform. Dat geeft duidelijkheid en financiering, maar introduceert precies het probleem dat je wilde oplossen: vendor lock-in. De gemeente is afhankelijk van de continuïteit, het prijsbeleid en de agenda van dat ene bedrijf.
-
-**Probleem:** Commercieel eigendom van publieke infrastructuur leidt tot afhankelijkheid.
-
-### 4. VC-gefinancierd open source
-
-Risicokapitaal financiert de eerste jaren, in de hoop op een grote exit of IPO. Maar: investeerders willen 10x rendement, wat groeidruk creëert die botst met het publieke belang. De missie wordt bijgestuurd zodra de exit relevant wordt.
-
-**Probleem:** Exitdruk en missie zijn structureel onverenigbaar voor publieke digitale voorzieningen.
+Bij propriëtaire software is het duidelijk wie er verantwoordelijk is: de leverancier. Bij open source is dat minder vanzelfsprekend. De code is beschikbaar, maar de vraag wie de architectuur bewaakt, wie de security patches uitrolt, wie beslist over de roadmap — die valt niet automatisch beantwoord. Iemand moet dat doen. En iemand moet daarvoor betalen.
 
 ---
 
-## Het eigenlijke probleem: free-riding en continuïteitsrisico
+## Het paradox van gratis
+
+Open source betekent: vrij te gebruiken, te kopiëren, aan te passen. Het betekent niet: onderhoud zonder kosten, governance zonder mensen, continuïteit zonder financiering.
 
 :::note[Een veelgehoord misverstand]
 Gemeenten zetten regelmatig een aanbesteding uit van **€300.000** voor een propriëtaire documentgeneratieoplossing. Wordt diezelfde gemeente gevraagd **€50.000** bij te dragen aan een open source alternatief, dan is het antwoord nogal eens: "Maar dat is toch gratis?"
 
-Open source betekent vrij te gebruiken. Het betekent niet: zonder onderhoudskosten, zonder governance, zonder architecten. Wie denkt dat open source letterlijk gratis is, betaalt uiteindelijk de hoofdprijs — in de vorm van een product dat niet meer onderhouden wordt.
+Open source is vrij te gebruiken. Dat is iets anders dan gratis in stand te houden. Wie denkt dat open source automatisch onderhouden wordt, betaalt uiteindelijk de echte prijs: een platform dat stopt met werken.
 :::
 
-Alle vier de modellen lopen vroeg of laat vast op dezelfde dynamiek: **wie voordeel trekt uit het platform draagt niet automatisch bij aan de instandhouding ervan.**
+---
 
-Als voldoende organisaties het platform gebruiken zonder bij te dragen — via betaling of bijdragen in natura — sterft het platform. Niet direct, maar geleidelijk: patches blijven uit, architectuur veroudert, de community krimpt.
+## Het free-rider probleem
 
-Dit probleem heeft een naam: **free-riding**. Het is niet per se kwade wil. Het is een structureel gevolg van een model dat niet expliciet regelt wie wat bijdraagt.
+Wanneer iedereen aanneemt dat een ander wel voor de instandhouding zorgt, zorgt niemand ervoor. Dit heet het **free-rider probleem** — een klassieker uit de economie, en een structureel risico voor open source projecten met een kleine gebruikersbasis.
+
+Voor grote open source projecten (Linux, PostgreSQL, Kubernetes) werkt het community-model: genoeg bedrijven hebben er commercieel belang bij om te investeren in het onderhoud. Voor een niche platform voor 300+ Nederlandse gemeenten is die kritische massa er niet vanzelf. De gebruikersgroep is klein. De bijdragen zijn onzeker. En de afhankelijkheid is groot.
+
+Het resultaat: patches blijven uit. Architectuur veroudert. Beheerders haken af. Het platform sterft een stille dood — niet door een dramatische beslissing, maar door een optelsom van niet-genomen acties.
 
 ---
 
-## De oplossing: een escalatieladder van bijdragen
+## Dit is geen technisch probleem
 
-Een duurzaam model maakt bijdragen expliciet en varieert ze naar draagkracht en type gebruik. Wie commercieel profiteert van het platform, draagt bij via een licentie. Wie het platform operationeel nodig heeft, betaalt voor SLA en support. Wie expertise wil of speciale diensten afneemt, betaalt daarvoor. En wie geen van deze opties kan of wil benutten, draagt toch bij — via code, documentatie, of een directe bijdrage aan de continuïteit van het platform.
+De software kan uitstekend zijn. De architectuur kan solide zijn. Het probleem is economisch: **er is geen mechanisme dat betrouwbare inkomsten genereert voor het beheer van het platform.**
 
-Dit noemen we een **escalatieladder van participatie**:
+Dat mechanisme moet ontworpen worden. En het ontwerp heeft consequenties voor eigenaarschap, governance en de vraag of gebruikers uiteindelijk toch afhankelijk worden van één partij.
 
-```
-Gebruik voor niets
-        ↓
-  Continuïteitsbijdrage (minimum bijdrage)
-        ↓
-  Diensten (betaalde expertise en services)
-        ↓
-  SLA & Support (operationele dienstverlening)
-        ↓
-  Licentie (commercieel gebruik, meest betrokken)
-```
-
-De ladder loopt van minimale betrokkenheid onderaan naar maximale betrokkenheid bovenaan. Het model verwacht niet dat iedereen bovenaan staat — maar het verwacht wél dat niemand volledig gratis meelifts.
-
----
-
-## Epistola als voorbeeld
-
-Epistola is een concreet voorbeeld van een platform dat dit model toepast. Het is een open platform voor digitale documentgeneratie voor gemeenten, eigendom van een onafhankelijke stichting. Meerdere commerciële leveranciers leveren diensten op basis van hetzelfde platform.
-
-De verdienstructuur van Epistola illustreert hoe de escalatieladder in de praktijk werkt:
-
-- **Licenties** zorgen voor stabiele inkomsten voor de stichting
-- **SLA & support** maakt het verdienmodel voor leveranciers mogelijk
-- **Diensten** zoals template-audits en versie-compatibiliteitsvalidatie creëren extra waarde
-- **Continuïteitsbijdragen** zijn de vangnet: wie geen van de bovenstaande opties kiest maar wel gebruik maakt van het platform, wordt gevraagd op een andere manier bij te dragen
-
-> **Samenvatting:** Het probleem is niet open source zelf. Het probleem is een model zonder expliciete bijdragestructuur. De oplossing is niet één correcte aanpak, maar een escalatieladder die verschillende vormen van bijdrage mogelijk maakt — en die duidelijk maakt: als licenties geen optie zijn, dan moet je op een andere manier bijdragen.
-
----
-
-## Zie ook
-
-- [Het Model in Één Oogopslag](/introductie/het-model-in-een-oogopslag) — Hoe het model dit oplost
-- [Het Verdienmodel](/het-verdienmodel/overzicht) — De vier inkomstenbronnen uitgelegd
-- [Continuïteitsbijdrage](/het-verdienmodel/continuiteits-bijdrage) — Wat bijdragen inhoudt als licenties geen optie zijn
+[→ Lees over de mogelijke oplossingen](/introductie/de-oplossingen)

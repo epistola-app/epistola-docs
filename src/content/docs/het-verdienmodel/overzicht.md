@@ -3,29 +3,13 @@ title: Het Verdienmodel
 description: De vier inkomstenbronnen die samen een escalatieladder van participatie vormen
 ---
 
-Open source platformsoftware voor de publieke sector heeft een verdienmodel nodig dat eerlijk, schaalbaar en expliciet is. Dit model steunt op vier inkomstenbronnen die geen gelijke alternatieven zijn — ze vormen een **escalatieladder**: van maximale commerciële betrokkenheid tot de minimale bijdrage die een platform in stand houdt.
+Het verdienmodel bestaat uit vier bijdragevormen. Ze zijn niet gelijkwaardig en ze zijn ook geen hiërarchie — ze zijn complementair. Verschillende organisaties in verschillende situaties dragen op verschillende manieren bij.
 
-Epistola past dit model toe als concreet voorbeeld. De principes zijn echter generiek toepasbaar op vergelijkbare open platforms.
+Epistola past dit model toe als concreet voorbeeld. De principes zijn generiek toepasbaar op vergelijkbare open platforms.
 
----
-
-## De escalatieladder
-
-```mermaid
-flowchart TD
-    L["🪙 1. Licenties\nCommercieël gebruik van het platform\n€2k–€30k/jaar per gemeente"]
-    S["🛠️ 2. SLA & Support\nOperationele dienstverlening\nVrije marktprijsstelling"]
-    D["⚙️ 3. Diensten\nWaardetoevoegende expertise\nVrije marktprijsstelling"]
-    C["🌱 4. Continuïteitsbijdrage\nMinimale bijdrage als geen van bovenstaande\nCode, documentatie of financiële bijdrage"]
-
-    L --> S --> D --> C
-    style L fill:#1565c0,color:#fff
-    style S fill:#0277bd,color:#fff
-    style D fill:#0288d1,color:#fff
-    style C fill:#b3e5fc,color:#111
-```
-
-De ladder loopt van bovenaan (meeste commerciële betrokkenheid, meeste bijdrage) naar onderaan (minimale betrokkenheid, maar nog steeds een expliciete bijdrage). Puur gebruik zonder enige bijdrage valt buiten het model.
+:::note[Licenties zijn niet verplicht]
+Een open source platform kán prima draaien zonder licenties — als de meerderheid van de gebruikers substantieel bijdraagt via code, documentatie of governance. Licenties zijn de meest voorspelbare bijdragevorm, niet de enige legitieme. Zie [De Oplossingen](/introductie/de-oplossingen) voor de volledige afweging.
+:::
 
 ---
 
