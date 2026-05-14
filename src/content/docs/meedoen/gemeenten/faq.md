@@ -263,4 +263,4 @@ Dit is structureel gewaarborgd door stichting.
 - [Licentie & Kostenbeleid](/het-model/financieel/licentie-en-kostenbeleid) - Volledige prijstabel en schaalvoordelen
 - [Aanbestedingen](/meedoen/gemeenten/aanbestedingen) - Hoe Epistola past in aanbestedingen
 - [Organisatiestructuur](/het-model/structuur-rollen/structuur) - Hoe het model werkt
-- [Volledige Samenvatting](/referentie/samenvatting) - Alle informatie in één document
+- [Volledige Samenvatting](/samenvatting) - Alle informatie in één document
