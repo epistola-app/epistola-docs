@@ -10,6 +10,7 @@ import {
   berekenMijlpalen,
   berekenVoordelen,
   CERT_PER_SUPPLIER_PER_JAAR,
+  MIN_BV_FTE,
   MAX_BV_FTE,
   JAREN,
   type Tarieven,
@@ -43,6 +44,7 @@ const bvDefaults: BVInputs = {
   bvOmzetPerGemeente: 15_000,
   fteKosten: 100_000,
   overhead: 1.3,
+  klantenPerFte: 7,
 };
 
 // ----------------------------------------------------------------------------
@@ -241,11 +243,14 @@ describe('berekenBVJaar — afhankelijkheid van stichting', () => {
     expect(j5.bvGemeenten).toBe(10);
   });
 
-  it('FTE volgt uit beschikbaar budget, conservatief naar beneden afgerond', () => {
+  it('FTE = max(budget-FTE, demand-FTE), gecapt op MAX_BV_FTE', () => {
     const stichtingResult = simulateStichting(stichtingDefaults, tarievenTyped);
     const r = berekenBVJaar(stichtingResult.rows[0], bvDefaults);
-    // bvInkomsten = 300k (onderhoud+features) + 2 × 15k = 330k
-    // Budget 330k / (100k × 1.3 = 130k) = 2.54 → floor → 2
+    // bvInkomsten = 100k (onderhoud) + 100k (features in defaults) + 2 × 15k = 230k
+    // budgetFte = floor(230k / 130k) = 1
+    // demandFte = max(MIN_BV_FTE=2, ceil(2 / 7) = 1) = 2
+    // → fte = max(1, 2) = 2
+    expect(r.demandFte).toBe(2);
     expect(r.fte).toBe(2);
   });
 
@@ -257,6 +262,51 @@ describe('berekenBVJaar — afhankelijkheid van stichting', () => {
     const stichtingResult = simulateStichting(bigInputs, tarievenTyped);
     const r = berekenBVJaar(stichtingResult.rows[0], bvDefaults);
     expect(r.fte).toBe(MAX_BV_FTE);
+  });
+
+  it('FTE-minimum is MIN_BV_FTE ook bij heel weinig klanten', () => {
+    const stichtingResult = simulateStichting(stichtingDefaults, tarievenTyped);
+    const r = berekenBVJaar(stichtingResult.rows[0], {
+      ...bvDefaults,
+      bvStartGemeenten: 0,
+      bvGroeiPercentage: 0,
+    });
+    expect(r.demandFte).toBe(MIN_BV_FTE);
+    expect(r.fte).toBeGreaterThanOrEqual(MIN_BV_FTE);
+  });
+
+  it('Demand-FTE schaalt met klantenbasis (35 klanten / 7 per FTE = 5)', () => {
+    // Forceer 35 BV-klanten in jaar 5
+    const stichtingResult = simulateStichting(
+      { ...stichtingDefaults, gemeenteGroei: 8 },
+      tarievenTyped,
+    );
+    const r = berekenBVJaar(stichtingResult.rows[4], {
+      ...bvDefaults,
+      bvStartGemeenten: 35,
+      bvGroeiPercentage: 0,
+    });
+    expect(r.demandFte).toBe(5);
+  });
+
+  it('BV-resultaat kan negatief zijn als demand-FTE budget overstijgt', () => {
+    // Maak demand veel groter dan budget: veel klanten, weinig omzet en budget
+    const inputs: StichtingInputs = {
+      ...stichtingDefaults,
+      onderhoudsbudget: 0,
+      features: 0,
+      startGemeenten: 20,
+      gemeenteGroei: 0,
+    };
+    const stichtingResult = simulateStichting(inputs, tarievenTyped);
+    const r = berekenBVJaar(stichtingResult.rows[0], {
+      ...bvDefaults,
+      bvStartGemeenten: 20,
+      bvGroeiPercentage: 0,
+      bvOmzetPerGemeente: 5_000, // bewust te laag
+    });
+    expect(r.demandFte).toBeGreaterThan(r.budgetFte);
+    expect(r.bvResultaat).toBeLessThan(0);
   });
 
   it('aandeelOnderhoud van 0 sluit BV uit van platform-werk', () => {
@@ -295,20 +345,19 @@ describe('simulateBV — pipeline met stichting', () => {
     expect(bv.rows.length).toBe(stichting.rows.length);
   });
 
-  it('BV-resultaat is altijd niet-negatief (conservatieve staffing)', () => {
-    const stichting = simulateStichting(stichtingDefaults, tarievenTyped);
-    const bv = simulateBV(stichting, bvDefaults);
-    for (const r of bv.rows) {
-      expect(r.bvResultaat).toBeGreaterThanOrEqual(0);
-    }
-  });
-
-  it('BV-resultaat blijft bij geen FTE-cap onder kostenPerFte (1 FTE-equivalent)', () => {
-    const stichting = simulateStichting(stichtingDefaults, tarievenTyped);
+  it('Wanneer budget de operationele behoefte dekt, ligt resultaat in cost-plus marge', () => {
+    // Royaal scenario: budget veel hoger dan demand
+    const ruimInputs: StichtingInputs = {
+      ...stichtingDefaults,
+      onderhoudsbudget: 1_000_000,
+      features: 500_000,
+    };
+    const stichting = simulateStichting(ruimInputs, tarievenTyped);
     const bv = simulateBV(stichting, bvDefaults);
     const kostenPerFte = bvDefaults.fteKosten * bvDefaults.overhead;
     for (const r of bv.rows) {
       if (r.fte < MAX_BV_FTE) {
+        expect(r.bvResultaat).toBeGreaterThanOrEqual(0);
         expect(r.bvResultaat).toBeLessThan(kostenPerFte);
       }
     }

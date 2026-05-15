@@ -107,15 +107,19 @@ export interface BVInputs {
   fteKosten: number;
   /** BV overhead-factor (bv 1.30) */
   overhead: number;
+  /** Hoeveel klanten één FTE redelijkerwijs kan bedienen (default 7) */
+  klantenPerFte: number;
 }
 
 export interface BVYearRow {
   jaar: number;
   /** All-in kosten per FTE inclusief overhead (€) — referentie voor de afleiding */
   kostenPerFte: number;
-  /** Theoretische FTE-capaciteit bij het beschikbare budget (float, niet afgerond) */
-  beoogdeFte: number;
-  /** Daadwerkelijk gekozen FTE — conservatief: floor(beoogdeFte), max MAX_BV_FTE */
+  /** Wat het budget toelaat aan FTE (floor, conservatief) */
+  budgetFte: number;
+  /** Wat de klantenbasis vraagt aan FTE (max van MIN_BV_FTE en ceil(klanten/klantenPerFte)) */
+  demandFte: number;
+  /** Daadwerkelijk gekozen FTE — de hogere van budget en demand, gecapt op MAX_BV_FTE */
   fte: number;
   /** Aantal gemeenten dat BV bedient (afgerond) — afgeleid uit aandeelGemeenten */
   bvGemeenten: number;
@@ -138,6 +142,7 @@ export interface BVResult {
 // ----------------------------------------------------------------------------
 
 export const CERT_PER_SUPPLIER_PER_JAAR = 1000;
+export const MIN_BV_FTE = 2;
 export const MAX_BV_FTE = 20;
 export const JAREN = 5;
 
@@ -255,18 +260,29 @@ export function berekenBVJaar(
   const bvInkomsten = vanStichting + vanGemeenten;
 
   const kostenPerFte = inputs.fteKosten * inputs.overhead;
-  const beoogdeFte = kostenPerFte > 0 ? bvInkomsten / kostenPerFte : 0;
-  // Conservatieve staffing: floor naar beneden zodat BV nooit overcommitteert.
-  // Het FTE-afrondingsverschil blijft over als positieve buffer (overwinst die
-  // terugvloeit naar de gemeenschap). BV-resultaat is daarmee per definitie ≥ 0.
-  const fte = Math.min(Math.floor(beoogdeFte), MAX_BV_FTE);
+
+  // Budget-FTE: wat het beschikbare budget toelaat (conservatief afgerond
+  // naar beneden, zodat BV niet overcommitteert op pure financiële basis).
+  const budgetFte = kostenPerFte > 0 ? Math.floor(bvInkomsten / kostenPerFte) : 0;
+
+  // Demand-FTE: wat de klantenbasis operationeel vraagt. Minimaal MIN_BV_FTE,
+  // anders schaalt het mee met aantal klanten gedeeld door klantenPerFte.
+  const klantGedreven =
+    inputs.klantenPerFte > 0 ? Math.ceil(bvGemeenten / inputs.klantenPerFte) : 0;
+  const demandFte = Math.max(MIN_BV_FTE, klantGedreven);
+
+  // De BV moet de operationele vraag bedienen, ook als het budget daar krap
+  // voor is. Als demand > budget, gaat het bv-resultaat negatief — een
+  // signaal dat de cost-plus pricing op huidig niveau niet sluit.
+  const fte = Math.min(Math.max(budgetFte, demandFte), MAX_BV_FTE);
   const bvKosten = Math.round(fte * kostenPerFte);
   const bvResultaat = bvInkomsten - bvKosten;
 
   return {
     jaar: stichtingJaar.jaar,
     kostenPerFte,
-    beoogdeFte,
+    budgetFte,
+    demandFte,
     fte,
     bvGemeenten,
     vanStichtingOnderhoud,
