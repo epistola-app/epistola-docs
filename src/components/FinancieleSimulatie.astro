@@ -23,8 +23,8 @@
         <legend>Adoptie &amp; ecosysteem-groei</legend>
 
         <div class="input-group">
-          <label for="s-startGemeenten"><strong>Gemeenten jaar 1:</strong> <span id="s-startGemeenten-val">3</span></label>
-          <input type="range" id="s-startGemeenten" min="0" max="50" value="3" step="1" />
+          <label for="s-startGemeenten"><strong>Gemeenten jaar 1:</strong> <span id="s-startGemeenten-val">5</span></label>
+          <input type="range" id="s-startGemeenten" min="0" max="50" value="5" step="1" />
         </div>
         <div class="input-group">
           <label for="s-gemeenteGroei"><strong>Nieuwe gemeenten/jaar:</strong> <span id="s-gemeenteGroei-val">8</span></label>
@@ -40,6 +40,11 @@
             <option value="mid-groot">Mid–groot (60–100k)</option>
             <option value="groot">Groot (100–150k)</option>
           </select>
+        </div>
+        <div class="input-group">
+          <label for="s-contractduur"><strong>Contractduur (jaren, vooruitbetaald):</strong> <span id="s-contractduur-val">4</span></label>
+          <input type="range" id="s-contractduur" min="1" max="6" value="4" step="1" />
+          <small>Gemeenten betalen de volledige contractduur vooruit en vernieuwen daarna. Bij 1 jaar = puur jaarlijks model.</small>
         </div>
         <div class="input-group">
           <label for="s-startSuppliers"><strong>Preferred suppliers jaar 1:</strong> <span id="s-startSuppliers-val">2</span></label>
@@ -63,9 +68,9 @@
           <small>Afdracht per gegenereerd document naar de stichting. Range €0,001–€0,10.</small>
         </div>
         <div class="input-group">
-          <label for="s-docsPerSaas"><strong>Documenten per SaaS-aanbieder (per jaar):</strong> <span id="s-docsPerSaas-val">250.000</span></label>
-          <input type="range" id="s-docsPerSaas" min="0" max="2000000" value="250000" step="50000" />
-          <small>Gemiddeld aantal documenten per SaaS-aanbieder. Bij 250.000 = ±700/dag.</small>
+          <label for="s-docsPerSaas"><strong>Documenten per SaaS-aanbieder (per jaar):</strong> <span id="s-docsPerSaas-val">500.000</span></label>
+          <input type="range" id="s-docsPerSaas" min="0" max="2000000" value="500000" step="50000" />
+          <small>Gemiddeld aantal documenten per SaaS-aanbieder. Bij 500.000 = ±1.400/dag.</small>
         </div>
       </fieldset>
 
@@ -78,13 +83,13 @@
           <small>Basis-onderhoud (security, deps, infra, bugs). Uitbesteed onder cost-plus.</small>
         </div>
         <div class="input-group">
-          <label for="s-features"><strong>Features-budget (k€/jaar):</strong> <span id="s-features-val">50</span></label>
-          <input type="range" id="s-features" min="0" max="500" value="50" step="25" />
-          <small>Proactieve productevolutie. Met 0 is het scenario zuiver reactief.</small>
+          <label for="s-features"><strong>Features-budget (k€/jaar):</strong> <span id="s-features-val">0</span></label>
+          <input type="range" id="s-features" min="0" max="500" value="0" step="25" />
+          <small>Proactieve productevolutie. Standaard €0 in de opbouwfase — features worden gefinancierd zodra de stichting structureel positief draait.</small>
         </div>
         <div class="input-group">
-          <label for="s-admin"><strong>Administratie + stewards (k€/jaar):</strong> <span id="s-admin-val">25</span></label>
-          <input type="range" id="s-admin" min="5" max="80" value="25" step="5" />
+          <label for="s-admin"><strong>Administratie + stewards (k€/jaar):</strong> <span id="s-admin-val">20</span></label>
+          <input type="range" id="s-admin" min="5" max="80" value="20" step="5" />
         </div>
         <div class="input-group">
           <label for="s-investering"><strong>Initiële investering (k€):</strong> <span id="s-investering-val">0</span></label>
@@ -94,12 +99,14 @@
     </div>
 
     <h4>📈 Stichting inkomsten per jaar</h4>
+    <p class="sim-explainer"><strong>Actief</strong> = totaal aantal deelnemende gemeenten (bepaalt schaalkorting). <strong>Betalend</strong> = gemeenten die dit jaar afrekenen: nieuwe aansluitingen plus renewals van cohorten waarvan het meerjarige contract afloopt. Licentie-cash = betalend × contractduur × tarief, dus de kasstroom is lumpy en de renewal-golf is zichtbaar.</p>
     <div class="sim-table-wrap">
       <table>
         <thead>
           <tr>
             <th>Jaar</th>
-            <th>Gemeenten</th>
+            <th>Actief</th>
+            <th>Betalend</th>
             <th>Suppliers</th>
             <th>SaaS</th>
             <th>Licenties</th>
@@ -288,6 +295,7 @@
     const sStartGemeenten = bind('s-startGemeenten', 's-startGemeenten-val');
     const sGemeenteGroei = bind('s-gemeenteGroei', 's-gemeenteGroei-val');
     const sSchaal = bind('s-schaal');
+    const sContractduur = bind('s-contractduur', 's-contractduur-val');
     const sStartSuppliers = bind('s-startSuppliers', 's-startSuppliers-val');
     const sSupplierGroei = bind('s-supplierGroei', 's-supplierGroei-val');
     const sStartSaas = bind('s-startSaas', 's-startSaas-val');
@@ -322,6 +330,7 @@
         startGemeenten: parseInt(sStartGemeenten.value, 10),
         gemeenteGroei: parseInt(sGemeenteGroei.value, 10),
         schaalId: sSchaal.value,
+        contractduur: parseInt(sContractduur.value, 10),
         startSuppliers: parseInt(sStartSuppliers.value, 10),
         supplierGroei: parseInt(sSupplierGroei.value, 10),
         startSaasAanbieders: parseInt(sStartSaas.value, 10),
@@ -369,6 +378,7 @@
         <tr>
           <td>${r.jaar}</td>
           <td>${r.gemeenten}</td>
+          <td>${r.betalendeGemeenten}</td>
           <td>${r.suppliers}</td>
           <td>${r.saasAanbieders}</td>
           <td>${fmt.format(r.licentieInkomsten)}</td>

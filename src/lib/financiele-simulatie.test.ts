@@ -24,6 +24,7 @@ const stichtingDefaults: StichtingInputs = {
   startGemeenten: 5,
   gemeenteGroei: 8,
   schaalId: 'mid',
+  contractduur: 4,
   startSuppliers: 3,
   supplierGroei: 1,
   startSaasAanbieders: 1,
@@ -94,8 +95,14 @@ describe('berekenStichtingJaar — defaults jaar 1', () => {
     expect(r.saasAanbieders).toBe(1);
   });
 
-  it('licentie = gemeenten × tarief × (1 − korting)', () => {
-    expect(r.licentieInkomsten).toBe(5 * 4500);
+  it('jaar 1: alle 5 start-gemeenten betalen, contractduur 4 vooruit', () => {
+    expect(r.nieuweGemeenten).toBe(5);
+    expect(r.betalendeGemeenten).toBe(5);
+  });
+
+  it('licentie = betalende gemeenten × contractduur × tarief × (1 − korting)', () => {
+    // 5 betalend × 4 jaar vooruit × €4.500 × (1 − 0)
+    expect(r.licentieInkomsten).toBe(5 * 4 * 4500);
   });
 
   it('certificering = suppliers × €1.000', () => {
@@ -107,7 +114,7 @@ describe('berekenStichtingJaar — defaults jaar 1', () => {
   });
 
   it('totaalInkomsten somt de drie stromen', () => {
-    expect(r.totaalInkomsten).toBe(22_500 + 3_000 + 25_000);
+    expect(r.totaalInkomsten).toBe(90_000 + 3_000 + 25_000);
   });
 
   it('uitgaven volgen rechtstreeks uit inputs', () => {
@@ -118,7 +125,37 @@ describe('berekenStichtingJaar — defaults jaar 1', () => {
   });
 
   it('stichting-resultaat = inkomsten − uitgaven', () => {
-    expect(r.stichtingResultaat).toBe(50_500 - 325_000);
+    expect(r.stichtingResultaat).toBe(118_000 - 325_000);
+  });
+});
+
+describe('betalendeGemeenten — cohort & renewal-logica', () => {
+  it('jaar 1 = alle start-gemeenten', () => {
+    const r = berekenStichtingJaar(1, stichtingDefaults, 4500, 0);
+    expect(r.betalendeGemeenten).toBe(5);
+  });
+
+  it('jaar 2–4: alleen de nieuwe cohort betaalt (eerdere zitten in 4-jaars contract)', () => {
+    const r2 = berekenStichtingJaar(2, stichtingDefaults, 4500, 0);
+    const r3 = berekenStichtingJaar(3, stichtingDefaults, 4500, 0);
+    const r4 = berekenStichtingJaar(4, stichtingDefaults, 4500, 0);
+    expect(r2.betalendeGemeenten).toBe(8);
+    expect(r3.betalendeGemeenten).toBe(8);
+    expect(r4.betalendeGemeenten).toBe(8);
+  });
+
+  it('jaar 5: nieuwe cohort + renewal van de jaar-1-cohort', () => {
+    const r5 = berekenStichtingJaar(5, stichtingDefaults, 4500, 0);
+    // nieuw cohort jaar 5 = 8, renewal cohort jaar 1 = 5
+    expect(r5.betalendeGemeenten).toBe(13);
+  });
+
+  it('contractduur 1 reduceert tot het jaarlijkse model (iedereen betaalt elk jaar)', () => {
+    const jaarlijks: StichtingInputs = { ...stichtingDefaults, contractduur: 1 };
+    const r3 = berekenStichtingJaar(3, jaarlijks, 4500, 0);
+    // jaar 3 actief = 5 + 2×8 = 21; iedereen betaalt → betalend = 21
+    expect(r3.betalendeGemeenten).toBe(21);
+    expect(r3.gemeenten).toBe(21);
   });
 });
 
@@ -141,12 +178,17 @@ describe('simulateStichting — ecosysteem-groei', () => {
     expect(result.rows[4].perDocInkomsten).toBe(5 * 250_000 * 0.1);
   });
 
-  it('licentie past schaalkorting toe vanaf juiste jaar', () => {
+  it('licentie past schaalkorting toe op basis van actieve gemeenten, met 4-jaars vooruitbetaling', () => {
     const result = simulateStichting(stichtingDefaults, tarievenTyped);
-    expect(result.rows[0].licentieInkomsten).toBe(5 * 4500);
-    expect(result.rows[1].licentieInkomsten).toBe(Math.round(13 * 4500 * 0.95));
-    expect(result.rows[2].licentieInkomsten).toBe(Math.round(21 * 4500 * 0.9));
-    expect(result.rows[4].licentieInkomsten).toBe(Math.round(37 * 4500 * 0.85));
+    // betalend × 4 (contractduur) × tarief × (1−korting op actief aantal)
+    // J1: betalend 5, actief 5  → 0%
+    expect(result.rows[0].licentieInkomsten).toBe(Math.round(5 * 4 * 4500 * 1.0));
+    // J2: betalend 8, actief 13 → 5%
+    expect(result.rows[1].licentieInkomsten).toBe(Math.round(8 * 4 * 4500 * 0.95));
+    // J3: betalend 8, actief 21 → 10%
+    expect(result.rows[2].licentieInkomsten).toBe(Math.round(8 * 4 * 4500 * 0.9));
+    // J5: betalend 13 (8 nieuw + 5 renewal), actief 37 → 15%
+    expect(result.rows[4].licentieInkomsten).toBe(Math.round(13 * 4 * 4500 * 0.85));
   });
 
   it('cumulatief bouwt op vanaf de investering', () => {

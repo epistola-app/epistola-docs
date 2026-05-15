@@ -40,6 +40,8 @@ export interface StichtingInputs {
   gemeenteGroei: number;
   /** Schaal-id uit tarieven.schalen */
   schaalId: string;
+  /** Contractduur in jaren — gemeenten betalen de volledige duur vooruit (default 4) */
+  contractduur: number;
 
   // Ecosysteem-groei
   /** Aantal preferred suppliers in jaar 1 */
@@ -68,9 +70,15 @@ export interface StichtingInputs {
 
 export interface StichtingYearRow {
   jaar: number;
+  /** Totaal aantal actieve (deelnemende) gemeenten — bepaalt schaalkorting en BV-cap */
   gemeenten: number;
+  /** Nieuwe gemeenten die zich dit jaar aansluiten */
+  nieuweGemeenten: number;
+  /** Gemeenten die dit jaar betalen: nieuwe aansluitingen + renewals van aflopende cohorten */
+  betalendeGemeenten: number;
   suppliers: number;
   saasAanbieders: number;
+  /** Cash uit licenties: betalendeGemeenten × contractduur × tarief × (1−korting) */
   licentieInkomsten: number;
   certInkomsten: number;
   perDocInkomsten: number;
@@ -161,6 +169,29 @@ export function schaalKorting(tarieven: Tarieven, gemeenten: number): number {
   return korting;
 }
 
+/** Aantal nieuwe gemeenten dat zich in cohortjaar `c` aansluit. */
+export function nieuweGemeentenInJaar(inputs: StichtingInputs, c: number): number {
+  return c === 1 ? inputs.startGemeenten : inputs.gemeenteGroei;
+}
+
+/**
+ * Gemeenten die in `jaar` betalen: elk cohort betaalt bij ondertekening de
+ * volledige contractduur vooruit en opnieuw bij elke renewal. Cohort `c`
+ * betaalt in jaar `jaar` als (jaar − c) een veelvoud is van de contractduur.
+ * Bij contractduur 1 reduceert dit tot het jaarlijkse model (iedereen betaalt
+ * elk jaar).
+ */
+export function betalendeGemeentenInJaar(inputs: StichtingInputs, jaar: number): number {
+  const duur = Math.max(1, Math.round(inputs.contractduur));
+  let som = 0;
+  for (let c = 1; c <= jaar; c++) {
+    if ((jaar - c) % duur === 0) {
+      som += nieuweGemeentenInJaar(inputs, c);
+    }
+  }
+  return som;
+}
+
 // ----------------------------------------------------------------------------
 // Stichting-simulatie
 // ----------------------------------------------------------------------------
@@ -176,11 +207,15 @@ export function berekenStichtingJaar(
   korting: number,
 ): Omit<StichtingYearRow, 'cumulatief'> {
   const gemeenten = inputs.startGemeenten + (jaar - 1) * inputs.gemeenteGroei;
+  const nieuweGemeenten = nieuweGemeentenInJaar(inputs, jaar);
+  const betalendeGemeenten = betalendeGemeentenInJaar(inputs, jaar);
   const suppliers = inputs.startSuppliers + (jaar - 1) * inputs.supplierGroei;
   const saasAanbieders = inputs.startSaasAanbieders + (jaar - 1) * inputs.saasGroei;
+  const duur = Math.max(1, Math.round(inputs.contractduur));
 
-  // Drie inkomstenstromen
-  const licentieInkomsten = Math.round(gemeenten * tarief * (1 - korting));
+  // Drie inkomstenstromen. Licentie: betalende gemeenten betalen de volledige
+  // contractduur vooruit. Korting volgt het totaal aantal actieve gemeenten.
+  const licentieInkomsten = Math.round(betalendeGemeenten * duur * tarief * (1 - korting));
   const certInkomsten = suppliers * CERT_PER_SUPPLIER_PER_JAAR;
   const perDocInkomsten = Math.round(
     saasAanbieders * inputs.docsPerSaasAanbieder * inputs.tariefPerDoc,
@@ -197,6 +232,8 @@ export function berekenStichtingJaar(
   return {
     jaar,
     gemeenten,
+    nieuweGemeenten,
+    betalendeGemeenten,
     suppliers,
     saasAanbieders,
     licentieInkomsten,
