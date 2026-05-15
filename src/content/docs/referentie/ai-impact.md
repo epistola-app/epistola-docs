@@ -47,6 +47,25 @@ Wat AI niet eenvoudig vervangt, is diep begrip van het probleemdomein: hoe werke
 
 Dienstverleners die die kennis hebben opgebouwd, behouden een reëel concurrentievoordeel — ook in een wereld waar AI de basisimplementatie versnelt.
 
+### Switching costs voor bestaande gebruikers
+
+AI maakt het goedkoper om software te **bouwen**, niet om over te **stappen**. Voor een gemeente die al een systeem in productie heeft, omvat overstappen veel meer dan "een ander platform installeren":
+
+- **Data-migratie** — bestaande documenten, templates en metadata moeten worden geconverteerd; vaak met inhoudelijke validatie van conversie-resultaten
+- **Template-migratie** — soms honderden templates die opnieuw gevalideerd, getest en gepubliceerd moeten worden
+- **Integraties opnieuw inrichten** — koppelingen met zaakgericht werken, DigiD, archivering, ESB-routes; allemaal opnieuw configureren en doortesten
+- **Training & change management** — medewerkers omscholen, processen bijstellen, instructies bijwerken
+- **Contractuele afhandeling** — bestaande contracten ontbinden, juridische review van het nieuwe contract, aanbestedingstraject doorlopen
+- **Tijdelijke dubbele kosten** — periode waarin oude én nieuwe systeem parallel draaien
+
+Bij elkaar lopen die kosten makkelijk op tot meerdere malen de jaarlijkse licentiekosten. Dat creëert een **economische lock-in** die los staat van de technische of contractuele lock-in: zelfs als de software open source is en het contract netjes opzegbaar, is overstappen zelden economisch aantrekkelijk binnen één begrotingscyclus.
+
+**Twee implicaties:**
+
+1. **Voor de BV (en andere preferred suppliers)** — switching costs beschermen de zittende leverancier tegen AI-gedreven nieuwe concurrenten die het platform "even snel" kunnen reproduceren. De relatie met de klant is daarom een reële moat, los van de code-moat die AI uitholt.
+
+2. **Voor gemeenten die nu op een propriëtaire oplossing zitten** — switching costs zijn ook het tegenovergestelde van een feature: ze maken vendor lock-in een dagelijkse realiteit, ongeacht of de leverancier zich misdraagt. Het platform-ontwerp dat anti-lock-in als kerneigenschap heeft (open source na 1 jaar, meerdere preferred suppliers, gestandaardiseerde data-portabiliteit) blijft daarom waardevol — niet alleen tegen toekomstige overstap, maar als blijvende garantie dat de overstap *technisch en contractueel* mogelijk is, wat de operationele kosten ook zijn.
+
 ---
 
 ## Consequenties voor open source businessmodellen
