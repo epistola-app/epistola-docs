@@ -5,6 +5,9 @@ Nieuwste bovenaan.
 
 ## 2026-05-15
 
+- **Diagrammen renderen weer correct** — in alle schema's werden
+  regelafbrekingen als letterlijke `\n` weergegeven in plaats van een
+  nieuwe regel; site-breed verholpen.
 - **Verhaal aangescherpt na de herstructurering** — de
   [kernvraag-pagina](/epistola/modelkeuze) opent nu direct met de ene
   vraag in plaats van met een "keuze tussen modellen", en

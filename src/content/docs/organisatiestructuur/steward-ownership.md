@@ -38,19 +38,19 @@ Maar de stichting levert zelf niets. Alle dienstverlening — hosting, support, 
 flowchart TD
     subgraph Commercieel["For-Profit"]
         direction LR
-        E["Eigenaar\n(BV/NV)"] -->|"Beheert én levert"| K1["Klanten"]
+        E["Eigenaar<br/>(BV/NV)"] -->|"Beheert én levert"| K1["Klanten"]
         style E fill:#ffcdd2
     end
 
     subgraph NietCommercieel["Traditionele Stichting"]
         direction LR
-        S["Stichting"] -->|"Beheert én levert\n(zonder marktprikkel)"| K2["Gebruikers"]
+        S["Stichting"] -->|"Beheert én levert<br/>(zonder marktprikkel)"| K2["Gebruikers"]
         style S fill:#fff9c4
     end
 
     subgraph StewardOwned["Steward Ownership"]
         direction LR
-        ST["Stichting\n(bewaakt missie & IP)"] -->|"Certificeert"| L["Leveranciers\n(concurreren op kwaliteit)"]
+        ST["Stichting<br/>(bewaakt missie & IP)"] -->|"Certificeert"| L["Leveranciers<br/>(concurreren op kwaliteit)"]
         L -->|"Leveren diensten"| K3["Gebruikers"]
         style ST fill:#c8e6c9
         style L fill:#fff3e0

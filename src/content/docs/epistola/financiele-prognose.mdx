@@ -35,16 +35,16 @@ De simulatie hieronder gaat er voor de eenvoud van uit dat al het platform-onder
 ```mermaid
 flowchart LR
     G["🏘️ Gemeenten"]
-    PS["🏢 Preferred Supplier\n(Epistola BV of derde)"]
-    SAAS["☁️ SaaS-aanbieder\n(ook een supplier)"]
+    PS["🏢 Preferred Supplier<br/>(Epistola BV of derde)"]
+    SAAS["☁️ SaaS-aanbieder<br/>(ook een supplier)"]
     S["🏛️ Stichting"]
-    BV["🏢 Epistola BV\nals platformbouwer"]
+    BV["🏢 Epistola BV<br/>als platformbouwer"]
 
-    G -->|"Licentie + diensten\n(één factuur)"| PS
+    G -->|"Licentie + diensten<br/>(één factuur)"| PS
     G -->|"Multi-tenant abonnement"| SAAS
-    PS -->|"Licentie-afdracht\n+ certificering"| S
-    SAAS -->|"Per-document afdracht\n+ certificering"| S
-    S -->|"Onderhoudsbudget\n(cost-plus)"| BV
+    PS -->|"Licentie-afdracht<br/>+ certificering"| S
+    SAAS -->|"Per-document afdracht<br/>+ certificering"| S
+    S -->|"Onderhoudsbudget<br/>(cost-plus)"| BV
 
     style S fill:#e1f5fe
     style BV fill:#fff3e0

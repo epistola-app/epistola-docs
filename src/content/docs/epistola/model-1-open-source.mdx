@@ -38,12 +38,12 @@ Het probleem ontstaat als het platform succesvol wordt en andere partijen ook di
 ```mermaid
 flowchart LR
     G["🏘️ Gemeente"]
-    SX["🏢 Supplier X\ndiensten, geen onderhoud"]
-    P["🏛️ Platformonderhoud\ngedragen door Epistola BV"]
+    SX["🏢 Supplier X<br/>diensten, geen onderhoud"]
+    P["🏛️ Platformonderhoud<br/>gedragen door Epistola BV"]
 
     G -->|"Betaalt voor diensten"| SX
-    SX -.->|"Gebruikt platform\nzonder bij te dragen"| P
-    G -.->|"Onderhoudsbijdrage\nontbreekt"| P
+    SX -.->|"Gebruikt platform<br/>zonder bij te dragen"| P
+    G -.->|"Onderhoudsbijdrage<br/>ontbreekt"| P
 
     style P fill:#ffebee
     style SX fill:#fff3e0

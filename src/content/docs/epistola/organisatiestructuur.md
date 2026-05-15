@@ -13,14 +13,14 @@ Het uitgangspunt: twee entiteiten. De **stichting** beheert het intellectueel ei
 
 ```mermaid
 flowchart TB
-    S["🏛️ Stichting\nIP, licentie, governance, roadmap"]
-    BV["🏢 Epistola BV\nBouwt en onderhoudt het platform"]
-    PS["🏢 Preferred Suppliers\nLeveren diensten aan gemeenten"]
+    S["🏛️ Stichting<br/>IP, licentie, governance, roadmap"]
+    BV["🏢 Epistola BV<br/>Bouwt en onderhoudt het platform"]
+    PS["🏢 Preferred Suppliers<br/>Leveren diensten aan gemeenten"]
     G["🏘️ Gemeenten & Afnemers"]
 
     S -->|"Is eigenaar van"| BV
     S -->|"Certificeert"| PS
-    BV -->|"Draagt bij aan platform\n(als preferred supplier)"| S
+    BV -->|"Draagt bij aan platform<br/>(als preferred supplier)"| S
     PS -->|"Leveren SLA, implementatie, diensten"| G
     BV -->|"Levert platform + kernonderhoud"| G
 

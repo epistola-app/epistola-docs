@@ -19,9 +19,9 @@ Model 1 en Model 2 zijn geen rivalen. Het zijn twee antwoorden op deze ene vraag
 
 ```mermaid
 flowchart TD
-    Q{"Kan de bijdrage aan\nplatformonderhoud\nworden geborgd?"}
-    Q -->|"JA — extern geborgd\n(bv. GIBIT-verplichting)"| M1["Model 1\nVolledig open source\nDiensten = vrije markt\nNiemand lift gratis mee"]
-    Q -->|"NEE — geen externe borging"| M2["Model 2\nBSL borgt de bijdrage zelf\nNa change date Apache 2.0"]
+    Q{"Kan de bijdrage aan<br/>platformonderhoud<br/>worden geborgd?"}
+    Q -->|"JA — extern geborgd<br/>(bv. GIBIT-verplichting)"| M1["Model 1<br/>Volledig open source<br/>Diensten = vrije markt<br/>Niemand lift gratis mee"]
+    Q -->|"NEE — geen externe borging"| M2["Model 2<br/>BSL borgt de bijdrage zelf<br/>Na change date Apache 2.0"]
 
     style M1 fill:#e8f5e9
     style M2 fill:#e1f5fe
@@ -120,12 +120,12 @@ Een GIBIT-verplichting tot onderhoudsbijdrage lost dit op:
 ```mermaid
 flowchart LR
     G["🏘️ Gemeente"]
-    PS["🏢 Derde Partij\n(diensten)"]
-    S["🏛️ Stichting\n(platformonderhoud)"]
+    PS["🏢 Derde Partij<br/>(diensten)"]
+    S["🏛️ Stichting<br/>(platformonderhoud)"]
 
     G -->|"Diensten betalen"| PS
-    G -->|"Onderhoudsbijdrage\n(GIBIT-verplichting)"| S
-    PS -->|"Gebruikt platform\nzonder onderhoudslasten"| S
+    G -->|"Onderhoudsbijdrage<br/>(GIBIT-verplichting)"| S
+    PS -->|"Gebruikt platform<br/>zonder onderhoudslasten"| S
 
     style S fill:#e1f5fe
     style PS fill:#fce4ec
