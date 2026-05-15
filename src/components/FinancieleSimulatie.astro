@@ -58,9 +58,9 @@
           <input type="range" id="s-saasGroei" min="0" max="5" value="1" step="1" />
         </div>
         <div class="input-group">
-          <label for="s-tariefPerDoc"><strong>Tarief per document (€):</strong> <span id="s-tariefPerDoc-val">0.01</span></label>
-          <input type="range" id="s-tariefPerDoc" min="0" max="0.50" value="0.01" step="0.01" />
-          <small>Afdracht per gegenereerd document naar de stichting.</small>
+          <label for="s-tariefPerDoc"><strong>Tarief per document (€):</strong> <span id="s-tariefPerDoc-val">0.010</span></label>
+          <input type="range" id="s-tariefPerDoc" min="0.001" max="0.1" value="0.01" step="0.001" />
+          <small>Afdracht per gegenereerd document naar de stichting. Range €0,001–€0,10.</small>
         </div>
         <div class="input-group">
           <label for="s-docsPerSaas"><strong>Documenten per SaaS-aanbieder (per jaar):</strong> <span id="s-docsPerSaas-val">250.000</span></label>
@@ -292,7 +292,7 @@
     const sSupplierGroei = bind('s-supplierGroei', 's-supplierGroei-val');
     const sStartSaas = bind('s-startSaas', 's-startSaas-val');
     const sSaasGroei = bind('s-saasGroei', 's-saasGroei-val');
-    const sTariefPerDoc = bind('s-tariefPerDoc', 's-tariefPerDoc-val', 2);
+    const sTariefPerDoc = bind('s-tariefPerDoc', 's-tariefPerDoc-val', 3);
 
     // Docs-slider toont met duizendtal-separator
     const sDocsPerSaas = document.getElementById('s-docsPerSaas') as HTMLInputElement;
