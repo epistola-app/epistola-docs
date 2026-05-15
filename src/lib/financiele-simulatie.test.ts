@@ -39,7 +39,7 @@ const bvDefaults: BVInputs = {
   aandeelOnderhoud: 1.0,
   aandeelFeatures: 1.0,
   bvStartGemeenten: 2,
-  bvGemeenteGroei: 2,
+  bvGroeiPercentage: 0.5,
   bvOmzetPerGemeente: 15_000,
   fteKosten: 100_000,
   overhead: 1.3,
@@ -223,20 +223,20 @@ describe('berekenBVJaar — afhankelijkheid van stichting', () => {
 
   it('BV-gemeenten worden gecapt op het totale aantal stichting-gemeenten', () => {
     const stichtingResult = simulateStichting(stichtingDefaults, tarievenTyped);
-    // Forceer BV groter dan markt: 100 klanten in jaar 1 maar maar 5 gemeenten totaal
+    // Forceer BV groter dan markt: 100 klanten in jaar 1 maar maar 3 gemeenten totaal
     const r = berekenBVJaar(stichtingResult.rows[0], {
       ...bvDefaults,
       bvStartGemeenten: 100,
-      bvGemeenteGroei: 0,
+      bvGroeiPercentage: 0,
     });
     expect(r.bvGemeenten).toBe(stichtingResult.rows[0].gemeenten);
   });
 
-  it('BV-gemeenten groeit lineair tot aan markt-cap', () => {
+  it('BV-gemeenten groeit compound tot aan markt-cap', () => {
     const stichtingResult = simulateStichting(stichtingDefaults, tarievenTyped);
     const j1 = berekenBVJaar(stichtingResult.rows[0], bvDefaults);
     const j5 = berekenBVJaar(stichtingResult.rows[4], bvDefaults);
-    // jaar 1: bvStart 2; jaar 5: 2 + 4×2 = 10 (totaal markt jaar 5 = 37, dus geen cap)
+    // jaar 1: 2 × 1.5^0 = 2; jaar 5: round(2 × 1.5^4) = round(10.125) = 10
     expect(j1.bvGemeenten).toBe(2);
     expect(j5.bvGemeenten).toBe(10);
   });
@@ -276,12 +276,12 @@ describe('berekenBVJaar — afhankelijkheid van stichting', () => {
     const klein = berekenBVJaar(stichtingResult.rows[4], {
       ...bvDefaults,
       bvStartGemeenten: 2,
-      bvGemeenteGroei: 0,
+      bvGroeiPercentage: 0,
     });
     const groot = berekenBVJaar(stichtingResult.rows[4], {
       ...bvDefaults,
       bvStartGemeenten: 20,
-      bvGemeenteGroei: 0,
+      bvGroeiPercentage: 0,
     });
     expect(groot.bvInkomsten).toBeGreaterThan(klein.bvInkomsten);
     expect(groot.fte).toBeGreaterThanOrEqual(klein.fte);

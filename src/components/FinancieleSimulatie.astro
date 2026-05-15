@@ -182,9 +182,9 @@
           <small>Hoeveel gemeenten BV als preferred supplier kiezen in jaar 1. Onafhankelijk van het totaal aantal stichting-gemeenten.</small>
         </div>
         <div class="input-group">
-          <label for="b-bvGemeenteGroei"><strong>Nieuwe BV-klanten per jaar:</strong> <span id="b-bvGemeenteGroei-val">2</span></label>
-          <input type="range" id="b-bvGemeenteGroei" min="0" max="10" value="2" step="1" />
-          <small>BV-klanten kunnen nooit boven het totaal stichting-aantal komen.</small>
+          <label for="b-bvGroei"><strong>Compound groei BV-klanten per jaar:</strong> <span id="b-bvGroei-val">50</span>%</label>
+          <input type="range" id="b-bvGroei" min="0" max="200" value="50" step="5" />
+          <small>Multiplicatieve groei (ecosysteem-flywheel). Bij 50% groeit 2 → 3 → 5 → 7 → 10. BV-klanten worden gecapt op het totaal aantal stichting-gemeenten.</small>
         </div>
       </fieldset>
 
@@ -197,8 +197,8 @@
           <small>Training, consultancy, dienstverlening, marge op licentie. Cost-plus.</small>
         </div>
         <div class="input-group">
-          <label for="b-fteKosten"><strong>Kosten per FTE (all-in, k€/jaar):</strong> <span id="b-fteKosten-val">100</span></label>
-          <input type="range" id="b-fteKosten" min="60" max="140" value="100" step="5" />
+          <label for="b-fteKosten"><strong>Kosten per FTE (all-in, k€/jaar):</strong> <span id="b-fteKosten-val">150</span></label>
+          <input type="range" id="b-fteKosten" min="60" max="200" value="150" step="5" />
         </div>
         <div class="input-group">
           <label for="b-overhead"><strong>Overhead-factor:</strong> <span id="b-overhead-val">1.30</span></label>
@@ -213,7 +213,7 @@
         <thead>
           <tr>
             <th>Jaar</th>
-            <th>BV-klanten</th>
+            <th>BV-klanten (van totaal)</th>
             <th>FTE</th>
             <th>Van stichting (onderhoud)</th>
             <th>Van stichting (features)</th>
@@ -304,7 +304,7 @@
     const bAandeelOnderhoud = bind('b-aandeelOnderhoud', 'b-aandeelOnderhoud-val');
     const bAandeelFeatures = bind('b-aandeelFeatures', 'b-aandeelFeatures-val');
     const bBvStartGemeenten = bind('b-bvStartGemeenten', 'b-bvStartGemeenten-val');
-    const bBvGemeenteGroei = bind('b-bvGemeenteGroei', 'b-bvGemeenteGroei-val');
+    const bBvGroei = bind('b-bvGroei', 'b-bvGroei-val');
     const bOmzetGem = bind('b-omzetGem', 'b-omzetGem-val');
     const bFteKosten = bind('b-fteKosten', 'b-fteKosten-val');
     const bOverhead = bind('b-overhead', 'b-overhead-val', 2);
@@ -332,7 +332,7 @@
         aandeelOnderhoud: parseInt(bAandeelOnderhoud.value, 10) / 100,
         aandeelFeatures: parseInt(bAandeelFeatures.value, 10) / 100,
         bvStartGemeenten: parseInt(bBvStartGemeenten.value, 10),
-        bvGemeenteGroei: parseInt(bBvGemeenteGroei.value, 10),
+        bvGroeiPercentage: parseInt(bBvGroei.value, 10) / 100,
         bvOmzetPerGemeente: parseInt(bOmzetGem.value, 10) * 1000,
         fteKosten: parseInt(bFteKosten.value, 10) * 1000,
         overhead: parseFloat(bOverhead.value),
@@ -348,7 +348,7 @@
       renderInkomstenChart(stichting);
       renderMilestones(stichting);
       renderVoordelen(stichting);
-      renderBVInkomsten(bv);
+      renderBVInkomsten(bv, stichting);
       renderBVUitgaven(bv);
     }
 
@@ -459,21 +459,22 @@
       `;
     }
 
-    function renderBVInkomsten(bv: BVResult) {
+    function renderBVInkomsten(bv: BVResult, stichting: StichtingResult) {
       const tbody = document.getElementById('b-inkomsten-tbody')!;
       tbody.innerHTML = bv.rows
-        .map(
-          (r) => `
+        .map((r, i) => {
+          const totaal = stichting.rows[i]?.gemeenten ?? 0;
+          return `
         <tr>
           <td>${r.jaar}</td>
-          <td>${r.bvGemeenten}</td>
+          <td>${r.bvGemeenten} van ${totaal}</td>
           <td>${r.fte}</td>
           <td>${fmt.format(r.vanStichtingOnderhoud)}</td>
           <td>${fmt.format(r.vanStichtingFeatures)}</td>
           <td>${fmt.format(r.vanGemeenten)}</td>
           <td><strong>${fmt.format(r.bvInkomsten)}</strong></td>
-        </tr>`
-        )
+        </tr>`;
+        })
         .join('');
     }
 

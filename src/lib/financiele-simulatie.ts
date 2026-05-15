@@ -99,8 +99,8 @@ export interface BVInputs {
   aandeelFeatures: number;
   /** Aantal gemeenten dat BV als preferred supplier kiest, in jaar 1 */
   bvStartGemeenten: number;
-  /** Aantal nieuwe BV-gemeenten per jaar (gecapt op totaal aantal gemeenten) */
-  bvGemeenteGroei: number;
+  /** Compound jaarlijkse groei van BV-klanten (0..1+, bv 0.5 = +50%/jaar). Gecapt op het totaal aantal stichting-gemeenten. */
+  bvGroeiPercentage: number;
   /** Externe BV-omzet per BV-gemeente per jaar (€) */
   bvOmzetPerGemeente: number;
   /** All-in kosten per FTE per jaar (€) */
@@ -242,11 +242,15 @@ export function berekenBVJaar(
   const vanStichtingFeatures = stichtingJaar.featureBudget * inputs.aandeelFeatures;
   const vanStichting = vanStichtingOnderhoud + vanStichtingFeatures;
 
-  // BV-gemeenten groeit met eigen tempo, maar kan nooit het totaal aantal
-  // gemeenten van de stichting overstijgen.
+  // BV-gemeenten groeit compound met het opgegeven percentage. Wordt
+  // gecapt op het totaal aantal gemeenten van de stichting — BV kan
+  // immers nooit meer klanten bedienen dan er bestaan.
   const beoogdeBvGemeenten =
-    inputs.bvStartGemeenten + (stichtingJaar.jaar - 1) * inputs.bvGemeenteGroei;
-  const bvGemeenten = Math.max(0, Math.min(beoogdeBvGemeenten, stichtingJaar.gemeenten));
+    inputs.bvStartGemeenten * Math.pow(1 + inputs.bvGroeiPercentage, stichtingJaar.jaar - 1);
+  const bvGemeenten = Math.max(
+    0,
+    Math.min(Math.round(beoogdeBvGemeenten), stichtingJaar.gemeenten),
+  );
   const vanGemeenten = bvGemeenten * inputs.bvOmzetPerGemeente;
   const bvInkomsten = vanStichting + vanGemeenten;
 
