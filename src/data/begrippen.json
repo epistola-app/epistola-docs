@@ -1,0 +1,52 @@
+{
+  "bsl": {
+    "term": "BSL",
+    "kort": "Business Source License — broncode is publiek inzichtelijk; commercieel gebruik vereist tijdelijk een licentie. Na 1 jaar gaat elke versie automatisch over naar Apache 2.0.",
+    "link": "/referentie/bsl-licentie"
+  },
+  "cost-plus": {
+    "term": "cost-plus pricing",
+    "kort": "De prijs wordt bepaald door de werkelijke kosten plus een kleine buffer — niet door wat de markt maximaal wil betalen. Bedoeld om afnemers eerlijke prijzen te bieden zonder winstmaximalisatie.",
+    "link": "/organisatiestructuur/cost-recovery"
+  },
+  "change-date": {
+    "term": "change date",
+    "kort": "De vaste datum waarop een BSL-versie automatisch overgaat naar Apache 2.0 — bij Epistola één jaar na de release. Onomkeerbaar.",
+    "link": "/referentie/bsl-licentie#hoe-de-change-date-werkt"
+  },
+  "steward-ownership": {
+    "term": "steward ownership",
+    "kort": "Eigendomsmodel waarin de onderneming niet verkocht kan worden en zeggenschap los staat van financieel belang. Beschermt de missie tegen exit-druk.",
+    "link": "/organisatiestructuur/steward-ownership"
+  },
+  "preferred-supplier": {
+    "term": "preferred supplier",
+    "kort": "Een door de stichting gecertificeerde leverancier die diensten (hosting, support, training) aan gemeenten levert op basis van Epistola.",
+    "link": "/meedoen/leveranciers/certificering"
+  },
+  "gibit": {
+    "term": "GIBIT",
+    "kort": "Gemeentelijke Inkoopvoorwaarden bij IT — de standaard set inkoopvoorwaarden die Nederlandse gemeenten hanteren bij IT-aanbestedingen, beheerd door de VNG.",
+    "link": "/meedoen/gemeenten/gibit-compatibiliteit"
+  },
+  "saas-aanbieder": {
+    "term": "SaaS-aanbieder",
+    "kort": "Een preferred supplier die Epistola als multi-tenant clouddienst aanbiedt aan meerdere gemeenten tegelijk, met een afdracht per gegenereerd document naar de stichting.",
+    "link": "/meedoen/leveranciers/saas-aanbieden"
+  },
+  "additional-use-grant": {
+    "term": "Additional Use Grant",
+    "kort": "De gebruiksruimte die de BSL zonder licentie toestaat. Voor Epistola: niet-commercieel onbeperkt, commercieel productiegebruik tot 200 documenten per dag.",
+    "link": "/referentie/bsl-licentie#de-additional-use-grant-gratis-gebruiksruimte"
+  },
+  "ecosysteem-incentive-conflict": {
+    "term": "ecosysteem-incentive-conflict",
+    "kort": "Het structurele probleem in een diensten-only model: elke nieuwe ecosysteem-deelnemer schaadt de omzet van de oorspronkelijke ontwikkelaar, waardoor er geen prikkel is om het ecosysteem te laten groeien.",
+    "link": "/epistola/model-1-open-source"
+  },
+  "free-rider": {
+    "term": "free-rider probleem",
+    "kort": "Wanneer iedereen aanneemt dat een ander voor de instandhouding zorgt, zorgt niemand ervoor — een klassiek economisch risico voor open source projecten met een kleine gebruikersbasis.",
+    "link": "/open-source/financiele-uitdagingen#het-free-rider-probleem"
+  }
+}

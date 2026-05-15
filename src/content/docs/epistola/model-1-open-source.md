@@ -101,6 +101,14 @@ Voor Epistola — met de ambitie om alle 300+ Nederlandse gemeenten te bedienen 
 
 ---
 
+## GIBIT-compatibiliteit
+
+**Volledig compatibel.** De software is een OSI-erkende open source licentie; standaard GIBIT-clausules over open source software en data-portabiliteit zijn direct toepasbaar. Geen aanpassingen aan de aanbestedingstekst nodig.
+
+[→ Volledige analyse per clausule](/meedoen/gemeenten/gibit-compatibiliteit#model-1--volledig-open-source--diensten)
+
+---
+
 ## Zie ook
 
 - [Model 2: BSL + Ecosysteem](/epistola/model-2-bsl-licentie) — Hoe de licentie het incentive-conflict oplost

@@ -111,6 +111,14 @@ Als de VNG centraal wil aanbesteden, adviseren we:
 
 ---
 
+## GIBIT-compatibiliteit
+
+**Compatibel mits goed ingericht.** Een raamcontract met één exclusieve supplier voldoet wel formeel aan de GIBIT, maar ondermijnt de geest van anti-lock-in. Compatibele variant: meervoudig raamcontract waarbij open source of BSL+1jaar als eis is opgenomen, plus een aanbestede onderhoudsbijdrage volgens de GIBIT-aanbeveling.
+
+[→ Volledige analyse en aanbevelingen aan de VNG](/meedoen/gemeenten/gibit-compatibiliteit)
+
+---
+
 ## Zie ook
 
 - [Model 1: Open Source + Diensten](/epistola/model-1-open-source)

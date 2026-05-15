@@ -1,0 +1,106 @@
+---
+import begrippen from '../data/begrippen.json';
+
+interface Props {
+  /** Sleutel uit begrippen.json (bv. "bsl", "cost-plus") */
+  id: string;
+  /** Optionele tekst om i.p.v. de standaard term te tonen */
+  label?: string;
+}
+
+const { id, label } = Astro.props;
+const begrip = (begrippen as Record<string, { term: string; kort: string; link?: string }>)[id];
+
+if (!begrip) {
+  throw new Error(`Begrip "${id}" niet gevonden in begrippen.json`);
+}
+
+const display = label ?? begrip.term;
+---
+
+<span class="begrip" tabindex="0">
+  <span class="begrip-term">{display}</span>
+  <span class="begrip-tooltip" role="tooltip">
+    <strong>{begrip.term}</strong>
+    <span class="begrip-uitleg">{begrip.kort}</span>
+    {begrip.link && <a href={begrip.link} class="begrip-link">Lees meer →</a>}
+  </span>
+</span>
+
+<style>
+  .begrip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted var(--sl-color-accent);
+    cursor: help;
+    outline: none;
+  }
+
+  .begrip:hover,
+  .begrip:focus-visible {
+    background: color-mix(in srgb, var(--sl-color-accent) 12%, transparent);
+  }
+
+  .begrip-term {
+    /* Hou de tekst inline en stijl-neutraal */
+  }
+
+  .begrip-tooltip {
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    width: min(28rem, 90vw);
+    padding: 0.75rem 0.875rem;
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--sl-color-white);
+    text-align: left;
+    white-space: normal;
+    /* Verstop standaard */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    pointer-events: none;
+  }
+
+  .begrip:hover .begrip-tooltip,
+  .begrip:focus-visible .begrip-tooltip,
+  .begrip:focus-within .begrip-tooltip {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .begrip-tooltip strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--sl-color-accent);
+    font-weight: 600;
+  }
+
+  .begrip-uitleg {
+    display: block;
+  }
+
+  .begrip-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--sl-color-accent);
+    text-decoration: underline;
+  }
+
+  /* Mobiele val-terug: als hover niet beschikbaar, expandable via :focus */
+  @media (hover: none) {
+    .begrip {
+      text-decoration: underline dotted;
+      text-decoration-color: var(--sl-color-accent);
+      text-underline-offset: 0.2em;
+    }
+  }
+</style>
