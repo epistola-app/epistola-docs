@@ -5,6 +5,10 @@ Nieuwste bovenaan.
 
 ## 2026-05-15
 
+- **Model 1 vereist twee waarborgen, niet één** — naast externe borging van
+  de bijdrage moet het platform óók in een stichting/steward-owned structuur
+  zitten; anders blijft de prikkel bestaan om het ecosysteem moeilijk te
+  maken. Zie [Model 1](/epistola/model-1-open-source).
 - **"Model 3" heet nu "Centrale aanbesteding"** — duidelijkere naam. De
   [kernvraag-pagina](/epistola/modelkeuze) richt zich weer puur op de twee
   antwoorden; centrale aanbesteding heeft een
