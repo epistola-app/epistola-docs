@@ -5,6 +5,14 @@ Nieuwste bovenaan.
 
 ## 2026-05-15
 
+- **Verhaal aangescherpt na de herstructurering** — de
+  [kernvraag-pagina](/epistola/modelkeuze) opent nu direct met de ene
+  vraag in plaats van met een "keuze tussen modellen", en
+  [Model 1](/epistola/model-1-open-source) maakt expliciet dat de
+  eigenaarschapsvoorwaarde voor Epistola al vervuld is en alleen de
+  externe borging nog ontbreekt. Kleinere tekstuele naden in de
+  [samenvatting](/samenvatting) en de
+  [licentievergelijking](/referentie/licentievergelijking) rechtgetrokken.
 - **Model 1 vereist twee waarborgen, niet één** — naast externe borging van
   de bijdrage moet het platform óók in een stichting/steward-owned structuur
   zitten; anders blijft de prikkel bestaan om het ecosysteem moeilijk te

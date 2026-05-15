@@ -47,7 +47,7 @@ De software kan uitstekend zijn. De architectuur kan solide zijn. Het probleem i
 
 Dat mechanisme moet ontworpen worden. En het ontwerp heeft consequenties voor eigenaarschap, governance en de vraag of gebruikers uiteindelijk toch afhankelijk worden van één partij.
 
-Het free-rider-probleem laat zich terugbrengen tot **één kernvraag** die de rest van deze site beantwoordt: *kan de bijdrage aan het onderhoud worden geborgd?* Is ze extern geborgd, dan werkt volledig open source; is er geen externe borging, dan moet de licentie de bijdrage zelf borgen. Dat is geen keuze tussen twee modellen maar twee antwoorden op dezelfde vraag.
+Het free-rider-probleem laat zich terugbrengen tot **één kernvraag** die de rest van deze site beantwoordt: *kan de bijdrage aan het onderhoud worden geborgd?* Is ze extern geborgd, dan werkt volledig open source; is er geen externe borging, dan moet de licentie de bijdrage zelf borgen. Dat is geen keuze tussen twee modellen maar twee antwoorden op dezelfde vraag. Epistola loopt daar vandaag zelf tegenaan: het draait nu volledig open source zónder externe borging — een bewuste, expliciet tijdelijke keuze die het antwoord op de kernvraag hieronder uitlegt.
 
 [→ De kernvraag en de twee antwoorden](/epistola/modelkeuze)
 
