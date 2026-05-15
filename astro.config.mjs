@@ -120,7 +120,16 @@ export default defineConfig({
               {
                   label: 'Referentie',
                   collapsed: true,
-                  autogenerate: { directory: 'referentie' },
+                  items: [
+                      { label: 'De Impact van AI op Open Source Businessmodellen', link: '/referentie/ai-impact' },
+                      { label: 'Begrippen & Terminologie', link: '/referentie/begrippen' },
+                      { label: 'Bronnen & Naslagwerk', link: '/referentie/bronnen' },
+                      { label: 'De Business Source License (BSL)', link: '/referentie/bsl-licentie' },
+                      { label: 'EUPL — alleen relevant binnen Model 1', link: '/referentie/eupl-vergelijking' },
+                      { label: 'Investeringen', link: '/referentie/investeringen' },
+                      { label: 'Open source licenties — een overzicht', link: '/referentie/licentievergelijking' },
+                      { label: 'Wat is er veranderd', link: '/referentie/wat-is-er-veranderd' },
+                  ],
               },
           ],
       }),
