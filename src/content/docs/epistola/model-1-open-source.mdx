@@ -4,6 +4,7 @@ description: Volledig open source met diensten als verdienmodel — het antwoord
 ---
 
 import ModelKader from '../../../components/ModelKader.astro';
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
 <ModelKader model="1" />
 
@@ -33,6 +34,23 @@ Deze diensten zijn reëel waardevol. Gemeenten betalen er graag voor als de kwal
 ## Het ecosysteem-incentive-conflict
 
 Het probleem ontstaat als het platform succesvol wordt en andere partijen ook diensten willen aanbieden.
+
+```mermaid
+flowchart LR
+    G["🏘️ Gemeente"]
+    SX["🏢 Supplier X\ndiensten, geen onderhoud"]
+    P["🏛️ Platformonderhoud\ngedragen door Epistola BV"]
+
+    G -->|"Betaalt voor diensten"| SX
+    SX -.->|"Gebruikt platform\nzonder bij te dragen"| P
+    G -.->|"Onderhoudsbijdrage\nontbreekt"| P
+
+    style P fill:#ffebee
+    style SX fill:#fff3e0
+    style G fill:#f1f8e9
+```
+
+Dit is het spiegelbeeld van de geborgde geldstroom: de onderhoudsbijdrage die Model 1 *mét* borging wél kent, ontbreekt hier — en juist dat pad houdt het platform overeind.
 
 Stel: Supplier X wil template kwaliteitschecks aanbieden aan gemeenten. Ze vragen Epistola BV om:
 - Documentatie over de kwaliteitscriteria
@@ -69,13 +87,14 @@ Open standaarden die derden in staat stellen te integreren? Blijven "op de roadm
 
 ### Wat er uiteindelijk gebeurt
 
-**Scenario A: het ecosysteem ontwikkelt zich niet.**
-
-Epistola BV is de dominante of enige serieuze dienstverlener. Dat betekent: weinig concurrentie, weinig kwaliteitsprikkel, beperkte adoptie. Het platform blijft niche omdat er geen ecosysteem is dat het draagt.
-
-**Scenario B: het ecosysteem ontwikkelt zich ondanks Epistola.**
-
-Andere partijen beginnen diensten aan te bieden, gebruikmakend van de open code, zonder Epistola's hulp. Ze onderbieden Epistola op prijs — ze dragen immers geen onderhoudslast. Epistola's dienstenomzet daalt. De financiering van het platform staat onder druk. Uiteindelijk wordt het model onhoudbaar.
+<CardGrid>
+  <Card title="Scenario A — het ecosysteem ontwikkelt zich niet" icon="warning">
+    Epistola BV is de dominante of enige serieuze dienstverlener. Weinig concurrentie, weinig kwaliteitsprikkel, beperkte adoptie. Het platform blijft niche omdat er geen ecosysteem is dat het draagt.
+  </Card>
+  <Card title="Scenario B — het ecosysteem ontwikkelt zich ondanks Epistola" icon="warning">
+    Andere partijen bieden diensten aan op de open code, zonder Epistola's hulp. Ze onderbieden Epistola op prijs — ze dragen immers geen onderhoudslast. De dienstenomzet daalt, de platformfinanciering komt onder druk, het model wordt onhoudbaar.
+  </Card>
+</CardGrid>
 
 In beide scenario's faalt het model op de langere termijn.
 
@@ -101,6 +120,10 @@ Model 1 is houdbaar zodra de bijdrage **geborgd** is:
 
 - **Beslissend — externe borging.** Als elke gemeente die het platform gebruikt verplicht een onderhoudsbijdrage betaalt (ongeacht leverancier), kan niemand nog gratis meeliften. Dit is precies wat de [aanbeveling aan de VNG](/epistola/modelkeuze#aanbeveling-aan-de-vng-pas-de-gibit-aan) — optie 1 — regelt. Mét die borging is volledig open source niet alleen ethisch het schoonst, maar ook structureel houdbaar.
 - Of, zonder externe borging, in beperkte vorm: zolang het platform zo gespecialiseerd is dat derden de expertise niet kunnen opbouwen, of de BV bewust klein blijft en geen ecosysteem nastreeft — beide tijdelijk en begrensd.
+
+<Aside type="tip" title="Beslissend: externe borging">
+Het hele incentive-conflict valt weg zodra niemand nog gratis kan meeliften — bijvoorbeeld via een verplichte onderhoudsbijdrage in de GIBIT. Niet het model bepaalt of dit werkt, maar of de bijdrage geborgd is.
+</Aside>
 
 Voor Epistola — met de ambitie om alle 300+ Nederlandse gemeenten te bedienen en een gezond ecosysteem van leveranciers te bouwen — is Model 1 **zonder geborgde bijdrage** structureel ongeschikt. Niet omdat het onethisch is, maar omdat de incentives verkeerd liggen. **Mét** geborgde bijdrage is het juist een uitstekend antwoord. Het verschil is niet het model — het is de borging. Zie [de kernvraag](/epistola/modelkeuze) voor hoe dit zich verhoudt tot Model 2.
 

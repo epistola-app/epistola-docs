@@ -129,13 +129,15 @@ De community-fork (OpenTofu) was bij HashiCorp het noodscenario. In dit model is
 
 ### Het worst-case scenario
 
+:::caution[Zelfs als alle waarborgen tegelijk falen]
 Stel — onwaarschijnlijk — dat alle waarborgen tegelijkertijd falen en een licentiewijziging toch wordt doorgevoerd. Wat dan?
 
 1. Alle versies ouder dan één jaar staan al onder Apache 2.0 — vrij en forkbaar
 2. Een rechtsgang tegen statutair-strijdige besluitvorming staat open
 3. De community kan op basis van de vrijgegeven Apache 2.0-code direct een fork starten — precies wat OpenTofu na de HashiCorp-switch deed
 
-Met andere woorden: zelfs in een totaal falenscenario blijft er een werkend, vrij platform beschikbaar. De vraag "wat als jullie de licentie veranderen?" heeft geen scenario waarin afnemers met lege handen staan.
+Zelfs in een totaal falenscenario blijft er dus een werkend, vrij platform beschikbaar. De vraag "wat als jullie de licentie veranderen?" heeft geen scenario waarin afnemers met lege handen staan.
+:::
 
 ---
 

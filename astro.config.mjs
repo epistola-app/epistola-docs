@@ -74,7 +74,7 @@ export default defineConfig({
                       { label: 'Organisatiestructuur', link: '/epistola/organisatiestructuur' },
                       { label: 'Model 1: Open Source + Diensten', link: '/epistola/model-1-open-source' },
                       { label: 'Model 2: BSL + Ecosysteem', link: '/epistola/model-2-bsl-licentie' },
-                      { label: 'Model 3: Centraal Aanbesteed', link: '/epistola/model-3-centraal-aanbesteed' },
+                      { label: 'Centrale aanbesteding', link: '/epistola/model-3-centraal-aanbesteed' },
                       { label: 'Modelkeuze & Transitie', link: '/epistola/modelkeuze' },
                       { label: 'Financiële Prognose', link: '/epistola/financiele-prognose' },
                       {

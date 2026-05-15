@@ -1,17 +1,30 @@
 ---
-title: Model 3 — Centraal Aanbesteed
-description: Wat er gebeurt als de VNG namens alle gemeenten centraal aanbesteedt — een aparte aanbestedings-as, combineerbaar met beide antwoorden, en het monopsonie-risico
+title: Centrale aanbesteding
+description: Wat er gebeurt als de VNG namens alle gemeenten centraal aanbesteedt — combineerbaar met beide antwoorden op de kernvraag, en het monopsonie-risico
 ---
 
 import ModelKader from '../../../components/ModelKader.astro';
+import { Aside } from '@astrojs/starlight/components';
 
 <ModelKader model="3" />
 
-Er is een derde model dat steeds vaker opduikt in gesprekken over digitale infrastructuur voor gemeenten: **centrale aanbesteding door de VNG**. In plaats van dat elke gemeente individueel een aanbesteding uitschrijft, doet de VNG dat namens alle gemeenten gezamenlijk. Gemeenten nemen vervolgens af van het centraal aanbestede contract.
+Een aanbestedingsvorm die steeds vaker opduikt in gesprekken over digitale infrastructuur voor gemeenten is **centrale aanbesteding door de VNG**. In plaats van dat elke gemeente individueel een aanbesteding uitschrijft, doet de VNG dat namens alle gemeenten gezamenlijk. Gemeenten nemen vervolgens af van het centraal aanbestede contract.
 
-Belangrijk: dit is **geen derde antwoord** op de kernvraag (*kan de bijdrage worden geborgd?*). Het beantwoordt een andere vraag — *koopt elke gemeente apart in, of de VNG centraal?* Daarom is centrale aanbesteding combineerbaar met beide antwoorden: een raamcontract kan draaien op Model 1 (mét externe borging) óf op Model 2. Wat Model 3 toevoegt is geen borgingsmechanisme, maar een eigen, los risico: **monopsonie**.
+Belangrijk: dit is **geen derde model** naast Model 1 en Model 2, en **geen antwoord op de kernvraag** (*kan de bijdrage worden geborgd?*). Het beantwoordt een andere vraag — *koopt elke gemeente apart in, of de VNG centraal?* Daarom is centrale aanbesteding combineerbaar met beide antwoorden: een raamcontract kan draaien op Model 1 (mét externe borging) óf op Model 2. Wat centrale aanbesteding toevoegt is geen borgingsmechanisme, maar een eigen, los risico: **monopsonie**.
 
-Dit model heeft aantrekkelijke eigenschappen — maar dat monopsonie-risico krijgt weinig aandacht.
+```mermaid
+flowchart TB
+    BORG["BORGINGS-AS — de kernvraag\nModel 1 (borging extern) vs. Model 2 (borging in de licentie)"]
+    AANB["AANBESTEDINGS-AS — centrale aanbesteding\ngemeente koopt apart in vs. VNG besteedt centraal aan"]
+    BORG -.->|"staat los van"| AANB
+
+    style BORG fill:#e1f5fe
+    style AANB fill:#fff3e0
+```
+
+De ene as is de kernvraag: Model 1 of Model 2. De andere as is de aanbestedingsvraag: koopt elke gemeente apart in, of besteedt de VNG centraal aan? Centrale aanbesteding verplaatst je op die tweede as — ongeacht welk antwoord je op de kernvraag hebt gegeven. Het is dus geen alternatief voor Model 1 of 2, maar een keuze die je *bovenop* een van beide maakt.
+
+Centrale aanbesteding heeft aantrekkelijke eigenschappen — maar het monopsonie-risico krijgt weinig aandacht.
 
 ---
 
@@ -41,6 +54,10 @@ De VNG (Vereniging van Nederlandse Gemeenten) sluit namens haar leden een raamco
 ## Het monopsonie-risico
 
 Een **monopsonie** is een markt met één koper — het spiegelbeeld van een monopolie. Wanneer de VNG optreedt als de enige of dominante koper van een bepaalde software-categorie, ontstaat er een monopsonie.
+
+<Aside type="caution" title="De kern van het risico">
+Als de VNG je enige koper is, ben je volledig afhankelijk van één beslissende partij: niet verlengd betekent al je omzet tegelijk kwijt. Dat risico staat los van de modelkeuze — het komt erbovenop.
+</Aside>
 
 Dat heeft gevolgen voor de leverancier:
 
@@ -127,7 +144,7 @@ Als de VNG centraal wil aanbesteden, adviseren we:
 
 ## Zie ook
 
-- [De kernvraag](/epistola/modelkeuze) — Eén vraag, twee antwoorden; Model 3 als aparte as
+- [De kernvraag](/epistola/modelkeuze) — Eén vraag, twee antwoorden
 - [Model 1: Open Source + Diensten](/epistola/model-1-open-source) — Antwoord 1: borging buiten de licentie
 - [Model 2: BSL + Ecosysteem](/epistola/model-2-bsl-licentie) — Antwoord 2: borging in de licentie
 - [Afnemersperspectief](/open-source/afnemersperspectief) — Hoe gemeenten lock-in en betrouwbaarheid beoordelen

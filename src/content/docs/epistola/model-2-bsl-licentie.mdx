@@ -5,6 +5,7 @@ description: Het antwoord op de kernvraag wanneer externe borging ontbreekt — 
 
 import LicentieTarieven from '../../../components/LicentieTarieven.astro';
 import ModelKader from '../../../components/ModelKader.astro';
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <ModelKader model="2" />
 
@@ -19,6 +20,15 @@ Model 2 lost dat op door de bijdrage in de licentie te borgen en de inkomstenstr
 ## Hoe het incentive-conflict verdwijnt
 
 In Model 1 schaadde ecosysteemgroei de omzet van Epistola BV direct. In Model 2 is dat omgekeerd.
+
+<CardGrid>
+  <Card title="In Model 1: ecosysteemgroei schaadt de omzet" icon="warning">
+    Elke supplier die diensten aanbiedt, neemt omzet weg bij Epistola BV. Het ecosysteem laten groeien betekent je eigen inkomsten ondermijnen — dus gebeurt het niet.
+  </Card>
+  <Card title="In Model 2: ecosysteemgroei vergroot de omzet" icon="approve-check-circle">
+    Elke nieuwe preferred supplier betaalt licentieafdracht aan de stichting en brengt nieuwe gemeenten binnen. Meer suppliers = meer licenties = beter gefinancierd platform — ook voor de BV.
+  </Card>
+</CardGrid>
 
 **Elke nieuwe preferred supplier die zich aansluit:**
 - Betaalt licentieafdracht aan de stichting

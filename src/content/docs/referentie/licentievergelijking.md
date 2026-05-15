@@ -101,13 +101,13 @@ Buiten scope van deze pagina, maar relevant als nulpunt: alles wat naar links va
 
 ## Wat dit voor Epistola betekent
 
-Epistola hanteert drie mogelijke modellen die elk een eigen licentiekeuze impliceren. De definitieve keuze is nog niet gemaakt — de site beargumenteert wel een voorkeur en een transitiepad.
+Epistola hanteert twee mogelijke verdienmodellen die elk een eigen licentiekeuze impliceren; centrale aanbesteding staat daar los van. De definitieve keuze is nog niet gemaakt — de site beargumenteert wel een voorkeur en een transitiepad.
 
 | Model | Licentie | Status |
 |---|---|---|
 | **Model 1** — Open source + diensten | Permissive (Apache 2.0) of copyleft (AGPL/EUPL) | Huidig startpunt — pragmatische adoptie |
 | **Model 2** — BSL + ecosysteem | BSL met change date naar Apache 2.0 | Voorkeursmodel, voorzien als eindbestemming |
-| **Model 3** — Centraal aanbesteed | Afhankelijk van VNG-eisen | Wordt mogelijk gemaakt, niet actief nagestreefd |
+| **Centrale aanbesteding** | Afhankelijk van VNG-eisen | Wordt mogelijk gemaakt, niet actief nagestreefd |
 
 Het BSL-model combineert code-transparantie vanaf dag 1, tijdelijke commerciële regulering voor platformfinanciering, en automatische overgang naar maximale vrijheid na één jaar. Voor de volledige onderbouwing en de redenering achter de modelkeuze, zie [Modelkeuze & Transitiestrategie](/epistola/modelkeuze). Voor de werking van de BSL specifiek, zie [De BSL-licentie](/referentie/bsl-licentie). Voor de EUPL-afweging zie [Waarom geen EUPL?](/referentie/eupl-vergelijking).
 
