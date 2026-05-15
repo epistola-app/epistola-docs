@@ -101,7 +101,7 @@ Buiten scope van deze pagina, maar relevant als nulpunt: alles wat naar links va
 
 ## Wat dit voor Epistola betekent
 
-Epistola hanteert twee mogelijke verdienmodellen die elk een eigen licentiekeuze impliceren; centrale aanbesteding staat daar los van. De definitieve keuze is nog niet gemaakt — de site beargumenteert wel een voorkeur en een transitiepad.
+Epistola hanteert twee mogelijke verdienmodellen die elk een eigen licentiekeuze impliceren. De definitieve keuze is nog niet gemaakt — de site beargumenteert wel een voorkeur en een transitiepad.
 
 | Model | Licentie | Status |
 |---|---|---|

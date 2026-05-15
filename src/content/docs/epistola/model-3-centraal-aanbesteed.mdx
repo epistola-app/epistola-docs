@@ -1,30 +1,13 @@
 ---
 title: Centrale aanbesteding
-description: Wat er gebeurt als de VNG namens alle gemeenten centraal aanbesteedt — combineerbaar met beide antwoorden op de kernvraag, en het monopsonie-risico
+description: Wat er gebeurt als de VNG namens alle gemeenten centraal aanbesteedt — en het onderschatte monopsonie-risico
 ---
 
-import ModelKader from '../../../components/ModelKader.astro';
 import { Aside } from '@astrojs/starlight/components';
-
-<ModelKader model="3" />
 
 Een aanbestedingsvorm die steeds vaker opduikt in gesprekken over digitale infrastructuur voor gemeenten is **centrale aanbesteding door de VNG**. In plaats van dat elke gemeente individueel een aanbesteding uitschrijft, doet de VNG dat namens alle gemeenten gezamenlijk. Gemeenten nemen vervolgens af van het centraal aanbestede contract.
 
-Belangrijk: dit is **geen derde model** naast Model 1 en Model 2, en **geen antwoord op de kernvraag** (*kan de bijdrage worden geborgd?*). Het beantwoordt een andere vraag — *koopt elke gemeente apart in, of de VNG centraal?* Daarom is centrale aanbesteding combineerbaar met beide antwoorden: een raamcontract kan draaien op Model 1 (mét externe borging) óf op Model 2. Wat centrale aanbesteding toevoegt is geen borgingsmechanisme, maar een eigen, los risico: **monopsonie**.
-
-```mermaid
-flowchart TB
-    BORG["BORGINGS-AS — de kernvraag\nModel 1 (borging extern) vs. Model 2 (borging in de licentie)"]
-    AANB["AANBESTEDINGS-AS — centrale aanbesteding\ngemeente koopt apart in vs. VNG besteedt centraal aan"]
-    BORG -.->|"staat los van"| AANB
-
-    style BORG fill:#e1f5fe
-    style AANB fill:#fff3e0
-```
-
-De ene as is de kernvraag: Model 1 of Model 2. De andere as is de aanbestedingsvraag: koopt elke gemeente apart in, of besteedt de VNG centraal aan? Centrale aanbesteding verplaatst je op die tweede as — ongeacht welk antwoord je op de kernvraag hebt gegeven. Het is dus geen alternatief voor Model 1 of 2, maar een keuze die je *bovenop* een van beide maakt.
-
-Centrale aanbesteding heeft aantrekkelijke eigenschappen — maar het monopsonie-risico krijgt weinig aandacht.
+Het heeft aantrekkelijke eigenschappen — maar het monopsonie-risico krijgt weinig aandacht.
 
 ---
 
@@ -56,7 +39,7 @@ De VNG (Vereniging van Nederlandse Gemeenten) sluit namens haar leden een raamco
 Een **monopsonie** is een markt met één koper — het spiegelbeeld van een monopolie. Wanneer de VNG optreedt als de enige of dominante koper van een bepaalde software-categorie, ontstaat er een monopsonie.
 
 <Aside type="caution" title="De kern van het risico">
-Als de VNG je enige koper is, ben je volledig afhankelijk van één beslissende partij: niet verlengd betekent al je omzet tegelijk kwijt. Dat risico staat los van de modelkeuze — het komt erbovenop.
+Als de VNG je enige koper is, ben je volledig afhankelijk van één beslissende partij: niet verlengd betekent al je omzet tegelijk kwijt.
 </Aside>
 
 Dat heeft gevolgen voor de leverancier:
@@ -111,13 +94,13 @@ Een centraal aanbesteed contract op basis van open source-software vermindert he
 
 ---
 
-## De combinatie met Epistola's modellen
+## Wat dit voor Epistola betekent
 
 Als de VNG centraal aanbesteedt, zijn er twee scenario's voor Epistola:
 
 **Epistola wint de aanbesteding.** Dan heeft Epistola één grote klant — de VNG. Het monopsonie-risico is volledig aanwezig. De stichting blijft relevant als IP-beheerder, maar de BV is volledig afhankelijk van het VNG-contract. Dit is geen gezonde positie, ook niet als het financieel aantrekkelijk lijkt.
 
-**De aanbesteding is open voor meerdere preferred suppliers.** Als de VNG een raamcontract sluit waarbij meerdere gecertificeerde suppliers mogen aanbieden, behoudt de markt haar concurrentiefunctie. In dat geval gaat het VNG-model samen met een geborgd antwoord op de kernvraag: ofwel Model 1 met een GIBIT-onderhoudsbijdrage, ofwel Model 2 met de borging in de licentie. De stichting certificeert suppliers, de VNG selecteert uit het gecertificeerde aanbod.
+**De aanbesteding is open voor meerdere preferred suppliers.** Als de VNG een raamcontract sluit waarbij meerdere gecertificeerde suppliers mogen aanbieden, behoudt de markt haar concurrentiefunctie. De stichting certificeert suppliers, de VNG selecteert uit het gecertificeerde aanbod.
 
 Dit laatste is het enige scenario waarbij centrale aanbesteding en een gezond ecosysteem samengaan.
 
