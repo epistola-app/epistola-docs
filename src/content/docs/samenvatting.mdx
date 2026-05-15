@@ -9,6 +9,12 @@ import Begrip from '../../components/Begrip.astro';
 
 Open source platformsoftware in de publieke sector heeft een structureel financieringsprobleem: gemeenten verwachten dat het "gratis" is, terwijl onderhoud, beveiliging en doorontwikkeling structureel geld kosten. Pure dienstenmodellen lossen dat niet op — ze creëren juist een prikkel om het ecosysteem klein te houden (het <Begrip id="ecosysteem-incentive-conflict" />).
 
+Daaruit volgt **één kernvraag**, en die loopt als rode draad door deze hele site:
+
+> **Kan de bijdrage aan het onderhoud van het platform worden geborgd?**
+
+Er zijn precies twee antwoorden op deze vraag — en welk antwoord juist is, hangt niet af van een ideologische voorkeur maar van één feitelijke omstandigheid: is de bijdrage **extern** geborgd (bijvoorbeeld via de inkoopvoorwaarden), dan kan de software volledig open source zijn; is er **geen** externe borging, dan moet de licentie de bijdrage zelf borgen. (Centrale aanbesteding is nog een aparte vraag — over de inkoopvorm — die met beide antwoorden samengaat.) Verderop op deze pagina krijgen deze antwoorden hun namen: Model 1 en Model 2.
+
 Een duurzaam alternatief vraagt drie dingen tegelijk:
 
 1. **Een organisatiestructuur die de missie beschermt** — geen aandeelhouders met exit-druk, geen mogelijkheid tot overname, salarissen en winstuitkering vooraf begrensd
@@ -42,22 +48,22 @@ Hoe for-profit, missiegedreven en <Begrip id="steward-ownership" label="steward-
 Het concrete voorbeeld: stichting + BV, vijf statutaire constraints (max salaris, geen winstuitkering, overwinst terug, 100% focus, max 20 FTE), en drie verdienmodellen doorgerekend.
 
 - [Organisatiestructuur](/epistola/organisatiestructuur)
-- [Model 1: Open Source + Diensten](/epistola/model-1-open-source) — eenvoudig, maar incentive-conflict
-- [Model 2: <Begrip id="bsl" /> + Ecosysteem](/epistola/model-2-bsl-licentie) — onze voorkeur
-- [Model 3: Centraal Aanbesteed](/epistola/model-3-centraal-aanbesteed) — risico: monopsonie
-- [Modelkeuze & Transitie](/epistola/modelkeuze) — waarom we beginnen met Model 1
+- [De kernvraag](/epistola/modelkeuze) — Eén vraag, twee antwoorden, en waar Epistola vandaag staat
+- [Model 1: Open Source + Diensten](/epistola/model-1-open-source) — Antwoord 1: borging buiten de licentie
+- [Model 2: <Begrip id="bsl" /> + Ecosysteem](/epistola/model-2-bsl-licentie) — Antwoord 2: de licentie borgt zelf
+- [Model 3: Centraal Aanbesteed](/epistola/model-3-centraal-aanbesteed) — Aparte aanbestedings-as; risico: monopsonie
 
 ---
 
 ## Onze positie
 
-Epistola opereert nu binnen **Model 1** (volledig open source, verdienen op diensten) — niet omdat we Model 1 als duurzaam eindpunt zien, maar omdat Model 2 (BSL + ecosysteem) in de huidige markt vaak wordt geïnterpreteerd als "niet écht open source". Die perceptie is de praktische blokkade, niet de inhoud.
+Vandaag bestaat er **geen externe borging**: de inkoopvoorwaarden verplichten gemeenten niet om bij te dragen aan platformonderhoud. Het antwoord op de kernvraag is op dit moment dus *nee*. Tóch draait Epistola nu **Model 1** (volledig open source, verdienen op diensten) — niet omdat we de kernvraag negeren, maar omdat een licentiemodel aan de voorkant vandaag een adoptierem is: de markt interpreteert source-available nog vaak als "niet écht open source". Dat is een bewuste, **expliciet tijdelijke** keuze — Model 1 *zonder* geborgde bijdrage is alleen houdbaar zolang we de dominante dienstverlener zijn.
 
-We zijn in goed gezelschap: **Maykin Media**, **Ritense** en andere Nederlandse open source-leveranciers in de publieke sector hanteren feitelijk hetzelfde model. En zij lopen tegen dezelfde uitdagingen aan — uitdagingen die met de opkomst van AI alleen maar groter zullen worden, omdat de toetredingsdrempel voor concurrerende dienstverleners verder daalt en het free-rider-probleem urgenter wordt. [Zie hier](/referentie/ai-impact) waarom AI de licentie-vs-diensten-afweging in scherpe vorm zet.
+We zijn in goed gezelschap: **Maykin Media**, **Ritense** en andere Nederlandse open source-leveranciers in de publieke sector hanteren feitelijk hetzelfde model. En zij lopen tegen dezelfde uitdagingen aan — uitdagingen die met de opkomst van AI alleen maar groter zullen worden, omdat de toetredingsdrempel voor concurrerende dienstverleners verder daalt en het free-rider-probleem urgenter wordt. [Zie hier](/referentie/ai-impact) waarom AI de borgingsvraag in scherpe vorm zet.
 
-Met dit document willen we niet één model promoten, maar **alle drie de modellen helder uitleggen en de consequenties van elk zichtbaar maken** — zodat gemeenten, leveranciers en stewards een geïnformeerde keuze kunnen maken in plaats van een impliciete.
+Wat we bepleiten is daarom **geen specifiek model**, maar dát de borging gaat bestaan. Zodra ze bestaat, is de modelkeuze geen dilemma meer maar een afgeleide: borging extern geregeld → Model 1; niet → Model 2. Daarom leggen we beide antwoorden volledig uit en maken we de consequenties van elk zichtbaar — zodat gemeenten, leveranciers en stewards een geïnformeerde keuze maken in plaats van een impliciete.
 
-We **adviseren de VNG** om de GIBIT aan te passen zodat afnemers van open source verplicht een onderhoudsbijdrage betalen. Dat lost het free-rider-probleem structureel op en geeft elk van de drie modellen een steviger financiële basis.
+We **adviseren de VNG** om die borging mogelijk te maken (zie hieronder). Dat lost het free-rider-probleem structureel op en geeft beide antwoorden een steviger financiële basis.
 
 [→ Volledige modelkeuze en transitiestrategie](/epistola/modelkeuze)
 
@@ -65,13 +71,13 @@ We **adviseren de VNG** om de GIBIT aan te passen zodat afnemers van open source
 
 ## Key takeaway: aanbeveling aan de VNG (kies één)
 
-Concreet kan dit op twee manieren — beide adresseren hetzelfde free-rider-probleem vanuit een andere kant:
+De aanbeveling aan de VNG is niet "kies tussen twee losse ideeën". Het zijn **exact de twee antwoorden op de kernvraag**, nu als beleidskeuze. Welke de VNG ook kiest, de borging die vandaag ontbreekt, gaat dan bestaan:
 
-1. **Verplichte redelijke bijdrage bij open source.** Neem in de GIBIT-voorwaarden op dat een gemeente die open source software gebruikt verplicht is een redelijke bijdrage te leveren aan de partij die de software onderhoudt en doorontwikkelt. *Lost het free-rider-probleem op binnen het bestaande open source-paradigma.*
+1. **Verplichte redelijke bijdrage bij open source.** Neem in de GIBIT-voorwaarden op dat een gemeente die open source software gebruikt verplicht is een redelijke bijdrage te leveren aan de partij die de software onderhoudt en doorontwikkelt. *Dit creëert de **externe** borging — en maakt daarmee antwoord 1 (Model 1, volledig open source) structureel houdbaar.*
 
-2. **Erken een nieuwe licentiecategorie: BSL+1jaar.** Voeg in de GIBIT een categorie toe voor source-available software met geborgde overgang naar Apache 2.0 binnen 12 maanden. *Maakt Model 2 als aanbestedingsbare categorie expliciet beschikbaar, met de continuïteitsbescherming in de licentie zelf.*
+2. **Erken een nieuwe licentiecategorie: BSL+1jaar.** Voeg in de GIBIT een categorie toe voor source-available software met geborgde overgang naar Apache 2.0 binnen 12 maanden. *Dit maakt antwoord 2 (Model 2) aanbestedbaar, met de borging **in de licentie** zelf.*
 
-Optie 1 verplicht bijdrage los van licentievorm; optie 2 erkent een nieuw licentietype dat de continuïteit zelf borgt. Beide maken Epistola — en vergelijkbare publieke-sector open source platforms — structureel financieerbaar.
+Optie 1 borgt de bijdrage buiten de licentie; optie 2 erkent een licentie die de bijdrage zelf borgt. Het is dezelfde kernvraag, twee kanten van dezelfde medaille. Beide maken Epistola — en vergelijkbare publieke-sector open source platforms — structureel financieerbaar.
 
 [→ GIBIT-compatibiliteit per model](/meedoen/gemeenten/gibit-compatibiliteit) · [→ De aanbeveling in detail](/epistola/modelkeuze#aanbeveling-aan-de-vng-pas-de-gibit-aan)
 

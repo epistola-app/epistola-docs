@@ -1,0 +1,66 @@
+---
+interface Props {
+  /** Welk model deze pagina behandelt */
+  model: '1' | '2' | '3';
+}
+
+const { model } = Astro.props;
+
+const plaatsing: Record<Props['model'], string> = {
+  '1': 'Model 1 is het antwoord wanneer de bijdrage <strong>extern geborgd</strong> is — bijvoorbeeld doordat de GIBIT elke gemeente verplicht een onderhoudsbijdrage te betalen, ongeacht de leverancier. Dan kan niemand gratis meeliften en is volledig open source houdbaar.',
+  '2': 'Model 2 is het antwoord wanneer externe borging <strong>ontbreekt</strong> — dan borgt de licentie zelf de bijdrage (BSL → na de change date Apache 2.0).',
+  '3': 'Model 3 staat op een <strong>andere as</strong>: het is een aanbestedingsvraag (één koper vs. meerdere), niet de borgingsvraag. Het is combineerbaar met beide antwoorden.',
+};
+---
+
+<aside class="model-kader" aria-label="Plaats in de kernvraag">
+  <p class="model-kader-vraag">
+    De kernvraag van deze site: <strong>kan de bijdrage aan platformonderhoud worden geborgd?</strong>
+    Er zijn twee antwoorden — Model 1 en Model 2 — plus Model 3 op een aparte as.
+  </p>
+  <p class="model-kader-plaats" set:html={plaatsing[model]} />
+  <p class="model-kader-link">
+    <a href="/epistola/modelkeuze">→ De kernvraag en de twee antwoorden in samenhang</a>
+  </p>
+</aside>
+
+<style>
+  .model-kader {
+    margin: 0 0 1.75rem;
+    padding: 1rem 1.125rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-left: 4px solid var(--sl-color-accent);
+    border-radius: 0.25rem;
+    background: var(--sl-color-bg-nav);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .model-kader p {
+    margin: 0;
+  }
+
+  .model-kader-vraag {
+    color: var(--sl-color-white);
+  }
+
+  .model-kader-plaats {
+    margin-top: 0.625rem !important;
+    color: var(--sl-color-gray-2);
+  }
+
+  .model-kader-link {
+    margin-top: 0.75rem !important;
+    font-size: 0.875rem;
+  }
+
+  .model-kader-link a {
+    color: var(--sl-color-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .model-kader-link a:hover {
+    text-decoration: underline;
+  }
+</style>

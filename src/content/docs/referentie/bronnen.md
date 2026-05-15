@@ -26,7 +26,7 @@ Fundamentele principes voor transparante bestuuring van publieke diensten en col
 ## Open Source & IP-Management
 
 ### Business Source License (BSL)
-[Официальная спецификация](https://mariadb.com/bsl/) van het licentietype dat Epistola in jaar 1–2 hanteert voordat volledige open source (Apache 2.0) plaatsvindt.
+[Officiële specificatie](https://mariadb.com/bsl/) van het licentietype achter Model 2: commercieel gebruik is tijdelijk beperkt, waarna de code na de change date automatisch overgaat naar volledige open source (Apache 2.0).
 
 **Relevantie voor Epistola:** Juridisch framework dat commercieel misbruik voorkomt, terwijl code open en inzichtelijk blijft. Garandeert toekomstige openheid zonder huidige inkomstenverlies.
 
