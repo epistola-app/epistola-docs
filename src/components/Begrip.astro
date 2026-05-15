@@ -68,9 +68,21 @@ const display = label ?? begrip.term;
     pointer-events: none;
   }
 
+  /* Onzichtbare brug onder de tooltip naar de trigger, zodat de muis
+     tussen beide kan reizen zonder dat de hover-state wordt onderbroken */
+  .begrip-tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 0.5rem;
+  }
+
   .begrip:hover .begrip-tooltip,
   .begrip:focus-visible .begrip-tooltip,
-  .begrip:focus-within .begrip-tooltip {
+  .begrip:focus-within .begrip-tooltip,
+  .begrip-tooltip:hover {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
