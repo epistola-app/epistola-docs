@@ -23,8 +23,8 @@
         <legend>Adoptie &amp; ecosysteem-groei</legend>
 
         <div class="input-group">
-          <label for="s-startGemeenten"><strong>Gemeenten jaar 1:</strong> <span id="s-startGemeenten-val">5</span></label>
-          <input type="range" id="s-startGemeenten" min="0" max="50" value="5" step="1" />
+          <label for="s-startGemeenten"><strong>Gemeenten jaar 1:</strong> <span id="s-startGemeenten-val">3</span></label>
+          <input type="range" id="s-startGemeenten" min="0" max="50" value="3" step="1" />
         </div>
         <div class="input-group">
           <label for="s-gemeenteGroei"><strong>Nieuwe gemeenten/jaar:</strong> <span id="s-gemeenteGroei-val">8</span></label>
@@ -42,12 +42,12 @@
           </select>
         </div>
         <div class="input-group">
-          <label for="s-startSuppliers"><strong>Preferred suppliers jaar 1:</strong> <span id="s-startSuppliers-val">3</span></label>
-          <input type="range" id="s-startSuppliers" min="0" max="15" value="3" step="1" />
+          <label for="s-startSuppliers"><strong>Preferred suppliers jaar 1:</strong> <span id="s-startSuppliers-val">2</span></label>
+          <input type="range" id="s-startSuppliers" min="0" max="15" value="2" step="1" />
         </div>
         <div class="input-group">
-          <label for="s-supplierGroei"><strong>Nieuwe suppliers/jaar:</strong> <span id="s-supplierGroei-val">1</span></label>
-          <input type="range" id="s-supplierGroei" min="0" max="5" value="1" step="1" />
+          <label for="s-supplierGroei"><strong>Nieuwe suppliers/jaar:</strong> <span id="s-supplierGroei-val">2</span></label>
+          <input type="range" id="s-supplierGroei" min="0" max="5" value="2" step="1" />
         </div>
         <div class="input-group">
           <label for="s-startSaas"><strong>SaaS-aanbieders jaar 1:</strong> <span id="s-startSaas-val">1</span></label>
@@ -58,8 +58,8 @@
           <input type="range" id="s-saasGroei" min="0" max="5" value="1" step="1" />
         </div>
         <div class="input-group">
-          <label for="s-tariefPerDoc"><strong>Tarief per document (€):</strong> <span id="s-tariefPerDoc-val">0.10</span></label>
-          <input type="range" id="s-tariefPerDoc" min="0" max="0.50" value="0.10" step="0.01" />
+          <label for="s-tariefPerDoc"><strong>Tarief per document (€):</strong> <span id="s-tariefPerDoc-val">0.01</span></label>
+          <input type="range" id="s-tariefPerDoc" min="0" max="0.50" value="0.01" step="0.01" />
           <small>Afdracht per gegenereerd document naar de stichting.</small>
         </div>
         <div class="input-group">
@@ -73,9 +73,9 @@
         <legend>Stichting-uitgaven</legend>
 
         <div class="input-group">
-          <label for="s-onderhoud"><strong>Onderhoudsbudget (k€/jaar):</strong> <span id="s-onderhoud-val">250</span></label>
-          <input type="range" id="s-onderhoud" min="0" max="800" value="250" step="25" />
-          <small>Basis-onderhoud (security, deps, infra, bugs). Uitbesteed onder cost-plus, ongeveer 2 FTE-equivalent.</small>
+          <label for="s-onderhoud"><strong>Onderhoudsbudget (k€/jaar):</strong> <span id="s-onderhoud-val">100</span></label>
+          <input type="range" id="s-onderhoud" min="0" max="800" value="100" step="25" />
+          <small>Basis-onderhoud (security, deps, infra, bugs). Uitbesteed onder cost-plus.</small>
         </div>
         <div class="input-group">
           <label for="s-features"><strong>Features-budget (k€/jaar):</strong> <span id="s-features-val">50</span></label>
@@ -87,8 +87,8 @@
           <input type="range" id="s-admin" min="5" max="80" value="25" step="5" />
         </div>
         <div class="input-group">
-          <label for="s-investering"><strong>Initiële investering (k€):</strong> <span id="s-investering-val">100</span></label>
-          <input type="range" id="s-investering" min="0" max="500" value="100" step="10" />
+          <label for="s-investering"><strong>Initiële investering (k€):</strong> <span id="s-investering-val">0</span></label>
+          <input type="range" id="s-investering" min="0" max="500" value="0" step="10" />
         </div>
       </fieldset>
     </div>
@@ -177,9 +177,14 @@
           <input type="range" id="b-aandeelFeatures" min="0" max="100" value="100" step="10" />
         </div>
         <div class="input-group">
-          <label for="b-aandeelGemeenten"><strong>Aandeel gemeenten dat BV als supplier kiest:</strong> <span id="b-aandeelGemeenten-val">40</span>%</label>
-          <input type="range" id="b-aandeelGemeenten" min="0" max="100" value="40" step="5" />
-          <small>Naarmate het ecosysteem groeit verschuift dit aandeel. BV kan absoluut groeien terwijl haar relatieve aandeel daalt.</small>
+          <label for="b-bvStartGemeenten"><strong>BV-klanten in jaar 1:</strong> <span id="b-bvStartGemeenten-val">2</span></label>
+          <input type="range" id="b-bvStartGemeenten" min="0" max="50" value="2" step="1" />
+          <small>Hoeveel gemeenten BV als preferred supplier kiezen in jaar 1. Onafhankelijk van het totaal aantal stichting-gemeenten.</small>
+        </div>
+        <div class="input-group">
+          <label for="b-bvGemeenteGroei"><strong>Nieuwe BV-klanten per jaar:</strong> <span id="b-bvGemeenteGroei-val">2</span></label>
+          <input type="range" id="b-bvGemeenteGroei" min="0" max="10" value="2" step="1" />
+          <small>BV-klanten kunnen nooit boven het totaal stichting-aantal komen.</small>
         </div>
       </fieldset>
 
@@ -208,6 +213,7 @@
         <thead>
           <tr>
             <th>Jaar</th>
+            <th>BV-klanten</th>
             <th>FTE</th>
             <th>Van stichting (onderhoud)</th>
             <th>Van stichting (features)</th>
@@ -297,7 +303,8 @@
     // BV inputs
     const bAandeelOnderhoud = bind('b-aandeelOnderhoud', 'b-aandeelOnderhoud-val');
     const bAandeelFeatures = bind('b-aandeelFeatures', 'b-aandeelFeatures-val');
-    const bAandeelGemeenten = bind('b-aandeelGemeenten', 'b-aandeelGemeenten-val');
+    const bBvStartGemeenten = bind('b-bvStartGemeenten', 'b-bvStartGemeenten-val');
+    const bBvGemeenteGroei = bind('b-bvGemeenteGroei', 'b-bvGemeenteGroei-val');
     const bOmzetGem = bind('b-omzetGem', 'b-omzetGem-val');
     const bFteKosten = bind('b-fteKosten', 'b-fteKosten-val');
     const bOverhead = bind('b-overhead', 'b-overhead-val', 2);
@@ -324,7 +331,8 @@
       return {
         aandeelOnderhoud: parseInt(bAandeelOnderhoud.value, 10) / 100,
         aandeelFeatures: parseInt(bAandeelFeatures.value, 10) / 100,
-        aandeelGemeenten: parseInt(bAandeelGemeenten.value, 10) / 100,
+        bvStartGemeenten: parseInt(bBvStartGemeenten.value, 10),
+        bvGemeenteGroei: parseInt(bBvGemeenteGroei.value, 10),
         bvOmzetPerGemeente: parseInt(bOmzetGem.value, 10) * 1000,
         fteKosten: parseInt(bFteKosten.value, 10) * 1000,
         overhead: parseFloat(bOverhead.value),
@@ -458,6 +466,7 @@
           (r) => `
         <tr>
           <td>${r.jaar}</td>
+          <td>${r.bvGemeenten}</td>
           <td>${r.fte}</td>
           <td>${fmt.format(r.vanStichtingOnderhoud)}</td>
           <td>${fmt.format(r.vanStichtingFeatures)}</td>

@@ -38,7 +38,8 @@ const stichtingDefaults: StichtingInputs = {
 const bvDefaults: BVInputs = {
   aandeelOnderhoud: 1.0,
   aandeelFeatures: 1.0,
-  aandeelGemeenten: 0.4,
+  bvStartGemeenten: 2,
+  bvGemeenteGroei: 2,
   bvOmzetPerGemeente: 15_000,
   fteKosten: 100_000,
   overhead: 1.3,
@@ -210,16 +211,40 @@ describe('berekenBVJaar — afhankelijkheid van stichting', () => {
     const sr = stichtingResult.rows[0];
     const r = berekenBVJaar(sr, bvDefaults);
 
-    expect(r.vanStichtingOnderhoud).toBe(250_000 * 1.0);
-    expect(r.vanStichtingFeatures).toBe(50_000 * 1.0);
-    expect(r.vanStichting).toBe(300_000);
-    expect(r.vanGemeenten).toBe(5 * 0.4 * 15_000); // 30.000
-    expect(r.bvInkomsten).toBe(300_000 + 30_000);
+    expect(r.vanStichtingOnderhoud).toBe(stichtingDefaults.onderhoudsbudget * 1.0);
+    expect(r.vanStichtingFeatures).toBe(stichtingDefaults.features * 1.0);
+    expect(r.vanStichting).toBe(
+      stichtingDefaults.onderhoudsbudget + stichtingDefaults.features,
+    );
+    // bvStart=2, totaal=5 → 2 BV-klanten × €15k
+    expect(r.bvGemeenten).toBe(2);
+    expect(r.vanGemeenten).toBe(2 * 15_000);
+  });
+
+  it('BV-gemeenten worden gecapt op het totale aantal stichting-gemeenten', () => {
+    const stichtingResult = simulateStichting(stichtingDefaults, tarievenTyped);
+    // Forceer BV groter dan markt: 100 klanten in jaar 1 maar maar 5 gemeenten totaal
+    const r = berekenBVJaar(stichtingResult.rows[0], {
+      ...bvDefaults,
+      bvStartGemeenten: 100,
+      bvGemeenteGroei: 0,
+    });
+    expect(r.bvGemeenten).toBe(stichtingResult.rows[0].gemeenten);
+  });
+
+  it('BV-gemeenten groeit lineair tot aan markt-cap', () => {
+    const stichtingResult = simulateStichting(stichtingDefaults, tarievenTyped);
+    const j1 = berekenBVJaar(stichtingResult.rows[0], bvDefaults);
+    const j5 = berekenBVJaar(stichtingResult.rows[4], bvDefaults);
+    // jaar 1: bvStart 2; jaar 5: 2 + 4×2 = 10 (totaal markt jaar 5 = 37, dus geen cap)
+    expect(j1.bvGemeenten).toBe(2);
+    expect(j5.bvGemeenten).toBe(10);
   });
 
   it('FTE volgt uit beschikbaar budget, conservatief naar beneden afgerond', () => {
     const stichtingResult = simulateStichting(stichtingDefaults, tarievenTyped);
     const r = berekenBVJaar(stichtingResult.rows[0], bvDefaults);
+    // bvInkomsten = 300k (onderhoud+features) + 2 × 15k = 330k
     // Budget 330k / (100k × 1.3 = 130k) = 2.54 → floor → 2
     expect(r.fte).toBe(2);
   });
@@ -246,18 +271,20 @@ describe('berekenBVJaar — afhankelijkheid van stichting', () => {
     expect(r.bvInkomsten).toBe(r.vanGemeenten);
   });
 
-  it('hoger aandeelGemeenten verhoogt BV-inkomsten en FTE', () => {
+  it('meer BV-gemeenten verhoogt BV-inkomsten en FTE', () => {
     const stichtingResult = simulateStichting(stichtingDefaults, tarievenTyped);
-    const laag = berekenBVJaar(stichtingResult.rows[4], {
+    const klein = berekenBVJaar(stichtingResult.rows[4], {
       ...bvDefaults,
-      aandeelGemeenten: 0.2,
+      bvStartGemeenten: 2,
+      bvGemeenteGroei: 0,
     });
-    const hoog = berekenBVJaar(stichtingResult.rows[4], {
+    const groot = berekenBVJaar(stichtingResult.rows[4], {
       ...bvDefaults,
-      aandeelGemeenten: 0.8,
+      bvStartGemeenten: 20,
+      bvGemeenteGroei: 0,
     });
-    expect(hoog.bvInkomsten).toBeGreaterThan(laag.bvInkomsten);
-    expect(hoog.fte).toBeGreaterThanOrEqual(laag.fte);
+    expect(groot.bvInkomsten).toBeGreaterThan(klein.bvInkomsten);
+    expect(groot.fte).toBeGreaterThanOrEqual(klein.fte);
   });
 });
 

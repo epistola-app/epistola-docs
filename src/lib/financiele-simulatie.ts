@@ -97,8 +97,10 @@ export interface BVInputs {
   aandeelOnderhoud: number;
   /** Aandeel van stichting-features dat naar BV gaat (0..1) */
   aandeelFeatures: number;
-  /** Aandeel van gemeenten waarvoor BV preferred supplier is (0..1) */
-  aandeelGemeenten: number;
+  /** Aantal gemeenten dat BV als preferred supplier kiest, in jaar 1 */
+  bvStartGemeenten: number;
+  /** Aantal nieuwe BV-gemeenten per jaar (gecapt op totaal aantal gemeenten) */
+  bvGemeenteGroei: number;
   /** Externe BV-omzet per BV-gemeente per jaar (€) */
   bvOmzetPerGemeente: number;
   /** All-in kosten per FTE per jaar (€) */
@@ -115,6 +117,8 @@ export interface BVYearRow {
   beoogdeFte: number;
   /** Daadwerkelijk gekozen FTE — conservatief: floor(beoogdeFte), max MAX_BV_FTE */
   fte: number;
+  /** Aantal gemeenten dat BV bedient (afgerond) — afgeleid uit aandeelGemeenten */
+  bvGemeenten: number;
   vanStichtingOnderhoud: number;
   vanStichtingFeatures: number;
   vanStichting: number;
@@ -237,8 +241,13 @@ export function berekenBVJaar(
   const vanStichtingOnderhoud = stichtingJaar.onderhoudsbudget * inputs.aandeelOnderhoud;
   const vanStichtingFeatures = stichtingJaar.featureBudget * inputs.aandeelFeatures;
   const vanStichting = vanStichtingOnderhoud + vanStichtingFeatures;
-  const vanGemeenten =
-    stichtingJaar.gemeenten * inputs.aandeelGemeenten * inputs.bvOmzetPerGemeente;
+
+  // BV-gemeenten groeit met eigen tempo, maar kan nooit het totaal aantal
+  // gemeenten van de stichting overstijgen.
+  const beoogdeBvGemeenten =
+    inputs.bvStartGemeenten + (stichtingJaar.jaar - 1) * inputs.bvGemeenteGroei;
+  const bvGemeenten = Math.max(0, Math.min(beoogdeBvGemeenten, stichtingJaar.gemeenten));
+  const vanGemeenten = bvGemeenten * inputs.bvOmzetPerGemeente;
   const bvInkomsten = vanStichting + vanGemeenten;
 
   const kostenPerFte = inputs.fteKosten * inputs.overhead;
@@ -255,6 +264,7 @@ export function berekenBVJaar(
     kostenPerFte,
     beoogdeFte,
     fte,
+    bvGemeenten,
     vanStichtingOnderhoud,
     vanStichtingFeatures,
     vanStichting,
